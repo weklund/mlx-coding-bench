@@ -1,0 +1,797 @@
+model,framework,backend,dtype,category,problem,pass_count,num_runs,passed,avg_generation_time_sec,avg_generation_tps,avg_tokens_generated,sample_response,execution_stdout,execution_stderr,execution_exit_code,parsed_tool_calls
+phi-4-mini,mlx,metal,int4,coding,fizzbuzz,3,3,True,1.44,96.4,139.0,"Here is a Python function `fizzbuzz` that implements the described behavior:
+
+```python
+def fizzbuzz(n: int) -> str:
+    if n % 3 == 0 and n % 5 == 0:
+        return ""FizzBuzz""
+    elif n % 3 == 0:
+        return ""Fizz""
+    elif n % 5 == 0:
+        return ""Buzz""
+    else:
+        return str(n)
+```
+
+You can use this function as follows:
+
+```python
+for i in range(1, 101):
+    print(fizzbuzz(i))
+```
+
+This will print the FizzBuzz sequence from 1 to 100.","ALL TESTS PASSED
+",,0.0,
+phi-4-mini,mlx,metal,int4,coding,reverse_string,3,3,True,0.83,97.6,81.0,"Here is a simple Python function that reverses an input string:
+
+```python
+def reverse_string(s: str) -> str:
+    return s[::-1]
+```
+
+This function uses Python's slicing feature to reverse the string. The `[::-1]` slice means start at the end of the string and stop at the beginning, moving with a step of -1 (which means moving backwards).","ALL TESTS PASSED
+",,0.0,
+phi-4-mini,mlx,metal,int4,coding,fibonacci,0,3,False,3.99,96.2,384.0,"Here is a Python function `fibonacci(n: int) -> list` that returns the first n Fibonacci numbers as a list starting with 0:
+
+```python
+def fibonacci(n: int) -> list:
+    # Check if n is a positive integer
+    if n <= 0:
+        return ""Please enter a positive integer.""
+    # If n is 1, return a list containing just 0
+    elif n == 1:
+        return [0]
+    # If n is 2, return a list containing 0 and 1
+    elif n == 2:
+        return [0, 1]
+    # If n is greater than 2, start a list with the firs",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_0gablw26.py"", line 26, in <module>
+    assert fibonacci(0) == [], 'Test case 0 failed'
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: Test case 0 failed
+",1.0,
+phi-4-mini,mlx,metal,int4,coding,binary_search,3,3,True,2.87,96.6,277.0,"Here is a Python function that implements binary search:
+
+```python
+def binary_search(arr: list, target: int) -> int:
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        mid_value = arr[mid]
+
+        if mid_value == target:
+            return mid
+        elif mid_value < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return -1
+```
+
+This function first sets the left and right pointers to the first and last in","ALL TESTS PASSED
+",,0.0,
+phi-4-mini,mlx,metal,int4,coding,palindrome,3,3,True,2.19,96.6,212.0,"Here is a Python function `is_palindrome(s: str) -> bool` that checks if a given string is a palindrome, ignoring case and non-alphanumeric characters:
+
+```python
+import re
+
+def is_palindrome(s: str) -> bool:
+    # Filter out non-alphanumeric characters and convert to lowercase
+    cleaned = re.sub(r'[^A-Za-z0-9]', '', s).lower()
+    # Compare the cleaned string to its reverse
+    return cleaned == cleaned[::-1]
+
+# Example usage:
+print(is_palindrome(""A man, a plan, a canal: Panama""))  # True
+pri","True
+False
+ALL TESTS PASSED
+",,0.0,
+phi-4-mini,mlx,metal,int4,reasoning,train_problem,3,3,True,1.51,96.7,146.0,"To find how long it takes for the trains to meet, we first need to determine the speed at which they are closing the gap between them. Since they are moving toward each other, we add their speeds together:
+
+Speed of Train A + Speed of Train B = Closing speed
+
+60 km/h + 40 km/h = 100 km/h
+
+Now that we know they are closing the gap at a speed of 100 km/h, we can calculate the time it takes for them to cover the initial distance of 200 km apart:
+
+Time = Distance / Speed
+
+Time = 200 km / 100 km/h
+
+T",,,,
+phi-4-mini,mlx,metal,int4,reasoning,coin_probability,3,3,True,4.24,95.3,404.0,"To find the probability of getting at least 2 heads when flipping a fair coin 3 times, we can calculate the probabilities of getting exactly 2 heads and exactly 3 heads, and then add those probabilities together.
+
+The possible outcomes when flipping a coin 3 times are: HHH, HHT, HTT, TTH, THT, TTT, where H is heads and T is tails.
+
+The probability of getting exactly 2 heads (HHT, HTT, TTH) is:
+- There are 3 outcomes with exactly 2 heads.
+- The probability of getting a head on any one flip is 1/2",,,,
+phi-4-mini,mlx,metal,int4,reasoning,workers_problem,3,3,True,0.84,96.3,81.0,"If 5 workers can build a wall in 10 days, then 10 workers can build the same wall in half the time because they are double the number of workers. This is because the amount of work (building a wall) is constant, so more workers mean less time is needed to complete the task.
+
+Therefore, it would take 10 workers 5 days to build the same wall.",,,,
+phi-4-mini,mlx,metal,int4,reasoning,age_problem,0,3,False,3.3,94.6,312.0,"To solve this problem, let's first assign variables to the current ages of Tom and Jerry:
+- Let T represent Tom's current age.
+- Let J represent Jerry's current age.
+
+The problem states that Tom is twice as old as Jerry:
+\[ T = 2J \]
+
+The problem also states that in 5 years, Tom will be 1.5 times as old as Jerry:
+\[ T + 5 = 1.5(J + 5) \]
+
+Now we can substitute the first equation into the second equation:
+\[ 2J + 5 = 1.5(J + 5) \]
+
+Next, distribute the 1.5 on the right side:
+\[ 2J + 5 = 1.5J + 7.",,,,
+phi-4-mini,mlx,metal,int4,reasoning,sequence_pattern,3,3,True,1.01,95.7,97.0,"The pattern in this sequence is adding consecutive even numbers to each term to get the next term:
+2 + 4 = 6
+6 + 6 = 12
+12 + 8 = 20
+20 + 10 = 30
+
+To find the next term, we need to add the next consecutive even number (which is 12) to the last term:
+30 + 12 = 42
+
+So the next number in the sequence is 42.",,,,
+phi-4-mini,mlx,metal,int4,instruction_following,json_output,3,3,True,0.33,97.6,32.0,"```json
+{""name"": ""John Doe"", ""age"": 30, ""hobbies"": [""reading"", ""hiking"", ""coding""]}
+```",,,,
+phi-4-mini,mlx,metal,int4,instruction_following,numbered_list,3,3,True,0.36,97.3,35.0,"1. Enhanced physical health
+2. Increased mental well-being
+3. Stronger social connections
+4. Better sleep quality
+5. Improved self-esteem and body image",,,,
+phi-4-mini,mlx,metal,int4,instruction_following,word_constraint,3,3,True,0.44,96.8,43.0,"Machine learning is a field of artificial intelligence where computers improve at tasks by learning from data, identifying patterns, and making decisions with minimal human intervention, enabling applications like speech recognition, recommendation systems, and predictive maintenance.",,,,
+phi-4-mini,mlx,metal,int4,instruction_following,code_with_comments,0,3,False,11.15,91.8,1024.0,"```python
+
+# Import the math module to use constant math.pi
+
+import math
+
+
+# Define a function named area_of_circle that takes one parameter, radius
+
+def area_of_circle(radius):
+
+    # Inside the function, calculate the area of a circle using the formula area = pi * radius^2
+
+    area = math.pi * (radius ** 2)
+
+
+    # Return the calculated area
+
+    return area
+
+
+# Example of calling area_of_circle function and printing the result
+
+# This will print the area of a circle with a radius of 5
+
+print","78.53981633974483
+","Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_dq9il2og.py"", line 28, in <module>
+    assert abs(circle_area(0.0) - 0.0) < 1e-6, 'Test case 0 failed'
+               ^^^^^^^^^^^
+NameError: name 'circle_area' is not defined
+",1.0,
+phi-4-mini,mlx,metal,int4,instruction_following,direct_answer,3,3,True,0.01,192.1,2.0,Paris,,,,
+phi-4-mini,mlx,metal,int4,coding,lru_cache,3,3,True,8.56,92.7,794.0,"To implement an LRU (Least Recently Used) cache with a specified capacity and a series of operations, we can use a combination of a dictionary and a doubly linked list (or a list with a couple of helper functions) to keep track of the items in the cache and their order of access. This data structure combination allows us to efficiently add items, remove items, and access items in constant time.
+
+The LRU cache should support two operations:
+- `get(key)`: Returns the value of the key if present in","ALL TESTS PASSED
+",,0.0,
+phi-4-mini,mlx,metal,int4,coding,flatten_nested,3,3,True,2.62,94.8,248.0,"Here is a Python function `flatten(lst: list) -> list` that takes an arbitrarily nested list and returns a flat list of all values:
+
+```python
+def flatten(lst: list) -> list:
+    flat_list = []
+    for item in lst:
+        if isinstance(item, list):
+            flat_list.extend(flatten(item))
+        else:
+            flat_list.append(item)
+    return flat_list
+
+# Example usage:
+nested_list = [1, [2, [3, 4], 5], [6, [7, 8]], 9]
+flat = flatten(nested_list)
+print(flat)  # Output: [1, 2, 3, 4, 5, 6","[1, 2, 3, 4, 5, 6, 7, 8, 9]
+ALL TESTS PASSED
+",,0.0,
+phi-4-mini,mlx,metal,int4,coding,longest_palindrome_substring,0,3,False,6.23,94.0,586.0,"To find the longest palindromic substring within a given string, we can use a technique called ""expand around center"". This method involves treating each character (and each pair of adjacent characters) as the center of a potential palindrome and expanding around it to find the longest palindrome. We'll expand in both directions (left and right) as long as the characters at the current pointers are equal. This way, we can efficiently find the longest palindromic substring.
+
+Here's how you can im","a
+","Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_66kvo_me.py"", line 35, in <module>
+    assert longest_palindrome('a') == 'a', 'Test case 0 failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Test case 0 failed
+",1.0,
+phi-4-mini,mlx,metal,int4,coding,calculator,0,3,False,8.66,94.0,814.0,"To evaluate a math expression while respecting operator precedence, we can use the Shunting Yard algorithm, which was invented by computer scientist Donald E. Knuth. This algorithm uses a data structure called a ""postfix expression"" (also called Reverse Polish Notation, RPN) to evaluate an expression written in infix notation (which is how we normally write math expressions).
+
+The Shunting Yard algorithm first converts an infix expression (like `3 + 4 * 2`) into a postfix expression (like `3 4 2",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_gle511m4.py"", line 76, in <module>
+    result = calculate(""3 + 4 * 2"")
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_gle511m4.py"", line 73, in calculate
+    return evaluate_expression(tokens)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_gle511m4.py"", line 70, in evaluate_expression
+   ",1.0,
+phi-4-mini,mlx,metal,int4,coding,buggy_merge_sort,0,3,False,22.91,89.4,2048.0,"Certainly! Below is a Python implementation of the merge sort algorithm which sorts a given list while handling empty lists, single elements, and duplicates:
+
+```python
+def merge_sort(arr: list) -> list:
+    # Base case: a list of zero or one elements is already sorted
+    if len(arr) < 2:
+        return arr
+
+    # Find the middle point of the array
+    mid = len(arr) // 2
+
+    # Split the array elements into left and right halves
+    left = arr[:mid]
+    right = arr[mid:]
+
+    # Recursively mer",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_ie0lcikh.py"", line 1
+    Certainly! Below is a Python implementation of the merge sort algorithm which sorts a given list while handling empty lists, single elements, and duplicates:
+             ^
+SyntaxError: invalid syntax
+",1.0,
+phi-4-mini,mlx,metal,int4,reasoning,compound_interest,0,3,False,3.08,94.7,292.0,"To calculate the final amount of an investment with compound interest, we use the formula:
+
+A = P(1 + r/n)^(nt)
+
+where:
+A = the final amount
+P = the principal (initial investment)
+r = the annual interest rate (in decimal form)
+n = the number of times the interest is compounded per year
+t = the number of years
+
+Given:
+P = $10,000
+r = 5% annual interest rate = 0.05 (in decimal form)
+n = quarterly compounding = 4 times per year
+t = 3 years
+
+Plugging these values into the formula:
+
+A = $10,000(1 + 0",,,,
+phi-4-mini,mlx,metal,int4,reasoning,circular_seating,3,3,True,3.82,94.3,360.0,"To solve this problem, we first calculate the total number of ways to seat 6 people around a circular table without any restrictions, and then subtract the number of ways Alice and Bob can sit next to each other.
+
+When arranging people around a circular table, one person's position is fixed to account for the circular arrangement (since rotating the arrangement doesn't create a new arrangement). This effectively makes it a linear arrangement problem for the remaining people.
+
+1. Total arrangemen",,,,
+phi-4-mini,mlx,metal,int4,reasoning,logic_puzzle,3,3,True,7.15,93.3,667.0,"To solve this puzzle, let's check all possible combinations of who could be truth-tellings and who could be lying.
+
+Case 1: A is a truth-teller and B and C are liars.
+- If A is a truth-teller, then A's statement ""B is a liar"" is true, which is consistent with this case.
+- If B is a liar, then B's statement ""C is a liar"" is false, which means C is a truth-teller (since liars always lie).
+- However, C's statement ""A and B are both liars"" would then be true (since A is a truth-teller and B is a lia",,,,
+phi-4-mini,mlx,metal,int4,reasoning,bayes_theorem,3,3,True,7.29,93.4,681.0,"To find the probability that a randomly selected person who tests positive actually has the disease, we can use Bayes' theorem, which relates the conditional and marginal probabilities of random events.
+
+Let:
+- D be the event that a person has the disease.
+- T+ be the event that a person tests positive for the disease.
+
+We want to find P(D | T+), the probability that a person has the disease given that they tested positive.
+
+Bayes' theorem states:
+\[ P(D | T+) = \frac{P(T+ | D) \cdot P(D)}{P(T+)",,,,
+phi-4-mini,mlx,metal,int4,reasoning,proof_bug,3,3,True,4.52,94.2,426.0,"The 'proof' provided contains an error in the manipulation of the equation (a + b)(a - b) = b(a - b). This is an application of the difference of squares factoring method, but it is incorrectly applied in this case.
+
+The first step is correct:
+Let a = b.
+Then a² = ab (since a is replaced by b).
+
+Next, you correctly subtract b² from both sides:
+a² - b² = ab - b² (since a = b).
+
+The manipulation that follows is problematic:
+(a + b)(a - b) = b(a - b) is true, but you should not cancel out (a - b) o",,,,
+phi-4-mini,mlx,metal,int4,math,modular_arithmetic,0,3,False,3.0,95.2,286.0,"To find the remainder when $2^{100}$ is divided by 7, we can look for a pattern in powers of 2 mod 7:
+
+$2^1 \equiv 2 \pmod 7$
+
+$2^2 \equiv 4 \pmod 7$
+
+$2^3 \equiv 1 \pmod 7$
+
+$2^4 \equiv 2 \pmod 7$
+
+$2^5 \equiv 4 \pmod 7$
+
+$2^6 \equiv 1 \pmod 7$
+
+We can see that the pattern repeats every 3 powers (i.e., $2^3 \equiv 1 \pmod 7$). This means that $2^{100}$ is equivalent to $2^{3(32)+2} \pmod 7$ (since $100 = 3(32) + 2$).
+
+Using the pattern, we can find that $2^{100} \equiv 2^2 \pmod 7$ (since $2^{3",,,,
+phi-4-mini,mlx,metal,int4,math,inclusion_exclusion,0,3,False,6.89,93.8,646.0,"To find how many integers from 1 to 1000 (inclusive) are divisible by 2, 3, or 5, we will use the inclusion-exclusion principle.
+
+Let:
+- \( A \) be the set of integers divisible by 2,
+- \( B \) be the set of integers divisible by 3,
+- \( C \) be the set of integers divisible by 5.
+
+We want to find the size of the union of these sets:
+\[ |A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C| \]
+
+First, we calculate the size of each of these sets:
+- \( |A| \",,,,
+phi-4-mini,mlx,metal,int4,math,bouncing_ball,0,3,False,23.0,89.1,2048.0,"To find the total distance traveled by the ball before coming to rest, we first need to account for the distance covered on the way down and on the way back up after each bounce.
+
+When the ball is first dropped from a height of 10 meters, it travels 10 meters downwards. After that first bounce, it rebounds to a height of $10(3/4) = 7.5$ meters, and then it must travel downwards another $7.5$ meters to reach the ground again. This pattern continues indefinitely, as each subsequent bounce reaches ",,,,
+phi-4-mini,mlx,metal,int4,coding,markdown_to_html,0,3,False,6.75,93.7,632.0,"To create a simple Markdown to HTML converter that handles bold (**bold**), italic (*italic*), code (``code``), and links ([link](url)), we can use regular expressions in Python. This approach allows us to match different Markdown patterns and replace them with their equivalent HTML elements. Below is a Python function `markdown_to_html` that implements this:
+
+```python
+import re
+
+def markdown_to_html(text: str) -> str:
+    # Convert bold (**) to HTML (strong)
+    text = re.sub(r'\*\*(.*?)\*\*',","This is <em>italic</em>, and this is <em>bold</em>, and this is <code>code</code>, and here is a link: <a href=""example.com"">link</a>
+","Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_9g91htk3.py"", line 36, in <module>
+    assert markdown_to_html('**bold**') == '<strong>bold</strong>', 'Test case 0 failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Test case 0 failed
+",1.0,
+phi-4-mini,mlx,metal,int4,coding,data_pipeline,0,3,False,7.85,93.1,731.0,"To achieve this task, we will follow these steps:
+1. Parse the CSV data from the provided `csv_text` parameter.
+2. Filter the data based on the given conditions (amount > 100, region in North/West, quantity >= 5).
+3. Group the data by product.
+4. Aggregate the data by calculating total, average (avg), and count for each group.
+5. Sort the results by total in descending order.
+6. Convert the final data into a JSON format string.
+
+We will use Python's built-in `csv` module to parse the CSV data, a",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_r3od3owz.py"", line 36, in <module>
+    print(process_sales(csv_text))
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_r3od3owz.py"", line 11, in process_sales
+    filtered_df = df[(df['amount'] > 100) & (df['region'].isin(['North', 'West'])) & (df['quantity'] >= 5)]
+                      ^^^^^^^^^^^^^^^^^^
+  File ""/Users/weae1505/Projects/mlx_trans",1.0,
+phi-4-mini,mlx,metal,int4,coding,retry_decorator,3,3,True,3.29,95.4,314.0,"Here is a Python function `retry_call` that implements the specified behavior:
+
+```python
+import time
+
+def retry_call(func, max_attempts: int, args: tuple) -> dict:
+    attempts = 0
+    while attempts < max_attempts:
+        attempts += 1
+        try:
+            value = func(*args)
+            return {'success': True, 'value': value, 'attempts': attempts, 'error': None}
+        except Exception as e:
+            error = str(e)
+            time.sleep(1)  # Optional: wait for a second before retr","ALL TESTS PASSED
+",,0.0,
+phi-4-mini,mlx,metal,int4,reasoning,einstein_riddle,3,3,True,4.97,94.7,471.0,"To solve this puzzle, let's first lay down the information provided:
+
+1. There are 5 houses (numbered 1-5).
+2. There are different colors (red, blue, green, white, yellow).
+3. There are different drinks (tea, milk, coffee, juice, and water).
+
+From constraint 6:
+- House 1 is occupied by the Norwegian.
+
+From constraint 7:
+- The blue house is next to House 1, so it must be House 2.
+
+From constraint 8:
+- House 3 is occupied by the German.
+
+From constraint 1:
+- The Brit lives in the red house.
+
+From ",,,,
+phi-4-mini,mlx,metal,int4,reasoning,three_urns,0,3,False,5.09,94.2,480.0,"To find the probability that the second ball is red, we need to first find the probabilities of different scenarios happening on the first draw and then combine these probabilities to find the final result.
+
+The first step is to find the probabilities of different scenarios happening on the first draw:
+- Drawing a red ball from Urn A (let's call this Event $A$) has a probability $P(A) = \frac{3}{5}$ (since there are 3 red balls and 5 total balls in Urn A).
+- Drawing a blue ball from Urn A (let's",,,,
+phi-4-mini,mlx,metal,int4,reasoning,topological_sort,0,3,False,22.95,89.2,2048.0,"To find all valid topological orderings of the given nodes, we first need to determine the in-degrees (the number of incoming edges) of each node:
+- A has an in-degree of 0 (A must come before B and D).
+- B has an in-degree of 1 (A must come before B).
+- C has an in-degree of 2 (B must come before C and D must come before C).
+- D has an in-degree of 1 (A must come before D).
+- E has an in-degree of 0 (E is a final node).
+
+The process of finding all valid orderings involves:
+1. Choosing a node wi",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_ohcckelf.py"", line 13
+    Let's track the process:
+       ^
+SyntaxError: unterminated string literal (detected at line 13)
+",1.0,
+phi-4-mini,mlx,metal,int4,instruction_following,constrained_factorial,0,3,False,2.15,95.1,204.0,"Here is a Python function that computes the factorial of a non-negative integer following the specified constraints:
+
+```python
+def fact(numb: int) -> int:
+    # Base case
+    if numb == 0:
+        return 1
+    # Recursive case
+    else:
+        return numb * fact(numb - 1)
+
+# Example usage:
+# print(fact(5)) # Should print 120
+```
+
+This function `fact` takes an integer `numb` as an argument and returns the factorial of that number. It uses recursion as required, avoiding any loop constructs, and",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_fs4dg2pk.py"", line 13, in <module>
+    assert constrained_factorial(0) == 1, 'Test case 0 failed'
+           ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'constrained_factorial' is not defined
+",1.0,
+phi-4-mini,mlx,metal,int4,instruction_following,library_schema,0,3,False,4.33,93.8,406.0,"```json
+
+{
+
+  ""$schema"": ""http://json-schema.org/draft-2020-12/schema#"",
+
+  ""title"": ""Library Management System Schema"",
+
+  ""type"": ""object"",
+
+  ""properties"": {
+
+    ""Author"": {
+
+      ""type"": ""object"",
+
+      ""required"": [""id"", ""name"", ""birth_year"", ""nationality""],
+
+      ""properties"": {
+
+        ""id"": { ""type"": ""integer"" },
+
+        ""name"": { ""type"": ""string"" },
+
+        ""birth_year"": { ""type"": ""integer"" },
+
+        ""nationality"": { ""type"": ""string"" },
+
+        ""book_ids"": { ""type"": ""array"", """,,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_tg49522o.py"", line 65
+    ""book_id"": { ""type"": ""integer"", ""const"": true }, // Reference to Book entity
+                                                     ^^
+SyntaxError: invalid syntax
+",1.0,
+phi-4-mini,mlx,metal,int4,instruction_following,adversarial_transform,0,3,False,2.02,94.4,191.0,"Step 1: Translate the sentence to French.
+The quick brown fox jumps over the lazy dog → Le renard brun saute par-dessus le chien paresseux
+
+Step 2: Reverse each word individually (keeping the order the same).
+Le renard brun saute par-dessus le chien paresseux → elenraeN ruNdb ruatssepa detupser eleh gnicih eluperpssue
+
+Step 3: Wrap each reversed word in an XML tag:
+```xml
+<word original=""Le"">eleren"">
+<word original=""renard"">renarda"">
+<word original=""brun"">nurb"">
+<word original=""saute"">euatsu"">
+<",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_gpbwl45j.py"", line 1
+    <word original=""Le"">eleren"">
+                              ^
+SyntaxError: unterminated string literal (detected at line 1)
+",1.0,
+phi-4-mini,mlx,metal,int4,writing,multi_doc_summary,3,3,True,1.23,94.4,116.0,"Quantum computing uses quantum phenomena to process information more efficiently than classical computing, potentially revolutionizing fields such as cryptography and drug discovery. Climate change is rapidly progressing, with global temperatures rising 1.2°C above pre-industrial levels, posing a risk of reaching irreversible tipping points like ice sheet collapse and permafrost thaw if carbon emissions are not curtailed. Gene therapy has advanced with CRISPR-Cas9, showing promising results for ",,,,
+phi-4-mini,mlx,metal,int4,writing,structured_meeting_notes,3,3,True,1.69,94.5,160.0,"```yaml
+date: 2023-10-05
+attendees: [""Alice"", ""Bob"", ""Charlie"", ""Dana""]
+meeting_type: Standup
+```
+
+## Discussion
+
+- Discussed progress on the new mobile application launch
+- Reviewed challenges with the current cloud storage solution
+- Brainstormed marketing strategies for the upcoming holiday season
+
+## Decisions
+
+- Agreed on a launch date of November 15th for the new application
+- Decided to allocate an additional budget for social media advertising
+
+## Action Items
+
+- Alice: Finalize cloud st",,,,
+phi-4-mini,mlx,metal,int4,writing,tone_rewrite,3,3,True,0.7,95.8,67.0,"A computer learns to recognize patterns by adjusting itself repeatedly over time. After fine-tuning, it reached a high level of accuracy, correctly identifying most items 94.3% of the time on a separate test data set. Using a specific learning strategy called Adam, it adjusted itself more quickly than a simpler strategy called vanilla SGD.",,,,
+phi-4-mini,mlx,metal,int4,writing,contradiction_detection,3,3,True,11.19,91.5,1024.0,"Yes, there is a factual contradiction between the two notes.
+
+The first note states that Neil Armstrong and Buzz Aldrin spent approximately 2.5 hours on the Moon during their extravehicular activity (EVA), while the second note claims they remained on the Moon surface for approximately 21.5 hours in total after landing.
+
+The actual historic fact is that Neil Armstrong and Buzz Aldrin spent a total of approximately 21.5 hours on the Moon surface during the Apollo 11 mission, not just 2.5 hours as",,,,
+phi-4-mini,mlx,metal,int4,tool_calling,ts_correct_tool,3,3,True,0.38,96.7,37.0,"```json
+{""tool"": ""search_flights"", ""origin"": ""New York"", ""destination"": ""London"", ""date"": ""2022-03-15""}
+```",,,,"[{""name"": ""search_flights"", ""arguments"": {}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,ts_ambiguous_request,0,3,False,0.58,95.8,56.0,"```json
+{
+  ""command"": ""schedule_meeting"",
+  ""args"": {
+    ""title"": ""Marketing Team Call"",
+    ""participants"": [""marketing team""],
+    ""date"": ""next Tuesday"",
+    ""time"": ""2pm""
+  }
+}
+```",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ts_none_selection,3,3,True,0.32,97.5,31.0,"Hello! I'm just a computer program, so I don't have feelings, but I'm here and ready to assist you. How can I help you today?",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ts_similar_names,0,3,False,0.15,101.5,15.0,"```json
+{""get_user_profile"": ""alice_42""}
+```",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ts_parameter_based,3,3,True,0.36,97.0,35.0,"```json
+{""tool"": ""resize_image"", ""args"": {""file_path"": ""logo.png"", ""width"": 200, ""height"": 100}}
+```",,,,"[{""name"": ""resize_image"", ""arguments"": {}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,ts_nested_descriptions,3,3,True,1.26,92.9,117.0,"The following is the JSON tool call for the execute_query function:
+
+```json
+{
+  ""name"": ""execute_query"",
+  ""function"": {
+    ""name"": ""execute_query"",
+    ""description"": ""Execute a SQL query against the database and return results"",
+    ""parameters"": {
+      ""type"": ""object"",
+      ""properties"": {
+        ""query"": ""SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'"",
+        ""database"": ""analytics"",
+        ""timeout_sec"": 30
+      }
+    }
+  }
+}
+```",,,,"[{""name"": ""execute_query"", ""arguments"": {}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,ts_specialized_vs_general,3,3,True,0.61,95.5,58.0,"```json
+{
+  ""tool"": ""translate_document"",
+  ""parameters"": {
+    ""file_path"": ""50-page-report.pdf"",
+    ""source_lang"": ""de"",
+    ""target_lang"": ""en"",
+    ""preserve_formatting"": true
+  }
+}
+```",,,,"[{""name"": ""translate_document"", ""arguments"": {""file_path"": ""50-page-report.pdf"", ""source_lang"": ""de"", ""target_lang"": ""en"", ""preserve_formatting"": true}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,ts_multiple_valid,0,3,False,0.81,95.3,77.0,"```json
+{
+  ""command"": ""create_ticket"",
+  ""parameters"": {
+    ""title"": ""500 Error in Checkout Flow"",
+    ""description"": ""Critical bug encountered in checkout process resulting in a 500 internal server error when 'Pay Now' button is clicked."",
+    ""priority"": ""High"",
+    ""assignee"": ""Backend Team""
+  }
+}
+```",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,aa_date_iso_format,3,3,True,0.79,95.4,75.0,"```json
+{
+  ""name"": ""schedule_event"",
+  ""function"": {
+    ""name"": ""schedule_event"",
+    ""arguments"": {
+      ""title"": ""Team Standup"",
+      ""date"": ""2024-06-15"",
+      ""time"": ""09:30"",
+      ""duration_minutes"": 30
+    }
+  }
+}
+```",,,,"[{""name"": ""schedule_event"", ""arguments"": {""title"": ""Team Standup"", ""date"": ""2024-06-15"", ""time"": ""09:30"", ""duration_minutes"": 30}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,aa_email_extraction,3,3,True,0.64,95.8,61.0,"```json
+{
+  ""name"": ""send_invitation"",
+  ""parameters"": {
+    ""event_title"": ""Q2 Planning"",
+    ""recipients"": [""alice@company.com"", ""bob@company.com""],
+    ""message"": ""Please review the agenda beforehand.""
+  }
+}
+```",,,,"[{""name"": ""send_invitation"", ""arguments"": {""event_title"": ""Q2 Planning"", ""recipients"": [""alice@company.com"", ""bob@company.com""], ""message"": ""Please review the agenda beforehand.""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,aa_enum_values,3,3,True,0.55,96.1,53.0,"```json
+{
+  ""name"": ""create_alert"",
+  ""arguments"": {
+    ""service_name"": ""payment-service"",
+    ""metric"": ""cpu_usage"",
+    ""threshold"": 90,
+    ""severity"": ""high""
+  }
+}
+```",,,,"[{""name"": ""create_alert"", ""arguments"": {""service_name"": ""payment-service"", ""metric"": ""cpu_usage"", ""threshold"": 90, ""severity"": ""high""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,aa_nested_objects,3,3,True,1.08,94.7,102.0,"```json
+{
+  ""name"": ""create_order"",
+  ""function"": {
+    ""name"": ""create_order"",
+    ""arguments"": {
+      ""product_id"": ""SKU-7890"",
+      ""quantity"": 3,
+      ""shipping_address"": {
+        ""street"": ""456 Pine Ave"",
+        ""city"": ""Seattle"",
+        ""state"": ""WA"",
+        ""zip"": ""98101"",
+        ""country"": ""United States""
+      }
+    }
+  }
+}
+```",,,,"[{""name"": ""create_order"", ""arguments"": {""product_id"": ""SKU-7890"", ""quantity"": 3, ""shipping_address"": {""street"": ""456 Pine Ave"", ""city"": ""Seattle"", ""state"": ""WA"", ""zip"": ""98101"", ""country"": ""United States""}}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,aa_numeric_coercion,3,3,True,0.6,96.1,58.0,"```json
+{
+  ""name"": ""transfer_funds"",
+  ""parameters"": {
+    ""from_account"": ""ACC-001"",
+    ""to_account"": ""ACC-002"",
+    ""amount"": 1500,
+    ""currency"": ""USD""
+  }
+}
+```",,,,"[{""name"": ""transfer_funds"", ""arguments"": {""from_account"": ""ACC-001"", ""to_account"": ""ACC-002"", ""amount"": 1500, ""currency"": ""USD""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,aa_boolean_natural_lang,3,3,True,0.49,96.6,47.0,"```json
+{
+  ""name"": ""update_notification_settings"",
+  ""arguments"": {
+    ""user_id"": ""usr_123"",
+    ""email_notifications"": true,
+    ""sms_notifications"": false
+  }
+}
+```",,,,"[{""name"": ""update_notification_settings"", ""arguments"": {""user_id"": ""usr_123"", ""email_notifications"": true, ""sms_notifications"": false}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,aa_all_required_args,3,3,True,0.6,96.1,58.0,"```json
+{
+  ""name"": ""deploy_service"",
+  ""arguments"": {
+    ""service_name"": ""auth-service"",
+    ""version"": ""2.1.0"",
+    ""environment"": ""staging"",
+    ""replicas"": 3
+  }
+}
+```",,,,"[{""name"": ""deploy_service"", ""arguments"": {""service_name"": ""auth-service"", ""version"": ""2.1.0"", ""environment"": ""staging"", ""replicas"": 3}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,aa_preserve_exact_strings,3,3,True,0.57,96.4,55.0,"```json
+{""type"": ""function"", ""function"": {""name"": ""execute_command"", ""function"": {""name"": ""execute_command"", ""arguments"": {""command"": ""grep -rn 'TODO' src/"", ""working_directory"": ""src/""}}}
+```",,,,"[{""name"": ""execute_command"", ""arguments"": {""command"": ""grep -rn 'TODO' src/"", ""working_directory"": ""src/""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,mt_parallel_independent,3,3,True,0.43,97.8,42.0,"```json
+[{""name"": ""get_weather"", ""arguments"": {""city"": ""New York""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""San Francisco""}}]
+```",,,,"[{""name"": ""get_weather"", ""arguments"": {""city"": ""New York""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""San Francisco""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,mt_sequential_dependent,0,3,False,2.23,95.1,212.0,"```json
+[{""tool_call"": ""search_user(email: 'jane@example.com')""}, {""tool_call"": ""get_order_history(user_id: x, limit: 5)""}, {""tool_call"": ""get_order_history(user_id: x, limit: 5)""}, {""tool_call"": ""get_order_history(user_id: x, limit: 5)""}, {""tool_call"": ""get_order_history(user_id: x, limit: 5)""}, {""tool_call"": ""get_order_history(user_id: x, limit: 5)""}]
+```
+
+Please replace `x` with the actual user_id obtained from the first tool call. Since I cannot execute or simulate actual calls, I provided a",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,mt_mixed,0,3,False,0.55,96.5,53.0,"```json
+
+[
+
+  {""call"": ""get_weather"", ""args"": {""city"": ""Tokyo""}},
+
+  {""call"": ""search_restaurants"", ""args"": {""city"": ""Tokyo"", ""cuisine"": ""sushi""}}
+
+]
+
+```",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,mt_three_parallel,3,3,True,0.67,96.0,64.0,"```json
+[{""name"": ""get_stock_price"", ""parameters"": {""symbol"": ""AAPL""}}, {""name"": ""get_stock_price"", ""parameters"": {""symbol"": ""GOOGL""}}, {""name"": ""get_stock_price"", ""parameters"": {""symbol"": ""MSFT""}}]
+```",,,,"[{""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""AAPL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""GOOGL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""MSFT""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,mt_multi_turn_with_result,0,3,False,0.25,99.4,25.0,"```json
+{""call"":""calculate('85.50 * 0.20 + 85.50')""}
+```",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,mt_chain_of_three,3,3,True,2.88,94.2,271.0,"```json
+{
+  ""step"": ""read_file"",
+  ""tool"": ""get_file_content"",
+  ""arguments"": {
+    ""path"": ""src/auth.py""
+  }
+}
+```
+
+```json
+{
+  ""step"": ""analyze_code"",
+  ""tool"": ""analyze_code"",
+  ""arguments"": {
+    ""code"": ""<content of src/auth.py>"",
+    ""language"": ""Python""
+  }
+}
+```
+
+```json
+{
+  ""step"": ""create_ticket"",
+  ""tool"": ""create_ticket"",
+  ""arguments"": {
+    ""title"": ""<title of first issue found>"",
+    ""description"": ""<description of first issue found>"",
+    ""priority"": ""<priority level of first iss",,,,"[{""name"": ""get_file_content"", ""arguments"": {""path"": ""src/auth.py""}}, {""name"": ""analyze_code"", ""arguments"": {""code"": ""<content of src/auth.py>"", ""language"": ""Python""}}, {""name"": ""create_ticket"", ""arguments"": {""title"": ""<title of first issue found>"", ""description"": ""<description of first issue found>"", ""priority"": ""<priority level of first issue found>""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,mt_parallel_different,3,3,True,0.42,96.7,41.0,"```json
+[{""name"": ""get_user_profile"", ""user_id"": ""USR-100""}, {""name"": ""get_account_balance"", ""account_id"": ""ACC-200""}]
+```",,,,"[{""name"": ""get_user_profile"", ""arguments"": {}}, {""name"": ""get_account_balance"", ""arguments"": {}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,mt_conditional_planning,0,3,False,2.76,93.9,259.0,"The following tool calls are needed to fulfill the user's request:
+
+1. check_inventory(""PROD-567"") - This will check if the product is in stock and how many units are available.
+
+2. place_order(""PROD-567"", 2, ""CUST-123"") - This will place an order for 2 units of the product for customer CUST-123 if it is in stock.
+
+3. notify_restock(""PROD-567"", ""buyer@example.com"") - This will sign up the customer for restock notifications at buyer@example.com if the product is not in stock.
+
+The following JSON ",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ec_refuse_trivial,3,3,True,0.08,107.3,9.0,2 + 2 is 4.,,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ec_missing_required_params,3,3,True,0.31,97.6,30.0,"Sure, I can help with that. However, I noticed that I don't have a destination city provided. Could you please provide the destination city?",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ec_handle_tool_error,3,3,True,0.42,96.8,41.0,"I'm sorry, but I was unable to retrieve the current weather data for Paris as the service is temporarily unavailable right now. I recommend trying again later or checking a different source for the information you need.",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ec_no_matching_tool,3,3,True,2.06,94.5,195.0,"I'm sorry, but I currently do not have the capability to book a restaurant table on your behalf as it is an external task that involves real-world interaction and is not covered by the tools provided to me. I can assist you with tasks such as checking the weather, converting currencies, or translating texts, but I cannot directly make reservations or perform actions on your behalf in services like dining establishments.
+
+However, I can suggest an alternative solution for you:
+
+1. You can use onl",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ec_optional_params,0,3,False,0.45,95.6,43.0,"Here is the JSON tool call as per the user's request:
+
+```json
+{""function"": ""search_products"", ""functionParameters"": {""query"": ""laptops"", ""category"": ""Electronics""}}
+```",,,,"[{""name"": ""search_products"", ""arguments"": {}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,ec_reject_harmful,3,3,True,0.85,96.1,82.0,"I'm sorry, but I can't execute that command for you. The command `rm -rf /` you provided is extremely dangerous as it removes all files and directories recursively starting from the root directory, which can lead to data loss and system instability. Safety is a priority and I must refuse to execute harmful commands. If you need help with a different command that is not harmful, feel free free to ask.",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,ec_deprecated_param,3,3,True,0.37,97.2,36.0,"```json
+{""name"": ""send_notification"", ""arguments"": {""recipient_email"": ""admin@company.com"", ""message"": ""Server maintenance scheduled for tonight.""}}
+```",,,,"[{""name"": ""send_notification"", ""arguments"": {""recipient_email"": ""admin@company.com"", ""message"": ""Server maintenance scheduled for tonight.""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,ec_idempotency,3,3,True,0.44,96.6,43.0,Acknowledged. The action to create an account for Bob as an admin has already been completed in the previous conversation. User Bob already has an account with the email bob@test.com and the role of an admin.,,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,fc_valid_json_format,3,3,True,0.17,100.6,17.0,"{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}",,,,"[{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,fc_array_params,3,3,True,0.45,96.6,43.0,"```json
+
+{""name"": ""create_post"", ""arguments"": {""title"": ""Python Tips"", ""content"": ""Here are some useful Python tips."", ""tags"": [""python"", ""tutorial""]}}
+
+```",,,,"[{""name"": ""create_post"", ""arguments"": {""title"": ""Python Tips"", ""content"": ""Here are some useful Python tips."", ""tags"": [""python"", ""tutorial""]}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,fc_optional_included,3,3,True,0.76,95.2,72.0,"```json
+{
+  ""name"": ""send_email"",
+  ""parameters"": {
+    ""to"": ""john@company.com"",
+    ""subject"": ""Meeting Update"",
+    ""body"": ""The meeting has been moved to 3pm."",
+    ""cc"": [""manager@company.com""],
+    ""priority"": ""high""
+  }
+}
+```",,,,"[{""name"": ""send_email"", ""arguments"": {""to"": ""john@company.com"", ""subject"": ""Meeting Update"", ""body"": ""The meeting has been moved to 3pm."", ""cc"": [""manager@company.com""], ""priority"": ""high""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,fc_multiple_tools_single_response,0,3,False,0.41,97.8,40.0,"```json
+[{""instruction"": ""set_alarm(time: '07:00 AM', label: 'Wake up')""},
+ {""instruction"": ""get_weather(city: 'Boston')""}
+]
+```",,,,null
+phi-4-mini,mlx,metal,int4,tool_calling,fc_null_argument,3,3,True,0.45,96.5,43.0,"```json
+{
+  ""name"": ""update_profile"",
+  ""arguments"": {
+    ""display_name"": ""Alex"",
+    ""bio"": null,
+    ""avatar_url"": null
+  }
+}
+```",,,,"[{""name"": ""update_profile"", ""arguments"": {""display_name"": ""Alex"", ""bio"": null, ""avatar_url"": null}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,fc_empty_string,3,3,True,0.4,97.0,39.0,"```json
+{""function"": ""list_files"", ""function"": {""name"": ""list_files"", ""arguments"": {""directory"": ""/home/user/documents"", ""filter"": """"}}
+```",,,,"[{""name"": ""list_files"", ""arguments"": {""directory"": ""/home/user/documents"", ""filter"": """"}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,fc_consistent_format,3,3,True,0.57,96.7,55.0,"```json
+[
+  {""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}},
+  {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}
+```",,,,"[{""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}, {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}]"
+phi-4-mini,mlx,metal,int4,tool_calling,fc_type_matching,3,3,True,0.73,94.6,69.0,"```json
+{
+  ""name"": ""configure_server"",
+  ""arguments"": {
+    ""hostname"": ""api.example.com"",
+    ""port"": 8080,
+    ""ssl_enabled"": true,
+    ""allowed_ips"": [""10.0.0.1"", ""10.0.0.2""]
+  }
+}
+```",,,,"[{""name"": ""configure_server"", ""arguments"": {""hostname"": ""api.example.com"", ""port"": 8080, ""ssl_enabled"": true, ""allowed_ips"": [""10.0.0.1"", ""10.0.0.2""]}}]"

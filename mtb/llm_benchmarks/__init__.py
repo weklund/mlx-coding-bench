@@ -28,6 +28,7 @@ from mtb.llm_benchmarks.models.gemma4 import (
     Gemma4_31B_it,
 )
 from mtb.llm_benchmarks.models.llama import (
+    Llama4_Scout_17B_16E_it,
     Llama3p3_70B_it,
 )
 from mtb.llm_benchmarks.models.qwen import (
@@ -42,6 +43,11 @@ from mtb.llm_benchmarks.models.qwen import (
 )
 from mtb.llm_benchmarks.models.qwen3_coder import (
     Qwen3_Coder_30B_A3B,
+)
+from mtb.llm_benchmarks.models.phi import (
+    Phi4,
+    Phi4_Reasoning_Plus,
+    Phi4_Mini,
 )
 from mtb.llm_benchmarks.models.claude import (
     Claude_Opus_4_6,
@@ -90,6 +96,10 @@ MODEL_SPECS = [
     Qwen3_Coder_30B_A3B,
     GLM4p7_Flash,
     LFM2_24B_A2B,
+    # phi
+    Phi4_Mini,
+    Phi4,
+    Phi4_Reasoning_Plus,
     # gemma 4 — fast / on-device
     Gemma4_E2B_it,
     Gemma4_E4B_it,
@@ -99,6 +109,7 @@ MODEL_SPECS = [
     # --- 128GB+ only models ---
     Gemma3_27B_it,
     Qwen3_32B_it,
+    Llama4_Scout_17B_16E_it,
     Llama3p3_70B_it,
     # --- API models ---
     Claude_Opus_4_6,
