@@ -6,23 +6,25 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 
 <!-- BEGIN BENCHMARK TABLE -->
 
-> MLX Metal | int4 quantization | April 2026
+> MLX Metal | int4 quantization | June 2026
 > Speed: 1024 prompt tokens, 100 generated tokens
 > Quality: 81 problems across coding, reasoning, tool calling, math, writing (3 runs each, majority vote)
 > **API baseline:** Claude Opus 4.6 scores 86.7% on the same quality benchmark (via Anthropic API, not local)
+> † Run with a raised per-problem token-budget multiplier (`--max_tokens_multiplier`) so its verbose thinking can finish within budget; the cap is a ceiling, not forced length. Other rows use the default 1×, so this score is not strictly budget-comparable. Each run's multiplier is recorded in its `settings.json`.
 
 ### Best Models by Hardware
 
 | Hardware | Best Quality | Best Balance | Best Speed |
 |---|---|---|---|
-| **M4 Pro 64GB** | Gemma 4 31B-it (13 tok/s, 72.2%) | LFM2-24B-A2B (117 tok/s, 67.3%) | Gemma 4 E2B-it (121 tok/s, 65.3%) |
+| **M4 Pro 64GB** | Qwen 3.6-35B-A3B (86 tok/s, 86.2%) | Qwen 3.6-35B-A3B (86 tok/s, 86.2%) | Gemma 4 E2B-it (121 tok/s, 65.3%) |
 | **M5 Max 128GB** | Qwen3-Coder-30B-A3B (129 tok/s, 75.5%) | Qwen3-Coder-30B-A3B (129 tok/s, 75.5%) | Gemma 4 E2B-it (205 tok/s, 67.8%) |
 
 ### M4 Pro 64GB
 
 | Model | RAM | Quality | Gen tok/s |
 |---|---:|---:|---:|
-| Gemma 4 31B-it (31B dense) | 18.9 GiB | **72.2%** | 13 |
+| Qwen 3.6-35B-A3B (3B MoE) | 20.7 GiB | **86.2%** † | 86 |
+| Gemma 4 31B-it (31B dense) | 18.9 GiB | 72.2% | 13 |
 | Qwen 3.5-27B (27B dense) | 18.8 GiB | 68.6% | 12 |
 | LFM2-24B-A2B (2B MoE) | 14.2 GiB | 67.3% | 117 |
 | Qwen 3.5-35B-A3B (3B MoE) | 21.9 GiB | 66.9% | 26 |
