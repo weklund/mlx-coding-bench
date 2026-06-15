@@ -13,6 +13,7 @@ from mtb.llm_benchmarks.models.base import ModelSpec
 from mtb.quality_benchmarks.eval_problems import EVAL_PROBLEMS, EvalProblem
 from mtb.quality_benchmarks.sandbox import SandboxResult, execute_code
 from mtb.quality_benchmarks.tool_call_parser import parse_tool_calls
+from mtb.quality_benchmarks.utils import _strip_thinking
 
 
 def _build_test_code(problem: EvalProblem, code: str) -> str:
@@ -61,6 +62,12 @@ def _evaluate_with_sandbox(problem: EvalProblem, response: str) -> tuple:
         Tuple of (passed: bool, sandbox_result: SandboxResult).
     """
     from mtb.quality_benchmarks.sandbox import _strip_markdown_fences
+
+    # Strip the thinking section first. Verbose thinking models (e.g. Qwen3.6)
+    # draft indented code blocks mid-reasoning; without this, the fence
+    # extractor would grab an early draft from the thinking instead of the
+    # clean final answer after </think>.
+    response = _strip_thinking(response)
 
     # Extract code from response (strip markdown fences)
     extracted_code = _strip_markdown_fences(response)
@@ -147,6 +154,7 @@ def run_quality_benchmark(
     problems: Optional[List[EvalProblem]] = None,
     num_runs: int = 3,
     cooldown_time_fraction: float = 0.05,
+    max_tokens_multiplier: float = 1.0,
 ) -> pd.DataFrame:
     """Run quality evaluation for a single model+dtype configuration.
 
@@ -192,7 +200,11 @@ def run_quality_benchmark(
         for problem in tqdm(
             problems, desc=f"{model_spec.name} {dtype}", position=1, leave=False
         ):
-            benchmark.max_num_tokens = problem.max_tokens
+            # Scale the per-problem token cap. Verbose thinking models (e.g.
+            # Qwen3.6) need a larger ceiling to close </think> and emit the
+            # answer within budget; generation still stops at EOS, so a higher
+            # ceiling only costs time on problems that would otherwise truncate.
+            benchmark.max_num_tokens = int(problem.max_tokens * max_tokens_multiplier)
 
             prompt = problem.prompt
             is_code_exec = _has_code_execution(problem)

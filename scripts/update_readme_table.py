@@ -11,6 +11,7 @@ Usage:
 """
 
 import glob
+import json
 import re
 from datetime import datetime
 from pathlib import Path
@@ -46,6 +47,7 @@ MODEL_META = {
     "glm-4.7-flash": {"display": "GLM-4.7-Flash", "arch": "3B MoE"},
     "lfm2-24b-a2b": {"display": "LFM2-24B-A2B", "arch": "2B MoE"},
     "qwen-3.5-35b-a3b": {"display": "Qwen 3.5-35B-A3B", "arch": "3B MoE"},
+    "qwen-3.6-35b-a3b": {"display": "Qwen 3.6-35B-A3B", "arch": "3B MoE"},
     "qwen-3.5-27b": {"display": "Qwen 3.5-27B", "arch": "27B dense"},
     "qwen-3.5-27b-claude-opus-distilled": {
         "display": "Qwen 3.5-27B Opus Distilled",
@@ -168,6 +170,19 @@ def load_quality_data(
         p = Path(f)
         df["_source_dir"] = p.parent.name
         df["hardware"] = p.parts[-3]
+        # Read the per-run token-budget multiplier (>1 for verbose thinking
+        # models run with raised caps) so the table can flag those rows.
+        mult = 1.0
+        settings_path = p.parent / "settings.json"
+        if settings_path.exists():
+            try:
+                settings = json.loads(settings_path.read_text())
+                mult = settings.get("benchmark_settings", {}).get(
+                    "max_tokens_multiplier", 1.0
+                )
+            except (ValueError, OSError):
+                mult = 1.0
+        df["_max_tokens_multiplier"] = mult
         dfs.append(df)
 
     all_df = pd.concat(dfs, ignore_index=True)
@@ -262,6 +277,13 @@ def compute_quality_summary(
     result = overall[["model", "weighted_pct", "quality_pct"]].copy()
     for cat, cat_df in cats.items():
         result = result.merge(cat_df, on="model", how="left")
+
+    # Per-model token-budget multiplier (max across the model's rows).
+    if "_max_tokens_multiplier" in df.columns:
+        mult = (
+            df.groupby("model")["_max_tokens_multiplier"].max().reset_index()
+        )
+        result = result.merge(mult, on="model", how="left")
 
     return result
 
@@ -423,6 +445,9 @@ def generate_hardware_table(
         for _, r in with_quality.iterrows():
             name = format_model_name(r["name"], include_arch=True)
             qual_str = _format_quality_cell(r, top_quality, has_weighted)
+            mult = r.get("_max_tokens_multiplier", 1.0)
+            if pd.notna(mult) and mult and mult > 1:
+                qual_str = f"{qual_str} †"
             tps_str = _format_speed_cell(r["generation_tps"])
             mem = f"{r['peak_memory_gib']:.1f} GiB"
             lines.append(f"| {name} | {mem} | {qual_str} | {tps_str} |")
@@ -641,6 +666,21 @@ def generate_tables(
     lines.append(
         "> **API baseline:** Claude Opus 4.6 scores 86.7% on the same quality benchmark (via Anthropic API, not local)"
     )
+    # Footnote for rows run with a raised token-budget multiplier (only shown
+    # when some model used one). The cap is a ceiling, not forced length.
+    if (
+        not quality_df.empty
+        and "_max_tokens_multiplier" in quality_df.columns
+        and (quality_df["_max_tokens_multiplier"] > 1).any()
+    ):
+        lines.append(
+            "> † Run with a raised per-problem token-budget multiplier "
+            "(`--max_tokens_multiplier`) so its verbose thinking can finish "
+            "within budget; the cap is a ceiling, not forced length. Other "
+            "rows use the default 1×, so this score is not strictly "
+            "budget-comparable. Each run's multiplier is recorded in its "
+            "`settings.json`."
+        )
     lines.append("")
 
     # Cross-hardware summary at top

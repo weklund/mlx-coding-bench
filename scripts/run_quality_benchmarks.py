@@ -39,6 +39,7 @@ def main(
     dtypes: Iterable[str] = ("int4", "int8", "bfloat16"),
     num_runs: int = 3,
     cooldown_time_fraction: float = 0.05,
+    max_tokens_multiplier: float = 1.0,
     hf_cache_dir: Optional[str] = mtb.DEFAULT_HF_HOME,
     *,
     run_only_benchmarks: Optional[Iterable[str]] = None,
@@ -56,6 +57,10 @@ def main(
         dtypes: Data types to evaluate.
         num_runs: Number of runs per problem for majority voting.
         cooldown_time_fraction: Cooldown between problems.
+        max_tokens_multiplier: Scale factor applied to every problem's
+            max_tokens cap. Use >1.0 for verbose thinking models that need a
+            larger ceiling to finish reasoning and emit the answer within
+            budget (default 1.0 = unchanged).
         hf_cache_dir: HuggingFace cache directory.
         run_only_benchmarks: Optional list of model names to run.
         run_mlx_metal: Whether to run MLX with Metal backend.
@@ -143,11 +148,14 @@ def main(
             num_runs=num_runs,
             dtypes=list(dtypes),
             run_only_benchmarks=run_only_benchmarks,
+            max_tokens_multiplier=max_tokens_multiplier,
         ),
     )
     output_path = output_dir / "quality_results.csv"
     print(f"\nOutput directory: '{output_dir}'")
     print(f"Difficulty: {difficulty} ({len(problems)} problems x {num_runs} runs each)")
+    if max_tokens_multiplier != 1.0:
+        print(f"Token cap multiplier: {max_tokens_multiplier}x (raised for verbose thinking models)")
     print(f"Problems: {[p.name for p in problems]}\n")
 
     with tqdm(benchmarks_to_run, position=0) as iterator:
@@ -167,6 +175,7 @@ def main(
                 problems=problems,
                 num_runs=num_runs,
                 cooldown_time_fraction=cooldown_time_fraction,
+                max_tokens_multiplier=max_tokens_multiplier,
             )
 
     # Print summary

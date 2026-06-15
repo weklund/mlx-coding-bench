@@ -10,9 +10,13 @@ from typing import List
 def _strip_thinking(response: str) -> str:
     """Strip thinking/reasoning preambles from model responses.
 
-    Handles two formats:
+    Handles three formats:
     1. <think>...</think> blocks (Claude-distilled models)
     2. Freeform "Thinking Process:" preambles (base Qwen 3.5 models)
+    3. A bare trailing </think> with no opening tag: some chat templates
+       (e.g. Qwen3.x with enable_thinking) prefill the opening <think> into
+       the prompt, so the response begins mid-reasoning and only emits the
+       closing </think> before the answer.
 
     Our checks should evaluate the actual answer only.
     """
@@ -20,6 +24,10 @@ def _strip_thinking(response: str) -> str:
     stripped = re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL)
     # Also handle unclosed <think> blocks (response truncated mid-thinking)
     stripped = re.sub(r"<think>.*", "", stripped, flags=re.DOTALL)
+    # Handle a bare closing </think> whose opening tag was in the prompt:
+    # drop everything up to and including the (last) </think>.
+    if "</think>" in stripped:
+        stripped = re.sub(r"^.*</think>", "", stripped, flags=re.DOTALL)
 
     # Handle freeform thinking preambles (e.g., "Thinking Process:" or
     # "Here's a thinking process that leads to the solution:")
