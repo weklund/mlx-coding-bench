@@ -3,6 +3,7 @@ from typing import Any
 from mtb.llm_benchmarks.models.base import ModelSpec
 
 __all__ = [
+    "Qwen3p6_27B",
     "Qwen3p6_35B_A3B",
 ]
 
@@ -20,6 +21,22 @@ def format_qwen36_prompt(prompt: str) -> Any:
         },
     ]
     return messages
+
+
+# NOTE: mlx-community/Qwen3.6-27B-* are VLM-wrapper checkpoints; mlx-lm loads
+# them text-only via the qwen3_5 sanitize() (vision weights are stripped).
+Qwen3p6_27B = ModelSpec(
+    name="qwen-3.6-27b",
+    num_params=int(27e9),
+    prompt_formatter=format_qwen36_prompt,
+    thinking=True,
+    model_ids={
+        "mlx": {
+            "int4": "mlx-community/Qwen3.6-27B-4bit",
+            "int8": "mlx-community/Qwen3.6-27B-8bit",
+        },
+    },
+)
 
 
 # NOTE: mlx-community/Qwen3.6-35B-A3B-* are VLM-wrapper checkpoints; mlx-lm loads
