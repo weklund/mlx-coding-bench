@@ -48,6 +48,7 @@ MODEL_META = {
     "lfm2-24b-a2b": {"display": "LFM2-24B-A2B", "arch": "2B MoE"},
     "qwen-3.5-35b-a3b": {"display": "Qwen 3.5-35B-A3B", "arch": "3B MoE"},
     "qwen-3.6-35b-a3b": {"display": "Qwen 3.6-35B-A3B", "arch": "3B MoE"},
+    "qwen-3.6-27b": {"display": "Qwen 3.6-27B", "arch": "27B dense"},
     "qwen-3.5-27b": {"display": "Qwen 3.5-27B", "arch": "27B dense"},
     "qwen-3.5-27b-claude-opus-distilled": {
         "display": "Qwen 3.5-27B Opus Distilled",

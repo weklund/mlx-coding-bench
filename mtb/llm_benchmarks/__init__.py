@@ -62,6 +62,7 @@ from mtb.llm_benchmarks.models.qwen35 import (
     Qwen3p5_27B_Claude_Opus_Distilled,
 )
 from mtb.llm_benchmarks.models.qwen36 import (
+    Qwen3p6_27B,
     Qwen3p6_35B_A3B,
 )
 
@@ -96,6 +97,7 @@ MODEL_SPECS = [
     Qwen3p5_35B_A3B,
     Qwen3p5_27B_Claude_Opus_Distilled,
     # qwen 3.6
+    Qwen3p6_27B,
     Qwen3p6_35B_A3B,
     # agentic / coding — MoE models
     Qwen3_Coder_30B_A3B,
