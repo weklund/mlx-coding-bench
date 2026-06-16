@@ -1,15 +1,17 @@
 """Multi-format tool call parser for extracting structured tool calls from model responses.
 
 Parses tool calls from raw model response text in multiple formats:
-1. Hermes format: <tool_call>{...}</tool_call>
-2. JSON code blocks: ```json {...} ```
-3. Raw JSON objects with 'name' or 'function' key
+1. Pythonic format: <|tool_call_start|>[func(arg=val, ...)]<|tool_call_end|> (LFM2)
+2. Hermes format: <tool_call>{...}</tool_call>
+3. JSON code blocks: ```json {...} ```
+4. Raw JSON objects with 'name' or 'function' key
 
-Priority chain: Hermes tags first, then JSON code blocks, then raw JSON.
-Always strips <think>...</think> blocks before parsing.
+Priority chain: Pythonic markers first, then Hermes tags, then JSON code blocks,
+then raw JSON. Always strips <think>...</think> blocks before parsing.
 Never raises exceptions — returns None on any failure.
 """
 
+import ast
 import json
 import re
 from dataclasses import dataclass
@@ -35,9 +37,10 @@ def parse_tool_calls(response: str) -> Optional[list[ToolCall]]:
     """Extract structured tool calls from a model response string.
 
     Attempts parsing in priority order:
-    1. Hermes format (<tool_call>...</tool_call> tags)
-    2. JSON code blocks (```json ... ```)
-    3. Raw JSON objects with 'name' or 'function' key
+    1. Pythonic markers (<|tool_call_start|>[func(...)]<|tool_call_end|>)
+    2. Hermes format (<tool_call>...</tool_call> tags)
+    3. JSON code blocks (```json ... ```)
+    4. Raw JSON objects with 'name' or 'function' key
 
     Args:
         response: Raw model response text, potentially including
@@ -52,6 +55,10 @@ def parse_tool_calls(response: str) -> Optional[list[ToolCall]]:
         cleaned = _strip_thinking(response)
 
         # Try each parsing strategy in priority order
+        result = _parse_pythonic(cleaned)
+        if result:
+            return result
+
         result = _parse_hermes(cleaned)
         if result:
             return result
@@ -65,6 +72,60 @@ def parse_tool_calls(response: str) -> Optional[list[ToolCall]]:
             return result
 
         return None
+    except Exception:
+        return None
+
+
+def _parse_pythonic(text: str) -> Optional[list[ToolCall]]:
+    """Parse LFM2-style Pythonic tool calls.
+
+    Format: <|tool_call_start|>[func(arg=val, ...)]<|tool_call_end|>
+    The content between the markers is a Python expression — a list of function
+    calls (or a single bare call). Parsed with ast so we never exec model output.
+
+    Triggers only on the explicit markers, so it cannot affect other formats.
+    """
+    try:
+        blocks = re.findall(
+            r"<\|tool_call_start\|>\s*(.*?)\s*<\|tool_call_end\|>", text, re.DOTALL
+        )
+        if not blocks:
+            return None
+
+        results = []
+        for block in blocks:
+            block = block.strip()
+            try:
+                tree = ast.parse(block, mode="eval")
+            except SyntaxError:
+                continue
+
+            node = tree.body
+            if isinstance(node, ast.List):
+                calls = [e for e in node.elts if isinstance(e, ast.Call)]
+            elif isinstance(node, ast.Call):
+                calls = [node]
+            else:
+                calls = []
+
+            for call in calls:
+                name = getattr(call.func, "id", None) or getattr(
+                    call.func, "attr", None
+                )
+                if not name:
+                    continue
+                arguments = {}
+                for kw in call.keywords:
+                    if kw.arg is None:  # **kwargs splat — skip
+                        continue
+                    try:
+                        arguments[kw.arg] = ast.literal_eval(kw.value)
+                    except (ValueError, SyntaxError, TypeError):
+                        # Non-literal value: fall back to its source text
+                        arguments[kw.arg] = ast.get_source_segment(block, kw.value)
+                results.append(ToolCall(name=name, arguments=arguments))
+
+        return results if results else None
     except Exception:
         return None
 
@@ -300,6 +361,12 @@ def _dict_to_tool_call(d: dict) -> Optional[ToolCall]:
 
     Returns None if the dict doesn't look like a tool call.
     """
+    # Pattern 0: {"tool_call": {...}} wrapper (Gemma 4 emits this) — unwrap and
+    # recurse so the inner {"function": ..., "parameters": ...} matches below.
+    inner = d.get("tool_call")
+    if isinstance(inner, dict):
+        return _dict_to_tool_call(inner)
+
     # Pattern 4: Nested function object
     if "function" in d and isinstance(d["function"], dict):
         inner = d["function"]

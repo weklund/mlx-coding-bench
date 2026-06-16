@@ -1,0 +1,35 @@
+{
+  "datetime": "2026-06-15__22:38:26",
+  "contributor": "",
+  "git_commit": "999096baf1592673d270df358ffc4ca5f103a233",
+  "benchmark_settings": {
+    "num_warmup_iterations": 1,
+    "num_iterations": 3,
+    "max_num_tokens": 100,
+    "dtypes": [
+      "int4"
+    ],
+    "run_only_benchmarks": [
+      "lfm2.5-8b-a1b"
+    ]
+  },
+  "hardware_info": {
+    "processor": "arm",
+    "model_name": "Mac mini",
+    "chip": "Apple M4 Pro",
+    "memory": "64",
+    "total_cores": "14",
+    "performance_cores": "10",
+    "efficiency_cores": "4",
+    "gpu_cores": "20",
+    "hardware_string": "Apple_M4_Pro_10P+4E+20GPU_64GB"
+  },
+  "software_info": {
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "python_version": "3.11.11",
+    "torch_version": "2.6.0",
+    "mlx_version": "0.31.0",
+    "mlx_lm_version": "0.31.2",
+    "ollama_version": "0.30.8\nWarning: client version is 0.19.0"
+  }
+}
