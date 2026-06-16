@@ -25,6 +25,7 @@ from mtb.llm_benchmarks.models.lfm import (
 from mtb.llm_benchmarks.models.gemma4 import (
     Gemma4_E2B_it,
     Gemma4_E4B_it,
+    Gemma4_12B_it,
     Gemma4_26B_A4B_it,
     Gemma4_31B_it,
 )
@@ -113,6 +114,7 @@ MODEL_SPECS = [
     Gemma4_E2B_it,
     Gemma4_E4B_it,
     # gemma 4 — reasoning / agentic
+    Gemma4_12B_it,
     Gemma4_26B_A4B_it,
     Gemma4_31B_it,
     # --- 128GB+ only models ---
