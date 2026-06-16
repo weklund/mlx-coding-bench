@@ -46,6 +46,7 @@ MODEL_META = {
     "qwen3-coder-30b-a3b": {"display": "Qwen3-Coder-30B-A3B", "arch": "3B MoE"},
     "glm-4.7-flash": {"display": "GLM-4.7-Flash", "arch": "3B MoE"},
     "lfm2-24b-a2b": {"display": "LFM2-24B-A2B", "arch": "2B MoE"},
+    "lfm2.5-8b-a1b": {"display": "LFM2.5-8B-A1B", "arch": "1.5B MoE"},
     "qwen-3.5-35b-a3b": {"display": "Qwen 3.5-35B-A3B", "arch": "3B MoE"},
     "qwen-3.6-35b-a3b": {"display": "Qwen 3.6-35B-A3B", "arch": "3B MoE"},
     "qwen-3.6-27b": {"display": "Qwen 3.6-27B", "arch": "27B dense"},

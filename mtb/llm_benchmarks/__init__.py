@@ -20,6 +20,7 @@ from mtb.llm_benchmarks.models.glm import (
 )
 from mtb.llm_benchmarks.models.lfm import (
     LFM2_24B_A2B,
+    LFM2p5_8B_A1B,
 )
 from mtb.llm_benchmarks.models.gemma4 import (
     Gemma4_E2B_it,
@@ -103,6 +104,7 @@ MODEL_SPECS = [
     Qwen3_Coder_30B_A3B,
     GLM4p7_Flash,
     LFM2_24B_A2B,
+    LFM2p5_8B_A1B,
     # phi
     Phi4_Mini,
     Phi4,
