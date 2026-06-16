@@ -361,6 +361,12 @@ def _dict_to_tool_call(d: dict) -> Optional[ToolCall]:
 
     Returns None if the dict doesn't look like a tool call.
     """
+    # Pattern 0: {"tool_call": {...}} wrapper (Gemma 4 emits this) — unwrap and
+    # recurse so the inner {"function": ..., "parameters": ...} matches below.
+    inner = d.get("tool_call")
+    if isinstance(inner, dict):
+        return _dict_to_tool_call(inner)
+
     # Pattern 4: Nested function object
     if "function" in d and isinstance(d["function"], dict):
         inner = d["function"]
