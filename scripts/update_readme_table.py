@@ -41,9 +41,9 @@ HARDWARE_DISPLAY = {
 MODEL_META = {
     "gemma-4-e2b-it": {"display": "Gemma 4 E2B-it", "arch": "2.3B dense"},
     "gemma-4-e4b-it": {"display": "Gemma 4 E4B-it", "arch": "4.5B dense"},
+    "gemma-4-12b-it": {"display": "Gemma 4 12B-it", "arch": "12B dense"},
     "gemma-4-26b-a4b-it": {"display": "Gemma 4 26B-A4B-it", "arch": "3.8B MoE"},
     "gemma-4-31b-it": {"display": "Gemma 4 31B-it", "arch": "31B dense"},
-    "gemma-4-12b-it": {"display": "Gemma 4 12B-it", "arch": "12B dense"},
     "qwen3-coder-30b-a3b": {"display": "Qwen3-Coder-30B-A3B", "arch": "3B MoE"},
     "glm-4.7-flash": {"display": "GLM-4.7-Flash", "arch": "3B MoE"},
     "lfm2-24b-a2b": {"display": "LFM2-24B-A2B", "arch": "2B MoE"},

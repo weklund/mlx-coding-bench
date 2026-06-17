@@ -17,7 +17,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 | Hardware | Best Quality | Best Balance | Best Speed |
 |---|---|---|---|
 | **M4 Pro 64GB** | Qwen 3.6-27B (16 tok/s, 90.1%) | Qwen 3.6-35B-A3B (86 tok/s, 86.2%) | LFM2.5-8B-A1B (165 tok/s, 60.1%) |
-| **M5 Max 128GB** | Qwen3-Coder-30B-A3B (129 tok/s, 75.5%) | Qwen3-Coder-30B-A3B (129 tok/s, 75.5%) | Gemma 4 E2B-it (205 tok/s, 67.8%) |
+| **M5 Max 128GB** | Qwen 3.6-27B (32 tok/s, 86.2%) | Qwen 3.6-35B-A3B (133 tok/s, 83.3%) | Gemma 4 E2B-it (205 tok/s, 67.8%) |
 
 ### M4 Pro 64GB
 
@@ -110,7 +110,9 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 
 | Model | RAM | Quality | Gen tok/s |
 |---|---:|---:|---:|
-| Qwen3-Coder-30B-A3B (3B MoE) | 17.8 GiB | **75.5%** | 129 |
+| Qwen 3.6-27B (27B dense) | 17.0 GiB | **86.2%** † | 32 |
+| Qwen 3.6-35B-A3B (3B MoE) | 20.7 GiB | 83.3% † | 133 |
+| Qwen3-Coder-30B-A3B (3B MoE) | 17.8 GiB | 75.5% | 129 |
 | Gemma 4 31B-it (31B dense) | 18.9 GiB | 72.7% | 17 |
 | Qwen 3.5-27B (27B dense) | 18.8 GiB | 71.0% | 25 |
 | LFM2-24B-A2B (2B MoE) | 14.2 GiB | 70.6% | 180 |
@@ -118,6 +120,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 | Qwen 3.5-35B-A3B (3B MoE) | 21.9 GiB | 67.8% | 44 |
 | Gemma 4 26B-A4B-it (3.8B MoE) | 15.3 GiB | 65.3% | 110 |
 | Qwen 3.5-9B (9B dense) | 7.3 GiB | 64.5% | 79 |
+| Gemma 4 12B-it (12B dense) | 7.8 GiB | 56.2% † | 19 |
 | Qwen 3.5-4B (4B dense) | 4.9 GiB | 50.6% | 131 |
 | Gemma 4 E4B-it (4.5B dense) | 5.0 GiB | 50.6% | 130 |
 | Qwen 2.5-Coder-3B (3B dense) | 2.6 GiB | 48.2% | 226 |
@@ -166,6 +169,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 | LFM2-24B-A2B (2B MoE) | 25.9 GiB | 132 | 5297 |
 | Gemma 3-4B-it QAT (4B dense) | 5.6 GiB | 104 | 5157 |
 | Gemma 3-4B-it (4B dense) | 5.6 GiB | 104 | 5087 |
+| Qwen 3.6-35B-A3B (3B MoE) | 38.0 GiB | 102 | 3488 |
 | Qwen3-Coder-30B-A3B (3B MoE) | 33.1 GiB | 96 | 3353 |
 | Gemma 4 26B-A4B-it (3.8B MoE) | 27.7 GiB | 85 | 3208 |
 | Qwen 3.5-4B (4B dense) | 6.8 GiB | 85 | 2584 |
@@ -177,6 +181,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 | Qwen 3.5-35B-A3B (3B MoE) | 39.2 GiB | 45 | 2151 |
 | Qwen 3-14B-it (14B dense) | 16.4 GiB | 34 | 1426 |
 | Gemma 3-12B-it QAT (12B dense) | 14.6 GiB | 32 | 1060 |
+| Qwen 3.6-27B (27B dense) | 30.4 GiB | 18 | 669 |
 | Qwen 3.5-27B Opus Distilled (27B dense) | 30.3 GiB | 17 | 434 |
 | Qwen 3.5-27B (27B dense) | 32.0 GiB | 15 | 480 |
 | Gemma 4 31B-it (31B dense) | 34.1 GiB | 9 | 544 |

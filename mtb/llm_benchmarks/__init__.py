@@ -113,8 +113,9 @@ MODEL_SPECS = [
     # gemma 4 — fast / on-device
     Gemma4_E2B_it,
     Gemma4_E4B_it,
-    # gemma 4 — reasoning / agentic
+    # gemma 4 — mid
     Gemma4_12B_it,
+    # gemma 4 — reasoning / agentic
     Gemma4_26B_A4B_it,
     Gemma4_31B_it,
     # --- 128GB+ only models ---

@@ -22,6 +22,18 @@ def _strip_thinking(response: str) -> str:
 
     Our checks should evaluate the actual answer only.
     """
+    # Handle Gemma 4 channel-based thinking format:
+    # <|channel>thought\n...<|channel>response\n<actual answer>
+    if "<|channel>thought" in response:
+        channel_resp = re.search(r"<\|channel\>response\s*\n?", response)
+        if channel_resp:
+            response = response[channel_resp.end():]
+        else:
+            # No response channel found — strip the thought channel marker
+            # and treat everything after as the response
+            response = re.sub(r"<\|channel\>thought\s*\n?", "", response)
+        return response.strip()
+
     # Remove all <think>...</think> blocks (greedy, handles multiline)
     stripped = re.sub(r"<think>.*?</think>", "", response, flags=re.DOTALL)
     # Also handle unclosed <think> blocks (response truncated mid-thinking)

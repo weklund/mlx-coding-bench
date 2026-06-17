@@ -72,6 +72,11 @@ def _evaluate_with_sandbox(problem: EvalProblem, response: str) -> tuple:
     # Extract code from response (strip markdown fences)
     extracted_code = _strip_markdown_fences(response)
 
+    # Dedent: some thinking models (Gemma 4) indent code under a channel marker
+    import textwrap
+
+    extracted_code = textwrap.dedent(extracted_code)
+
     # Build test code combining implementation + assertions
     test_code = _build_test_code(problem, extracted_code)
 
