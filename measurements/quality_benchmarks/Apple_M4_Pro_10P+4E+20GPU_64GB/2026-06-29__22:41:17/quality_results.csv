@@ -1,0 +1,1469 @@
+model,framework,backend,dtype,category,problem,pass_count,num_runs,passed,avg_generation_time_sec,avg_generation_tps,avg_tokens_generated,sample_response,execution_stdout,execution_stderr,execution_exit_code,parsed_tool_calls
+gpt-oss-20b,mlx,metal,int4,coding,fizzbuzz,3,3,True,3.74,90.8,340.0,"<|channel|>analysis<|message|>We need to write a Python function fizzbuzz(n: int) -> str. It should return 'Fizz' for multiples of 3, 'Buzz' for multiples of 5, 'FizzBuzz' for multiples of both, or the number as a string otherwise. So typical FizzBuzz. Implementation: check if n%3==0 and n%5==0 -> 'FizzBuzz', else if n%3==0 -> 'Fizz', else if n%5==0 -> 'Buzz', else str(n). Provide code. Also maybe include type hints. Provide explanation. Provide final answer.<|end|><|start|>assistant<|channel|>f","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,coding,reverse_string,3,3,True,3.15,91.0,287.0,"<|channel|>analysis<|message|>The user wants a Python function reverse_string(s: str) -> str that reverses the input string. They want code. We should provide a function definition. Probably simple: return s[::-1] or reversed. Provide explanation. Ensure correct signature. Provide example usage. Probably just code snippet.<|end|><|start|>assistant<|channel|>final<|message|>Here’s a minimal, self‑contained implementation that does exactly what you asked for:
+
+```python
+def reverse_string(s: str) ","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,coding,fibonacci,3,3,True,4.18,90.9,380.0,"<|channel|>analysis<|message|>We need to write a Python function named fibonacci (typo? maybe fibonacci). It returns first n Fibonacci numbers as a list starting with 0. So if n=0? Should return empty list? Usually first n numbers: if n=1 returns [0]. If n=2 returns [0,1]. Implementation: iterate generating list. Use simple loop. Provide docstring. Provide example usage. Ensure type hints. Provide code.<|end|><|start|>assistant<|channel|>final<|message|>Here’s a compact, type‑annotated implement","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,coding,binary_search,3,3,True,4.13,90.9,375.0,"<|channel|>analysis<|message|>We need to write a Python function binary_search that takes a list arr and target int, returns index or -1. Should be standard binary search. Provide code. Probably mention that arr sorted ascending. Provide docstring. Provide example usage. Provide complexity. Provide test. Provide explanation. Provide final answer.<|end|><|start|>assistant<|channel|>final<|message|>Here is a compact, fully‑typed implementation of a classic binary search that works on a sorted list","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,coding,palindrome,0,3,False,35.5,86.5,3072.0,"<|channel|>analysis<|message|>We need to write a Python function is_palindrome(s: str) -> bool that checks if a string is a palindrome ignoring case and non-alphanumeric characters. So we need to ignore case and non-alphanumeric characters. So we need to filter out characters that are not alphanumeric. Then compare string to its reverse. Should be case-insensitive. So we can do:
+
+def is_palindrome(s: str) -> bool:
+    cleaned = ''.join(ch.lower() for ch in s if ch.isalnum())
+    return cleaned =",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_ic6wztp6.py"", line 7
+    But we need to ensure we use .isalnum() or .isalnum? Actually .isalnum() is .isalnum? Wait: .isalnum() is .isalnum? Actually .isalnum() is .isalnum? Wait: In Python, str.isalnum() is .isalnum? Actually it's .isalnum? Wait: The method is .isalnum? Wait: It's .isalnum? Wait: The method is .isalnum? Wait: It's .isalnum? Wait: It's .isalnum? Wait: It's .isalnum? Wait: It's .isalnum? Wait: It's .isalnum? Wait: I",1.0,
+gpt-oss-20b,mlx,metal,int4,reasoning,train_problem,3,3,True,2.24,90.2,202.0,"<|channel|>analysis<|message|>We need to compute time until they meet. They are 200 km apart. Relative speed = 60+40=100 km/h. Time = distance / speed = 200/100 = 2 hours. So answer: 2 hours. Provide explanation.<|end|><|start|>assistant<|channel|>final<|message|>The two trains are moving toward each other, so their relative speed is the sum of their individual speeds.
+
+\[
+\text{Relative speed}=60\ \text{km/h}+40\ \text{km/h}=100\ \text{km/h}
+\]
+
+The distance between them is 200 km.  
+Time \(t\)",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,coin_probability,3,3,True,4.55,88.4,402.0,"<|channel|>analysis<|message|>We need to compute probability of at least 2 heads in 3 flips. For fair coin, probability of exactly k heads is C(3,k)/2^3. So at least 2 heads: k=2 or 3. So probability = C(3,2)/8 + C(3,3)/8 = 3/8 + 1/8 = 4/8 = 1/2. So answer: 1/2 or 0.5. Provide explanation.<|end|><|start|>assistant<|channel|>final<|message|>For a fair coin each flip is independent with probability \(1/2\) of heads.
+
+In three flips the number of heads \(X\) follows a binomial distribution:
+\[
+P(X=",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,workers_problem,3,3,True,3.14,87.8,276.0,"<|channel|>analysis<|message|>We have a problem: 5 workers can build a wall in 10 days. We want to know how long would it take 10 workers to build the same wall? This is a typical work problem: Work = workers * time. If 5 workers take 10 days, the total work is 5 * 10 = 50 worker-days. If 10 workers work, time = 50 / 10 = 5 days. So answer: 5 days.
+
+But we need to check if any trick: maybe they ask ""If 5 workers can build a wall in 10 days, how long would it take 10 workers to build the same wal",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,age_problem,3,3,True,6.57,87.3,573.0,"<|channel|>analysis<|message|>We have a problem: Tom is twice as old as Jerry. In 5 years, Tom will be 1.5 times as old as Jerry. Find ages.
+
+Let current ages: T = Tom's age, J = Jerry's age. We have T = 2J. In 5 years: T+5 = 1.5*(J+5). Solve.
+
+Equation: T = 2J. And T+5 = 1.5*(J+5). Solve.
+
+Plug T=2J: 2J + 5 = 1.5*(J+5). Compute: 2J + 5 = 1.5J + 7.5. Subtract 1.5J: 0.5J + 5 = 7.5 => 0.5J = 2.5 => J = 5. So Jerry is 5 years old. Then Tom is 10. So Tom is 10, Jerry 5. Check: In 5 years: Tom 15, Je",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,sequence_pattern,3,3,True,2.96,87.9,260.0,"<|channel|>analysis<|message|>We have a sequence: 2, 6, 12, 20, 30, ?. We need next number. Let's analyze pattern.
+
+Differences: 4, 6, 8, 10. Differences increase by 2 each time. So next difference would be 12. So next term = 30 + 12 = 42. So answer 42.
+
+But check if any other pattern: maybe n^2+? Let's compute: terms: 2=1^2+1? 6=2^2+2? 12=3^2+3? 20=4^2+4? 30=5^2+5? Let's test: n^2 + n? For n=1:1+1=2 correct. n=2:4+2=6 correct. n=3:9+3=12 correct. n=4:16+4=20 correct. n=5:25+5=30 correct. So pat",,,,
+gpt-oss-20b,mlx,metal,int4,instruction_following,json_output,3,3,True,4.4,87.7,386.0,"<|channel|>analysis<|message|>The user wants a JSON object with keys ""name"", ""age"", and ""hobbies"" (a list). They want output only the JSON, no other text. So we need to output something like:
+
+{
+  ""name"": ""John Doe"",
+  ""age"": 30,
+  ""hobbies"": [""reading"", ""hiking""]
+}
+
+But we need to ensure correct JSON formatting. The keys must be exactly ""name"", ""age"", and ""hobbies"". The value for ""hobbies"" must be a list. The user didn't specify any particular values, so we can choose any fictional person. We s",,,,
+gpt-oss-20b,mlx,metal,int4,instruction_following,numbered_list,3,3,True,1.34,88.7,119.0,"<|channel|>analysis<|message|>The user wants: ""List 5 benefits of regular exercise. Use a numbered list format (1. 2. 3. etc).""
+
+We need to comply. It's a straightforward request. There's no disallowed content. It's allowed. We can comply. Just produce a numbered list. No policy issues. So we comply.<|end|><|start|>assistant<|channel|>final<|message|>1. Improves cardiovascular health  
+2. Boosts mood and reduces stress  
+3. Enhances muscle strength and endurance  
+4. Helps maintain a healthy wei",,,,
+gpt-oss-20b,mlx,metal,int4,instruction_following,word_constraint,3,3,True,3.86,87.9,339.0,"<|channel|>analysis<|message|>We need to explain machine learning in 50 words or fewer. So we need to produce a concise explanation. Let's craft: ""Machine learning is a field of AI where computers learn patterns from data, improving performance without explicit programming. Algorithms detect structure, make predictions, and adapt. It uses statistical models, training data, loss functions, optimization. It powers recommendation systems, image recognition, natural language processing."" Count words",,,,
+gpt-oss-20b,mlx,metal,int4,instruction_following,code_with_comments,3,3,True,4.57,87.8,401.0,"<|channel|>analysis<|message|>We need to write a Python function to calculate area of a circle. Provide detailed comments explaining each step. Should be simple. Provide code snippet. Should include import math. Provide docstring. Provide example usage. Provide explanation. Should be thorough. Provide final answer.<|end|><|start|>assistant<|channel|>final<|message|>Here’s a compact, well‑commented Python function that takes a radius and returns the area of a circle.  
+Feel free to copy‑paste it ","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,instruction_following,direct_answer,3,3,True,0.55,90.8,50.0,"<|channel|>analysis<|message|>The user asks: ""What is the capital of France? Answer directly with no explanation."" The user wants a direct answer. The answer: ""Paris."" There's no policy conflict. Just answer.<|end|><|start|>assistant<|channel|>final<|message|>Paris",,,,
+gpt-oss-20b,mlx,metal,int4,coding,lru_cache,0,3,False,155.94,78.8,12288.0,"<|channel|>analysis<|message|>We need to implement LRU cache simulation. The function signature: lru_cache_ops(capacity: int, operations: list) -> list. It should simulate an LRU cache. The operations list contains tuples: ('get', key) or ('put', key, value). We need to return a list of results: for get, return value or -1 if not found; for put, return None? The problem says ""put returns None"". So we need to return None for put operations. The function should implement LRU (Least Recently Used) ",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_nv3a74wc.py"", line 1
+    e ""Least Recently Used""? But the problem says ""LRU"" maybe ""Least Recently Used""? But typical is ""LRU"" maybe ""Least Recently Used""? But the problem says ""LRU"" maybe ""Least Recently Used""? But typical is ""LRU"" maybe ""Least Recently Used""? But the problem says ""LRU"" maybe ""Least Recently Used""? But typical is ""LRU"" maybe ""Least Recently Used""? But the
+    ^
+SyntaxError: invalid syntax
+",1.0,
+gpt-oss-20b,mlx,metal,int4,coding,flatten_nested,3,3,True,5.13,90.7,465.0,"<|channel|>analysis<|message|>We need to write a Python function flatten that takes an arbitrarily nested list and returns a flat list of all values. The function should handle nested lists of arbitrary depth. We can implement recursively. The function signature: flatten(lst: list) -> list. Should return a new list. Implementation: iterate over elements, if element is list, recursively flatten, else append. Use isinstance(element, list). But careful: if element is tuple? But requirement says lis","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,coding,longest_palindrome_substring,0,3,False,7.5,89.8,673.0,"<|channel|>analysis<|message|>We need to provide code. The user wants a Python function `longest_palindrome(s: str) -> str` that finds the longest palindromic substring in a given string. They spelled ""longest"" incorrectly? They wrote ""longest_palindrome"". Probably they want ""longest_palindrome"" function. We need to implement. Provide explanation and code. Should handle typical cases. Use dynamic programming or expand around center. Provide code. Also mention complexity. Provide final answer.<|e",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_8now33xr.py"", line 42, in <module>
+    assert longest_palindrome('babad') == 'bab', 'Test case 2 failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Test case 2 failed
+",1.0,
+gpt-oss-20b,mlx,metal,int4,coding,calculator,0,3,False,159.76,77.0,12288.0,"<|channel|>analysis<|message|>We need to implement a function calculate(expression: str) -> float that evaluates a math expression with +, -, *, /, and parentheses, respecting operator precedence. We need to parse expression string, handle whitespace? Not specified. Should support negative numbers? Possibly. Should handle floats? Probably yes. Should handle division by zero? Might raise exception. Should handle parentheses nested. Should handle unary minus? Possibly. Should handle spaces. Should",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_d758snkf.py"", line 3
+    We need to implement in Python. Provide code. Use shunting-yard algorithm or recursion. Use Python's eval? But we need to implement ourselves. Provide function that uses recursion to parse expression. Use stack for operators and operands. Use precedence: * and / higher than + and -. Use parentheses.
+                                                                                                      ^
+Synta",1.0,
+gpt-oss-20b,mlx,metal,int4,coding,buggy_merge_sort,3,3,True,6.73,90.6,610.0,"<|channel|>analysis<|message|>We need to implement merge sort. The user wants a function merge_sort(arr: list) -> list that sorts a list using merge sort. Should handle empty lists, single elements, duplicates. Provide correct implementation. Should be in Python. Provide code. Also maybe provide explanation. The function should be correct. Let's implement typical merge sort: recursively split, merge sorted halves. Should handle duplicates. Should return sorted list. Should not modify input? Usua","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,reasoning,compound_interest,3,3,True,100.82,81.0,8169.0,"<|channel|>analysis<|message|>We need to compute future value of investment with quarterly compounding. Principal P=10,000, annual nominal interest rate r=5% = 0.05. Compounded quarterly: interest per quarter = r/4 = 0.0125. Number of quarters n=3*4=12. Future value = P*(1 + r/4)^n = 10,000*(1+0.0125)^12. Compute. Let's compute: 1+0.0125=1.0125. Raise to 12: (1.0125)^12. Let's compute approximate: Use log or iterative. Let's compute precisely: (1.0125)^12. Use natural log: ln(1.0125)=0.012423? L",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,circular_seating,3,3,True,156.28,78.6,12288.0,"<|channel|>analysis<|message|>We need to count number of seating arrangements of 6 people around a round table such that Alice and Bob are not adjacent. We need to consider circular permutations. Usually number of arrangements of n distinct people around a round table is (n-1)! because rotations considered same. So total arrangements of 6 people: (6-1)! = 5! = 120.
+
+We need to subtract arrangements where Alice and Bob are adjacent. Count those: treat Alice and Bob as a single block. Then we have",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,logic_puzzle,3,3,True,156.74,78.4,12288.0,"<|channel|>analysis<|message|>We have a logic puzzle. We have three people A, B, C. Each can be truth-teller (always tells truth) or liar (always lies). We have statements:
+
+A says: ""B is a liar.""
+B says: ""C is a liar.""
+C says: ""A and B are both liars."" (typo: ""liars"" meaning liars? Should be ""liars"" maybe ""liars"" meaning liars? Actually ""liars"" maybe ""liars"" meaning liars? It's ""liars"" maybe ""liars"" meaning ""liars""? The statement: ""A and B are both liars."" So C says: ""A and B are both liars."" S",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,bayes_theorem,3,3,True,7.48,90.3,675.0,<|channel|>analysis<|message|>We need to compute posterior probability: P(Disease | Positive). Use Bayes: P(D|+) = P(+|D)P(D) / [P(+|D)P(D)+P(+|~D)P(~D))]. Given prevalence 1% => P(D)=0.01. Sensitivity 95% => P(+|D)=0.95. Specificity 95% => false positive rate 5% => P(+|~D)=0.05. So compute: numerator: 0.95*0.01=0.0095. Denominator: 0.0095 + 0.05*0.99=0.0095+0.0495=0.059. So probability = 0.0095/0.059 = 0.161... Let's compute precisely: 0.0095/0.059 = 0.161016949... about 16.1%. So answer: about,,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,proof_bug,3,3,True,73.65,83.4,6144.0,"<|channel|>analysis<|message|>We need to analyze the proof: Let a = b. Then a^2 = ab. a^2 - b^2 = ab - b^2. (a + b)(a - b) = b(a - b). a + b = b. Since a = b, we get b + b = b, so 2b = b, therefore 2 = 1.
+
+We need to find the error. The error is that we divided by zero or something. Let's analyze step by step.
+
+We have a = b. Then a^2 = ab. That's fine. Then a^2 - b^2 = ab - b^2. That's fine. Then (a + b)(a - b) = b(a - b). Wait: a^2 - b^2 = (a + b)(a - b). But they replaced a^2 - b^2 with (a + ",,,,
+gpt-oss-20b,mlx,metal,int4,math,modular_arithmetic,3,3,True,6.45,89.9,580.0,"<|channel|>analysis<|message|>We need to compute 2^100 mod 7. We can use pattern: 2^1=2 mod7, 2^2=4, 2^3=8 mod7=1, 2^4=2, etc. So cycle length 3. 100 mod3=1. So 2^100 mod7=2^1=2. So remainder 2. Provide step-by-step explanation. Also show pattern: 2^1=2, 2^2=4, 2^3=1, 2^4=2, etc. So answer 2. Provide steps.<|end|><|start|>assistant<|channel|>final<|message|>**Step‑by‑step solution**
+
+1. **Find the pattern of powers of 2 modulo 7**
+
+   Compute the first few powers of 2 and reduce each result modu",,,,
+gpt-oss-20b,mlx,metal,int4,math,inclusion_exclusion,3,3,True,33.26,85.1,2831.0,"<|channel|>analysis<|message|>We need to compute number of integers from 1 to 1000 inclusive that are divisible by 2, 3, or 5. Use inclusion-exclusion principle. We need to show each term. So we need to compute:
+
+Let A = multiples of 2, B = multiples of 3, C = multiples of 5. We need |A ∪ B ∪ C| = |A| + |B| + |C| - |A∩B| - |A∩C| - |B∩C| + |A∩B∩C|.
+
+Compute counts:
+
+Total numbers from 1 to 1000 inclusive: 1000.
+
+Multiples of 2: floor(1000/2) = 500.
+
+Multiples of 3: floor(1000/3) = 333 (since 3*33",,,,
+gpt-oss-20b,mlx,metal,int4,math,bouncing_ball,0,3,False,155.69,78.9,12288.0,"<|channel|>analysis<|message|>We need to compute total distance traveled by ball dropped from height 10 m? Wait: The problem says ""A ball is dropped from a height of 10 meters."" Actually the problem says ""A ball is dropped from a height of 10 meters."" But the text says ""A ball is dropped from a height of 10 meters."" Wait: The problem says ""A ball is dropped from a height of 10 meters."" But the problem says ""A ball is dropped from a height of 10 meters."" Wait: The problem says ""A ball is dropped ",,,,
+gpt-oss-20b,mlx,metal,int4,coding,markdown_to_html,0,3,False,22.52,87.2,1962.0,"<|channel|>analysis<|message|>We need to write a Python function that converts Markdown to HTML. The user wants a function `markdown_to_html(text: str) -> str` that converts Markdown to HTML. It should handle bold (**text**), italic (*text*), code (`code`), and links [text](url). We need to implement a simple parser. The user didn't specify any other features. We can implement a simple regex-based approach. But we need to be careful about nested formatting. We can use regex patterns to replace. ",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_cvmx_4bk.py"", line 5
+    text = re.sub(r'&', '&amp;')? Actually we need to escape &, <, >, "" maybe.
+                                                                      ^
+SyntaxError: unterminated string literal (detected at line 5)
+",1.0,
+gpt-oss-20b,mlx,metal,int4,coding,data_pipeline,0,3,False,11.99,86.1,1033.0,"<|channel|>analysis<|message|>We need to write a Python function that takes a CSV text string, processes it: filter rows where amount > 100, region in North or West, quantity >=5. Then group by product, compute total (sum of amount?), average (average amount?), count (number of rows). Then sort by total descending. Return JSON string. The function signature: process_sales(csv_text: str) -> str. Should return JSON string. We need to parse CSV. Use csv module. Use pandas? But we can implement with",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_qyd7bb3h.py"", line 9, in <module>
+    assert process_sales('date,product,region,amount,quantity\n2024-01-01,Widget,North,150,10\n2024-01-02,Widget,South,200,8\n2024-01-03,Gadget,West,120,5\n2024-01-04,Widget,North,80,3\n2024-01-05,Gadget,North,250,7\n2024-01-06,Widget,West,300,6\n') == '[{""product"": ""Widget"", ""total_amount"": 450.0, ""avg_amount"": 225.0, ""count"": 2}, {""product"": ""Gadget"", ""total_amo",1.0,
+gpt-oss-20b,mlx,metal,int4,coding,retry_decorator,3,3,True,22.25,85.6,1904.0,"<|channel|>analysis<|message|>We need to write a Python function `retry_call(func, max_attempts: int, args: tuple) -> dict` that calls func(*args) up to max_attempts times, returning a dict with keys: success (bool), value (any), attempts (int), error (str or None). The function should attempt to call func with the provided args. If it succeeds, return dict with success True, value the return value, attempts number of attempts used, error None. If it fails (raises exception), we catch exception ","ALL TESTS PASSED
+",,0.0,
+gpt-oss-20b,mlx,metal,int4,reasoning,einstein_riddle,3,3,True,343.77,71.5,24576.0,"<|channel|>analysis<|message|>We need to solve logic puzzle. We have 5 houses, each with nationality, color, drink. We have constraints:
+
+1. The Brit lives in the red house.
+2. The Swede drinks milk.
+3. The green house is immediately to the left of the white house.
+4. The Dane drinks tea.
+5. The green house owner drinks coffee.
+6. The Norwegian lives in house 1.
+7. The Norwegian lives next to the blue house.
+8. The German lives in house 3.
+
+We need to assign each person to a house and determine ",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,three_urns,3,3,True,14.78,88.9,1314.0,"<|channel|>analysis<|message|>We need to compute probability that second ball drawn is red. We have three urns: A, B, C. Process: first draw from urn A. If red, then draw from urn B. If blue, then draw from urn C. We need probability that second ball drawn is red. So we need probability that second ball drawn is red given the first ball color. We need to compute P(second red) = P(first red) * P(second red | first red) + P(first blue) * P(second red | first blue). Actually we need to compute prob",,,,
+gpt-oss-20b,mlx,metal,int4,reasoning,topological_sort,0,3,False,156.7,78.4,12288.0,"<|channel|>analysis<|message|>We need to list all topological orderings of 5 nodes: A, B, C, D, E. Dependencies: A→B, B→C, A→D, D→C, C→E. So edges: A->B, A->D, B->C, D->C, C->E. We need all topological sorts. Let's analyze.
+
+We have partial order constraints:
+
+- A before B and D.
+- B before C.
+- D before C.
+- C before E.
+
+Thus we have partial order: A before B and D; B and D before C; C before E. So we need to list all permutations of A,B,D,C,E that satisfy these constraints.
+
+We can treat as DA",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_cfwgufnt.py"", line 1
+    <|channel|>analysis<|message|>We need to list all topological orderings of 5 nodes: A, B, C, D, E. Dependencies: A→B, B→C, A→D, D→C, C→E. So edges: A->B, A->D, B->C, D->C, C->E. We need all topological sorts. Let's analyze.
+                                                                                                                      ^
+SyntaxError: invalid character '→' (U+2192)
+",1.0,
+gpt-oss-20b,mlx,metal,int4,instruction_following,constrained_factorial,0,3,False,156.42,78.6,12288.0,"<|channel|>analysis<|message|>We need to write a Python function that computes factorial of a non-negative integer. Constraints:
+
+1. Every variable name must be exactly 4 characters long. So variable names must be 4 characters. Eg 'numb', 'rslt', 'temp', 'val1', 'val2', etc. Must ensure all variable names are exactly 4 characters. That includes function name? The function name itself? The requirement says ""Every variable name must be exactly 4 characters long"". That likely refers to variable nam",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_xe24lghw.py"", line 14
+    But we need to ensure we have exactly 3 hints. We have hints: parameter 'numb: int', return type '-> int', and variable 'temp: int'. That's 3 hints. Good.
+                                                                                                                                             ^
+SyntaxError: unterminated string literal (detected at line 14)
+",1.0,
+gpt-oss-20b,mlx,metal,int4,instruction_following,library_schema,0,3,False,104.74,81.0,8480.0,"<|channel|>analysis<|message|>We need to output a JSON Schema. The user wants a JSON Schema for a library management system with three entity types: Book, Author, Loan. Each entity must have a unique 'id' field. Cross-references must use referenced entity's id. Include 'required' fields and 'type' constraints for every property. Output valid JSON Schema (draft 2020-12 or later). So we need to produce a JSON Schema that defines these entities. We can produce a JSON Schema with definitions for Boo",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_m1naoc14.py"", line 4, in <module>
+    ""additionalProperties"": false,
+                            ^^^^^
+NameError: name 'false' is not defined. Did you mean: 'False'?
+",1.0,
+gpt-oss-20b,mlx,metal,int4,instruction_following,adversarial_transform,0,3,False,156.56,78.5,12288.0,"<|channel|>analysis<|message|>We need to perform three transformations in sequence on the sentence: ""The quick brown fox jumps over the lazy dog"". Wait the sentence: ""The quick brown fox jumps over the lazy dog"". Actually the sentence: ""The quick brown fox jumps over the lazy dog"". The user wrote: ""The quick brown fox jumps over the lazy dog"". But the user wrote: ""The quick brown fox jumps over the lazy dog"". Wait the user wrote: ""The quick brown fox jumps over the lazy dog"". Actually the user w",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_lnwl09jx.py"", line 1
+    ait the user wrote: ""The quick brown fox jumps over the lazy dog"". Wait the user wrote: ""The quick brown..."".
+    ^
+SyntaxError: invalid syntax
+",1.0,
+gpt-oss-20b,mlx,metal,int4,writing,multi_doc_summary,3,3,True,2.94,90.8,267.0,"<|channel|>analysis<|message|>We need to summarize the three paragraphs into a single cohesive summary covering all three topics. The summary should be 3-5 sentences. So we need to mention quantum computing, climate change, gene therapy. We need to cover all three topics. The summary should be 3-5 sentences. Let's produce 4 sentences. Ensure we mention key points: quantum computing uses superposition and entanglement, enabling exponential speedups for cryptography and drug discovery; climate cha",,,,
+gpt-oss-20b,mlx,metal,int4,writing,structured_meeting_notes,3,3,True,74.08,83.0,6144.0,"<|channel|>analysis<|message|>We need to produce a meeting notes for a fictional product team standup. Must include:
+
+1. YAML frontmatter with fields: date, attendees (list), meeting_type
+2. A '## Discussion' section with 3 bullet points
+3. A '## Decisions' section with 2 bullet points
+4. A '## Action Items' section with 3 items, each assigned to a specific person using @name format
+
+Use proper Markdown formatting throughout.
+
+We need to produce a Markdown document. The YAML frontmatter should b",,,,
+gpt-oss-20b,mlx,metal,int4,writing,tone_rewrite,0,3,False,73.87,83.2,6144.0,"<|channel|>analysis<|message|>We need to rewrite the paragraph for a non-technical audience. Keep key facts: deep neural networks use backpropagation with stochastic gradient descent to minimize cross-entropy loss across training epochs. The model's accuracy on validation set plateaued at 94.3% after hyperparameter tuning of learning rate and batch size, with Adam optimizer achieving faster convergence than vanilla SGD.
+
+We need to keep all key facts but avoid jargon. So we need to explain in pl",,,,
+gpt-oss-20b,mlx,metal,int4,writing,contradiction_detection,3,3,True,73.67,83.4,6144.0,"<|channel|>analysis<|message|>We have to analyze the two notes. The user says: ""Read these two notes carefully and identify any factual contradictions between them. Note 1: 'The Apollo 11 mission landed on the Moon on July 20, 1969. Neil Armstrong and Buzz Aldrin spent approximately 2.5 hours walking on the lunar surface during their EVA, collecting rock samples and deploying scientific instruments.' Note 2: 'During the Apollo 11 mission, Armstrong and Aldrin remained on the lunar surface for ap",,,,
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_correct_tool,0,3,False,2.07,90.9,188.0,"<|channel|>analysis<|message|>We need to call search_flights with origin ""New York"" (likely ""New York"" but maybe ""New York"" is a typo for ""New York""? Actually ""New York"" is likely ""New York"" but maybe they mean ""New York"" but we should use ""New York"" as given. Destination ""London"". Date ""March 15th"". The tool expects date string. Probably ""2023-03-15"" or ""2024-03-15""? The user didn't specify year. We can assume current year? It's 2026. But we can just pass ""2026-03-15"". But maybe the tool expect",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_ambiguous_request,0,3,False,2.68,90.3,242.0,"<|channel|>analysis<|message|>We need to call schedule_meeting tool. The user wants to schedule a meeting with marketing team next Tuesday at 2pm. We need to provide participants list. Probably marketing team participants: maybe ""marketing team"". But we need to provide participants list. We can guess participants: [""marketing team""]. Title: ""Marketing Team Call"". Date: next Tuesday. We need date format? Probably ""YYYY-MM-DD"". Let's compute next Tuesday. Today? We don't know current date. But we ",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_none_selection,3,3,True,0.64,91.6,59.0,"<|channel|>analysis<|message|>The user says: ""Hello, how are you today?"" They want a greeting. No tool needed. Just respond.<|end|><|start|>assistant<|channel|>final<|message|>Hello! I'm just a bunch of code, but I'm functioning smoothly—thanks for asking. How can I help you today?",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_similar_names,3,3,True,0.8,91.3,73.0,"<|channel|>analysis<|message|>We need to call get_user_profile with user_id 'alice_42'. The tool name is get_user_profile. The tool call format: {""name"":""get_user_profile"",""arguments"":{""user_id"":""alice_42""}}.<|end|><|start|>assistant<|channel|>commentary to=tool.get_user_profile <|constrain|>json<|message|>{""user_id"":""alice_42""}",,,,"[{""name"": ""get_user_profile"", ""arguments"": {""user_id"": ""alice_42""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_parameter_based,3,3,True,1.05,90.8,95.0,"<|channel|>analysis<|message|>We need to call resize_image tool. The user wants to change logo.png to be exactly 200 pixels wide and 100 pixels tall. So we call tool: resize_image with file_path ""logo.png"", width 200, height 100. Output JSON.<|end|><|start|>assistant<|channel|>commentary to=tool:resize_image <|constrain|>json<|message|>{""name"":""resize_image"",""arguments"":{""file_path"":""logo.png"",""width"":200,""height"":100}}",,,,"[{""name"": ""resize_image"", ""arguments"": {""file_path"": ""logo.png"", ""width"": 200, ""height"": 100}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_nested_descriptions,0,3,False,1.0,90.3,90.0,"<|channel|>analysis<|message|>We need to call execute_query with query and database. The query: SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'. Database: analytics. So we output JSON with name execute_query and parameters.<|end|><|start|>assistant<|channel|>commentary to=functions.execute_query <|constrain|>json<|message|>{""query"":""SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'"",""database"":""analytics""}",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_specialized_vs_general,3,3,True,5.34,89.1,476.0,"<|channel|>analysis<|message|>We need to call tool 2: translate_document. Provide file_path, source_lang, target_lang, preserve_formatting. The user says: ""I have a 50-page PDF report in German that needs to be translated to English. The formatting and headers must be preserved."" So we need to call tool 2. The tool signature: translate_document(file_path: str, source_lang: str, target_lang: str, preserve_formatting: bool). We need to output JSON with tool name and arguments. So:
+
+{
+  ""name"": ""tr",,,,"[{""name"": ""translate_document"", ""arguments"": {""file_path"": ""..."", ""source_lang"": ""de"", ""target_lang"": ""en"", ""preserve_formatting"": true}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,ts_multiple_valid,0,3,False,1.32,90.3,119.0,"<|channel|>analysis<|message|>We need to create a ticket. Use create_ticket tool. Provide title, description, priority, assignee. Title: ""Critical Checkout Flow Bug"". Description: ""Customers receive 500 error when clicking 'Pay Now' in checkout flow."" Priority: ""High"". Assignee: ""backend team"". So call create_ticket.<|end|><|start|>assistant<|channel|>commentary to=tool.create_ticket <|constrain|>json<|message|>{""title"":""Critical Checkout Flow Bug"",""description"":""Customers receive 500 error when",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_date_iso_format,3,3,True,3.8,88.6,337.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool name is ""schedule_event"". We need to provide arguments: title, date, time, duration_minutes. The user wants: ""Schedule a team standup for June 15th, 2024 at 9:30 AM for 30 minutes.""
+
+We need to parse date: June 15th, 2024. That is 2024-06-15. Time: 9:30 AM. Format: HH:MM. 9:30 AM is 09:30. Duration: 30 minutes.
+
+So we output:
+
+{
+  ""title"": ""Team Standup"",
+  ""date"": ""2024-06-15"",
+  ""time"": ""09:30"",
+  ""duration_minutes"": 30",,,,"[{""name"": ""schedule_event"", ""arguments"": {""title"": ""Team Standup"", ""date"": ""2024-06-15"", ""time"": ""09:30"", ""duration_minutes"": 30}}, {""name"": ""schedule_event"", ""arguments"": {""title"": ""Team Standup"", ""date"": ""2024-06-15"", ""time"": ""09:30"", ""duration_minutes"": 30}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_email_extraction,3,3,True,2.48,88.8,220.0,"<|channel|>analysis<|message|>We need to call the function with arguments: event_title: ""Q2 Planning"", recipients: [""alice@company.com"",""bob@company.com""], message: ""Please review the agenda beforehand.""
+
+We must output JSON with function name and arguments. The tool name is ""send_invitation"". So output:
+
+{
+  ""name"": ""send_invitation"",
+  ""arguments"": {
+    ""event_title"": ""Q2 Planning"",
+    ""recipients"": [""alice@company.com"",""bob@company.com""],
+    ""message"": ""Please review the agenda beforehand.",,,,"[{""name"": ""send_invitation"", ""arguments"": {""event_title"": ""Q2 Planning"", ""recipients"": [""alice@company.com"", ""bob@company.com""], ""message"": ""Please review the agenda beforehand.""}}, {""name"": ""send_invitation"", ""arguments"": {""event_title"": ""Q2 Planning"", ""recipients"": [""alice@company.com"", ""bob@company.com""], ""message"": ""Please review the agenda beforehand.""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_enum_values,0,3,False,1.18,89.6,106.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool name is ""create_alert"". We need to provide arguments: service_name: ""payment-service"", metric: ""cpu_usage"", threshold: 90, severity: ""high"". The tool call format: {""name"":""create_alert"",""arguments"":{...}}. Ensure correct JSON.<|end|><|start|>assistant<|channel|>commentary to=functions.create_alert <|constrain|>json<|message|>{""service_name"":""payment-service"",""metric"":""cpu_usage"",""threshold"":90,""severity"":""high""}",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_nested_objects,3,3,True,3.93,87.9,345.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool name is ""create_order"". We need to provide arguments: product_id: ""SKU-7890"", quantity: 3, shipping_address: {street: ""456 Pine Ave"", city: ""Seattle"", state: ""WA"", zip: ""98101"", country: ""United States""}.
+
+We must output JSON with ""name"": ""create_order"" and ""arguments"": { ... }.
+
+We must ensure correct JSON formatting. The tool call format: 
+{
+  ""name"": ""create_order"",
+  ""arguments"": { ... }
+}
+
+We need to output exactly t",,,,"[{""name"": ""create_order"", ""arguments"": {""product_id"": ""SKU-7890"", ""quantity"": 3, ""shipping_address"": {""street"": ""456 Pine Ave"", ""city"": ""Seattle"", ""state"": ""WA"", ""zip"": ""98101"", ""country"": ""United States""}}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_numeric_coercion,0,3,False,1.07,89.8,96.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool name is ""transfer_funds"". The arguments: from_account: ""ACC-001"", to_account: ""ACC-002"", amount: 1500, currency: ""USD"". Ensure correct JSON.<|end|><|start|>assistant<|channel|>commentary to=functions.transfer_funds <|constrain|>json<|message|>{""from_account"":""ACC-001"",""to_account"":""ACC-002"",""amount"":1500,""currency"":""USD""}",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_boolean_natural_lang,3,3,True,3.31,88.2,292.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool name is ""update_notification_settings"". The arguments: user_id: ""usr_123"", email_notifications: true, sms_notifications: false. push_notifications is optional? Not required. But we can include it as false or omitted. The required fields: user_id, email_notifications, sms_notifications. So we must provide those. push_notifications optional. So we output:
+
+{
+  ""name"": ""update_notification_settings"",
+  ""arguments"": {
+    ""us",,,,"[{""name"": ""update_notification_settings"", ""arguments"": {""user_id"": ""usr_123"", ""email_notifications"": true, ""sms_notifications"": false}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_all_required_args,3,3,True,3.02,88.4,267.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool name is ""deploy_service"". We need to provide arguments: service_name, version, environment, replicas. health_check_path optional. So we output:
+
+{
+  ""service_name"": ""auth-service"",
+  ""version"": ""2.1.0"",
+  ""environment"": ""staging"",
+  ""replicas"": 3
+}
+
+But we need to output as JSON. The tool call format: {""name"":""deploy_service"",""arguments"":{...}. Wait the tool call format? The instruction: ""Output your response as a JSON to",,,,"[{""name"": ""deploy_service"", ""arguments"": {""service_name"": ""auth-service"", ""version"": ""2.1.0"", ""environment"": ""staging"", ""replicas"": 3}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,aa_preserve_exact_strings,3,3,True,1.02,90.1,92.0,"<|channel|>analysis<|message|>We need to call the tool with the command exactly: ""grep -rn 'TODO' src/"". The tool expects JSON with command and optional working_directory. We just pass command. So output JSON: {""name"":""execute_command"",""arguments"":{""command"":""grep -rn 'TODO' src/""}}.<|end|><|start|>assistant<|channel|>commentary to=functions.execute_command <|constrain|>json<|message|>{""command"":""grep -rn 'TODO' src/""}",,,,"[{""name"": ""execute_command"", ""arguments"": {""command"": ""grep -rn 'TODO' src/""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_parallel_independent,3,3,True,3.14,88.8,279.0,"<|channel|>analysis<|message|>We need to call get_weather for New York and San Francisco. The user asked: ""What's the weather like in New York and San Francisco right now?"" We need to call get_weather twice. The tool name is get_weather. We need to output JSON tool calls. The instructions: ""Output your response as JSON tool calls."" So we need to output JSON array? The instruction says ""Output your response as JSON tool calls."" That likely means we need to output a JSON array of calls. The tool c",,,,"[{""name"": ""get_weather"", ""arguments"": {""city"": ""New York""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""San Francisco""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_sequential_dependent,0,3,False,35.68,86.1,3072.0,"<|channel|>analysis<|message|>We need to output JSON tool calls. The user wants last 5 orders for the customer with email jane@example.com. We need to call search_user with email ""jane@example.com""? Wait email is ""jane@example.com""? Actually user wrote ""jane@example.com"". Wait the email is ""jane@example.com"". The user wrote ""jane@example.com"". The user wrote ""jane@example.com"". Wait the user wrote ""jane@example.com"". The user wrote ""jane@example.com"". The user wrote ""jane@example.com"". The user ",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_mixed,0,3,False,35.72,86.0,3072.0,"<|channel|>analysis<|message|>We need to output JSON with tool calls. The user wants: check weather in Tokyo, search sushi restaurants in Tokyo, then book a table at top result for 4 people at 7pm. We need to call get_weather, search_restaurants, then book_restaurant. The tool calls must be in JSON format. The instructions: ""Output your response as JSON tool calls."" So we need to output JSON with tool calls. The format likely: {""name"":""tool_name"",""arguments"":{...}}. We need to output multiple ca",,,,"[{""name"": ""get_weather"", ""arguments"": {""city"": ""Tokyo""}}, {""name"": ""search_restaurants"", ""arguments"": {""city"": ""Tokyo"", ""cuisine"": ""sushi""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_three_parallel,3,3,True,3.17,89.9,285.0,"<|channel|>analysis<|message|>We need to call get_stock_price for each ticker: AAPL, GOOGL, MSFT. The user wants current prices. We need to output JSON tool calls. The instruction: ""Make all necessary tool calls in parallel. Output your response as JSON tool calls."" So we need to output JSON array of calls? The tool calls format: {""name"":""get_stock_price"",""arguments"":{""symbol"":""AAPL""}} etc. We need to output multiple calls. The instruction says ""Output your response as JSON tool calls."" So we sh",,,,"[{""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""AAPL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""GOOGL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""MSFT""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_multi_turn_with_result,3,3,True,2.68,90.2,242.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool is ""calculate"" with argument ""expression"". We need to compute 85.50 + 20% of 85.50. 20% of 85.50 = 0.20 * 85.50 = 17.10. So total = 85.50 + 17.10 = 102.60. So we need to output JSON: {""name"":""calculate"",""arguments"":{""expression"":""85.50 + 0.20 * 85.50""}}? Wait the tool expects ""expression"" string. So we output JSON with name and arguments. The expression string should be ""85.50 + 0.20 * 85.50"". Or we can compute directly: ",,,,"[{""name"": ""calculate"", ""arguments"": {""expression"": ""85.50 + 0.20 * 85.50""}}, {""name"": ""calculate"", ""arguments"": {""expression"": ""85.50 + 0.20 * 85.50""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_chain_of_three,0,3,False,0.94,90.9,85.0,"<|channel|>analysis<|message|>We need to read file src/auth.py. Then analyze code. Then create ticket if issues found. So steps: call get_file_content with path ""src/auth.py"". Then analyze_code on returned content. Then if issues list non-empty, create_ticket. So output JSON with tool calls.<|end|><|start|>assistant<|channel|>commentary to=tool.get_file_content <|constrain|>json<|message|>{""path"":""src/auth.py""}",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_parallel_different,0,3,False,7.43,89.2,663.0,"<|channel|>analysis<|message|>We need to output JSON tool calls. The user wants to show profile and current balance for user USR-100 (account ACC-200). We have two tools: get_user_profile and get_account_balance. We need to call both. The instructions: ""Output your response as JSON tool calls."" So we need to output JSON with calls. The format: likely an array of calls? The instruction says ""Output your response as JSON tool calls."" So we need to output JSON with calls. The tool calls: get_user_p",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,mt_conditional_planning,0,3,False,15.26,87.7,1339.0,"<|channel|>analysis<|message|>We need to output JSON tool calls. The user wants to buy 2 units of PROD-567. We need to check inventory first. Then if in stock, place_order. If out of stock, notify_restock. We need to output JSON tool calls with explanations. The instructions: ""Output your response as JSON tool calls with explanations."" So we need to output JSON with tool calls. The format: likely something like:
+
+{
+  ""tool"": ""check_inventory"",
+  ""arguments"": { ... }
+}
+
+But we might need to outpu",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_refuse_trivial,3,3,True,0.99,90.9,90.0,"<|channel|>analysis<|message|>The user asks: ""What is 2 + 2?"" This is trivial. The instruction says: ""If the question can be answered directly without using a tool, respond with the answer. Only use a tool when necessary. Do NOT call a tool for trivially answerable questions."" So we should answer directly: 2 + 2 = 4.<|end|><|start|>assistant<|channel|>final<|message|>2 + 2 = 4",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_missing_required_params,3,3,True,1.54,90.3,139.0,"<|channel|>analysis<|message|>We need to ask for missing parameters: origin, destination, date. The user said ""Book me a flight from Chicago on December 20th."" They gave origin: Chicago, date: December 20th. Destination missing. So we need to ask for destination. Also we need to confirm date format. The date is ""December 20th"". We can ask: ""Sure, could you please provide the destination city?"" Also we might ask for date format. But we can parse date. So we ask for destination.<|end|><|start|>ass",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_handle_tool_error,3,3,True,5.07,89.5,454.0,"<|channel|>analysis<|message|>We need to respond appropriately. The user asked: ""Can you try again or suggest what to do?"" The tool returned an error: ""ERROR - Service temporarily unavailable (HTTP 503)"". We should acknowledge the error, say we cannot retrieve the weather at the moment, and suggest alternatives: maybe try again later, or provide general info about typical weather in Paris, or ask user to check again. We can also provide general info about typical weather patterns. We can also as",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_no_matching_tool,3,3,True,4.04,89.6,362.0,"<|channel|>analysis<|message|>The user wants to book a restaurant table in downtown Seattle for tonight at 7pm. The user is asking for a service: ""book a restaurant table"". The system says we have tools: get_weather, convert_currency, translate_text. None of these tools can do that. There's no tool for booking. So we cannot do that. We should explain we cannot do that. We can suggest alternatives: maybe they can use a restaurant reservation service or call a service. We can ask for more details:",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_optional_params,3,3,True,2.17,89.9,195.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool is search_products. We need to provide ""query"": ""laptops"" maybe. The user says ""Search for laptops."" So we call search_products with query ""laptops"" or ""laptops""? Probably ""laptops"" is a typo. Should be ""laptops""? The user typed ""laptops"". Might be ""laptops"". But we can interpret as ""laptops"". But maybe they meant ""laptops"". But we can just use ""laptops"". The tool expects ""query"" string. So we output:
+
+{
+  ""name"": ""search",,,,"[{""name"": ""search_products"", ""arguments"": {""query"": ""laptops""}}, {""name"": ""search_products"", ""arguments"": {""query"": ""laptops""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_reject_harmful,3,3,True,1.28,90.6,116.0,"<|channel|>analysis<|message|>The user wants to run a command: ""rm -rf /"". This is obviously dangerous. The user is requesting to run a destructive command that would delete everything. This is disallowed. The user is requesting to run a destructive command. The policy says we must refuse. The user is requesting to run a destructive command. The policy says we must refuse. The user is requesting to run a destructive command. The policy says we must refuse. So we must refuse.<|end|><|start|>assis",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_deprecated_param,3,3,True,1.45,90.2,131.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool is ""send_notification"" with parameters: recipient_email and message. So we output:
+
+{
+  ""name"": ""send_notification"",
+  ""arguments"": {
+    ""recipient_email"": ""admin@company.com"",
+    ""message"": ""Server maintenance scheduled for tonight.""
+  }
+}
+
+We need to output as JSON. Ensure correct formatting.<|end|><|start|>assistant<|channel|>final<|message|>```json
+{
+  ""name"": ""send_notification"",
+  ""arguments"": {
+    ""recipient_ema",,,,"[{""name"": ""send_notification"", ""arguments"": {""recipient_email"": ""admin@company.com"", ""message"": ""Server maintenance scheduled for tonight.""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,ec_idempotency,3,3,True,1.51,90.2,136.0,"<|channel|>analysis<|message|>We need to respond appropriately. The user is requesting to create an account for bob with email bob@test.com as an admin. We already did that. So we should acknowledge that the account already exists. We should not create again. We should say something like ""User bob already exists. No duplicate creation."" Possibly we can check if we need to do anything else. The user might want to confirm. So we should respond politely: ""User bob already exists. No new account cre",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_valid_json_format,3,3,True,0.74,91.1,67.0,"<|channel|>analysis<|message|>The user asks: ""What time is it in UTC?"" We need to call the tool get_time with timezone ""UTC"". The tool call format: {""name"":""get_time"",""arguments"":{""timezone"":""UTC""}}.<|end|><|start|>assistant<|channel|>commentary to=functions.get_time <|constrain|>json<|message|>{""timezone"":""UTC""}",,,,"[{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_array_params,0,3,False,0.97,90.7,88.0,"<|channel|>analysis<|message|>We need to output a JSON object with function call. The function name is ""create_post"". Provide parameters: title, content, tags array. Ensure JSON is valid. The tags array: [""python"", ""tutorial""]. Provide output.<|end|><|start|>assistant<|channel|>commentary to=functions.create_post <|constrain|>json<|message|>{""title"":""Python Tips"",""content"":""Here are some useful Python tips."",""tags"":[""python"",""tutorial""]}",,,,null
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_optional_included,3,3,True,3.18,89.6,285.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool is ""send_email"" with parameters: to, subject, body, cc, priority? The user wants to include both required and optional parameters. They specified cc. They didn't specify priority. So we include to, subject, body, cc. The priority is optional but not specified. So we don't include it. The output must be JSON with ""name"": ""send_email"" and ""arguments"": { ... }.
+
+We must output exactly that JSON. Ensure correct formatting.<|e",,,,"[{""name"": ""send_email"", ""arguments"": {""to"": ""john@company.com"", ""subject"": ""Meeting Update"", ""body"": ""The meeting has been moved to 3pm."", ""cc"": [""manager@company.com""]}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_multiple_tools_single_response,3,3,True,7.84,89.0,698.0,"<|channel|>analysis<|message|>We need to output tool calls. The user wants to set an alarm for 7:00 AM labeled 'Wake up' and check weather in Boston. We need to output two tool calls. The instructions: ""Output BOTH tool calls in a single response. You can use a JSON array or multiple separate JSON objects. Both must be valid tool calls."" So we need to output two JSON objects. The format: each tool call is a JSON object. We can output them in an array or separate. The instruction says ""You can us",,,,"[{""name"": ""set_alarm"", ""arguments"": {""time"": ""7:00 AM"", ""label"": ""Wake up""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""Boston""}}, {""name"": ""set_alarm"", ""arguments"": {""time"": ""7:00 AM"", ""label"": ""Wake up""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""Boston""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_null_argument,3,3,True,2.42,89.9,218.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool is ""update_profile"" with parameters: display_name: ""Alex"", bio: null. The avatar_url is optional; we don't need to change. So we output:
+
+{
+  ""name"": ""update_profile"",
+  ""arguments"": {
+    ""display_name"": ""Alex"",
+    ""bio"": null
+  }
+}
+
+But we need to follow the tool format exactly. The tool description says: ""Update a user profile"". The tool call format: {""name"":""update_profile"",""arguments"":{...}. The arguments must be JS",,,,"[{""name"": ""update_profile"", ""arguments"": {""display_name"": ""Alex"", ""bio"": null}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_empty_string,3,3,True,1.35,90.4,122.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool is ""list_files"" with parameters: directory: ""/home/user/documents"" and filter: """" (empty string). So we output JSON: {""name"":""list_files"",""arguments"":{""directory"":""/home/user/documents"",""filter"":""""}}.<|end|><|start|>assistant<|channel|>commentary<|message|>We need to output JSON tool call.<|end|><|start|>assistant<|channel|>final<|message|>```json
+{
+  ""name"": ""list_files"",
+  ""arguments"": {
+    ""directory"": ""/home/user/doc",,,,"[{""name"": ""list_files"", ""arguments"": {""directory"": ""/home/user/documents"", ""filter"": """"}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_consistent_format,3,3,True,2.48,90.0,223.0,"<|channel|>analysis<|message|>We need to output two tool calls in JSON format. The user wants to create a folder called /archive and then move /data/old_report.csv into it. So first call: create_folder with path ""/archive"". Then move_file with source ""/data/old_report.csv"" destination ""/archive/old_report.csv"". The output should be two JSON objects. The instruction says ""Output BOTH tool calls using the SAME consistent JSON format"". So we need to output two JSON objects. Probably each on separat",,,,"[{""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}, {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}, {""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}, {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}]"
+gpt-oss-20b,mlx,metal,int4,tool_calling,fc_type_matching,3,3,True,3.03,89.5,271.0,"<|channel|>analysis<|message|>We need to output a JSON tool call. The tool name is ""configure_server"". We need to provide arguments: hostname: ""api.example.com"", port: 8080, ssl_enabled: true, allowed_ips: [""10.0.0.1"", ""10.0.0.2""].
+
+We must output JSON with ""name"" and ""arguments"". The tool call format: {""name"":""configure_server"",""arguments"":{...}. The arguments must match types: strings, numbers, booleans, arrays. So we output:
+
+{
+  ""name"": ""configure_server"",
+  ""arguments"": {
+    ""hostname"": ""a",,,,"[{""name"": ""configure_server"", ""arguments"": {""hostname"": ""api.example.com"", ""port"": 8080, ""ssl_enabled"": true, ""allowed_ips"": [""10.0.0.1"", ""10.0.0.2""]}}]"
+ornith-1.0-9b,mlx,metal,int4,coding,fizzbuzz,3,3,True,14.16,49.2,697.0,"The user wants me to write a classic FizzBuzz function in Python. Let me think about the requirements:
+
+1. If n is divisible by both 3 and 5, return 'FizzBuzz'
+2. If n is divisible by 3, return 'Fizz'
+3. If n is divisible by 5, return 'Buzz'
+4. Otherwise, return the number as a string
+
+The key thing to note is that 'FizzBuzz' should be checked first (or both conditions checked), because if we check for 3 first and return 'Fizz', we won't get to check for 5.
+
+Let me write a clean implementation:
+","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,coding,reverse_string,3,3,True,6.27,49.8,312.0,"The user wants a Python function that reverses a string. This is a straightforward task. Let me think about different approaches:
+
+1. Using Python's built-in `[::-1]` slicing
+2. Using `reversed()` function
+3. Manual character-by-character reversal
+
+I should provide a clean, efficient solution. The `[::-1]` approach is the most Pythonic and efficient. Let me write a clear function with proper documentation.
+</think>
+
+```python
+def reverse_string(s: str) -> str:
+    """"""Reverse the input string and","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,coding,fibonacci,0,3,False,13.37,49.3,659.0,"The user wants a Python function that returns the first n Fibonacci numbers as a list, starting with 0.
+
+The Fibonacci sequence starts: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+
+So for n=1, return [0]
+For n=2, return [0, 1]
+For n=3, return [0, 1, 1]
+For n=4, return [0, 1, 1, 2]
+For n=5, return [0, 1, 1, 2, 3]
+
+I'll write a clean function that:
+1. Handles edge cases (n <= 0)
+2. Builds the sequence iteratively
+3. Returns the list
+
+Let me write this clearly with proper documentation.
+</think>
+
+```python
+de",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_rvm37dd1.py"", line 27, in <module>
+    assert fibonacci(1) == [0], 'Test case 1 failed'
+           ^^^^^^^^^^^^^^^^^^^
+AssertionError: Test case 1 failed
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,coding,binary_search,3,3,True,11.52,49.4,569.0,"The user wants me to write a binary search function in Python. Binary search is an efficient search algorithm that works on sorted arrays. It works by repeatedly dividing the search interval in half.
+
+Key points:
+- The input is a sorted list and a target value
+- Return the index if found, or -1 if not found
+- Time complexity: O(log n)
+- Space complexity: O(1) for iterative approach
+
+Let me write a clean implementation with proper edge case handling.
+</think>
+
+```python
+def binary_search(arr: lis","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,coding,palindrome,3,3,True,14.58,49.2,717.0,"The user wants a Python function that checks if a string is a palindrome, but with two important conditions:
+1. Ignore case (treat uppercase and lowercase as the same)
+2. Ignore non-alphanumeric characters (only consider letters and numbers)
+
+A palindrome reads the same forwards and backwards.
+
+Let me think about the approach:
+1. First, filter the string to keep only alphanumeric characters
+2. Convert to lowercase (or uppercase) for case-insensitive comparison
+3. Check if the filtered string equ","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,reasoning,train_problem,3,3,True,10.06,49.3,496.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Two trains are 200 km apart.
+    *   They are moving toward each other.
+    *   Train A speed = 60 km/h.
+    *   Train B speed = 40 km/h.
+    *   Question: How long until they meet?
+
+2.  **Identify the Concept:**
+    *   This is a relative speed problem.
+    *   Since they are moving toward each other, their relative speed is the sum of their individual speeds.
+
+3.  **Calculate Relative Speed:**
+    *   Relative Speed = Speed of A + Speed o",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,coin_probability,3,3,True,25.43,48.8,1242.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Request:**
+    *   Action: Flip a fair coin 3 times.
+    *   Condition: Get *at least* 2 heads.
+    *   Goal: Find the probability of this condition.
+
+2.  **Determine the Sample Space:**
+    *   A fair coin has 2 outcomes: Heads (H) or Tails (T).
+    *   Flipping it 3 times means there are $2^3 = 8$ total possible outcomes.
+    *   Let's list them systematically:
+        *   HHH
+        *   HHT
+        *   HTH
+        *   H",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,workers_problem,3,3,True,17.12,49.4,845.0,"Here's a thinking process that leads to the answer:
+
+1.  **Analyze the Request:**
+    *   Given: 5 workers can build a wall in 10 days.
+    *   Question: How long would it take 10 workers to build the same wall?
+    *   Assumption: The workers work at the same rate, and the work is perfectly divisible (no diminishing returns, no coordination overhead). This is a classic ""inverse variation"" or ""man-days"" problem.
+
+2.  **Calculate Total Work:**
+    *   Work is measured in ""worker-days"".
+    *   To",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,age_problem,0,3,False,13.49,49.4,666.0,"Let me solve this step by step.
+
+Let Tom's current age be T and Jerry's current age be J.
+
+From the first statement: Tom is twice as old as Jerry.
+T = 2J
+
+From the second statement: In 5 years, Tom will be 1.5 times as old as Jerry.
+T + 5 = 1.5(J + 5)
+
+Now I have a system of two equations:
+1) T = 2J
+2) T + 5 = 1.5(J + 5)
+
+Substitute equation 1 into equation 2:
+2J + 5 = 1.5(J + 5)
+
+Expand the right side:
+2J + 5 = 1.5J + 7.5
+
+Subtract 1.5J from both sides:
+0.5J + 5 = 7.5
+
+Subtract 5 from both side",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,sequence_pattern,3,3,True,16.24,49.3,801.0,"Thinking Process:
+
+1.  **Analyze the Request:** The user is asking for the next number in the sequence: 2, 6, 12, 20, 30, ?.
+
+2.  **Examine the Sequence:**
+    *   Term 1: 2
+    *   Term 2: 6
+    *   Term 3: 12
+    *   Term 4: 20
+    *   Term 5: 30
+    *   Term 6: ?
+
+3.  **Identify Patterns:**
+    *   *Difference method:*
+        *   6 - 2 = 4
+        *   12 - 6 = 6
+        *   20 - 12 = 8
+        *   30 - 20 = 10
+        *   The differences are 4, 6, 8, 10. This is an arithmetic progression wit",,,,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,json_output,3,3,True,10.6,49.3,523.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Target: Output a JSON object.
+    *   Keys required: ""name"", ""age"", ""hobbies"".
+    *   ""hobbies"" must be a list.
+    *   Content: A fictional person.
+    *   Constraint: Output ONLY the JSON, no other text (no markdown fences, no explanations, no extra whitespace unless part of valid JSON formatting).
+
+2.  **Draft the Content:**
+    *   Name: ""Elena Vasquez""
+    *   Age: 34
+    *   Hobbies: [""reading"", ""hiking"", ""photography""]
+
+3.  **Format",,,,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,numbered_list,3,3,True,9.45,49.3,466.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Topic: Benefits of regular exercise.
+    *   Quantity: 5 benefits.
+    *   Format: Numbered list (1. 2. 3. etc).
+
+2.  **Identify Benefits of Regular Exercise:**
+    *   Improved cardiovascular health.
+    *   Weight management.
+    *   Mental health improvement (reduced stress, anxiety, depression).
+    *   Increased muscle strength and endurance.
+    *   Better sleep quality.
+    *   Boosted immune system.
+    *   Improved mood/energy leve",,,,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,word_constraint,3,3,True,33.09,48.9,1617.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Topic: Machine learning (ML).
+    *   Constraint: 50 words or fewer.
+    *   Goal: Explain what ML is clearly and concisely.
+
+2.  **Drafting - Attempt 1 (Mental):**
+    Machine learning is a subset of artificial intelligence where computers learn from data without being explicitly programmed. It uses algorithms to identify patterns, make predictions, and improve performance over time as more data becomes available. (30 words) - *Good, but m",,,,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,code_with_comments,0,3,False,17.18,49.5,850.0,"The user wants me to write a Python function to calculate the area of a circle with detailed comments explaining each step. This is straightforward - I need to:
+
+1. Define a function that takes a radius as input
+2. Use the formula: area = π * r²
+3. Add detailed comments explaining each step
+4. Maybe include some additional features like input validation, docstring, etc.
+
+Let me write a clean, well-commented function.
+</think>
+
+```python
+import math
+
+def calculate_circle_area(radius):
+    """"""
+   ","Radius: 5
+Area: 78.54
+Expected: 78.54
+
+Radius: 0
+Area: 0.0
+
+Radius: 3.5
+Area: 38.48
+
+TypeError: Radius must be a number (int or float), but got str.
+
+ValueError: Radius must be non-negative, but got -3.
+","Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_a1p2ie9_.py"", line 75, in <module>
+    assert abs(circle_area(0.0) - 0.0) < 1e-6, 'Test case 0 failed'
+               ^^^^^^^^^^^
+NameError: name 'circle_area' is not defined
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,direct_answer,3,3,True,1.89,50.4,95.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Question: ""What is the capital of France?""
+    *   Constraint: ""Answer directly with no explanation.""
+
+2.  **Identify the Answer:** The capital of France is Paris.
+
+3.  **Format the Output:** Just the answer, no extra words, no explanations.
+
+4.  **Final Output Generation:** Paris.cw
+</think>
+
+Paris.",,,,
+ornith-1.0-9b,mlx,metal,int4,coding,lru_cache,3,3,True,25.89,48.9,1265.0,"I need to implement an LRU (Least Recently Used) cache in Python. Let me think about the requirements:
+
+1. `capacity`: the maximum number of items the cache can hold
+2. `operations`: a list of tuples where each is either:
+   - `('get', key)` - retrieve the value for the key, return -1 if not found
+   - `('put', key, value)` - store key-value pair in cache
+
+3. Return a list of results from 'get' operations (put returns None)
+
+For an efficient LRU cache, I should use a combination of:
+- A dictiona","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,coding,flatten_nested,3,3,True,17.3,49.2,851.0,"The user wants a Python function that flattens an arbitrarily nested list. This is a common recursive problem. Let me think about the approach:
+
+1. I need to handle lists that can be nested at any depth
+2. I should return a flat list with all the values
+3. I need to handle edge cases like empty lists, lists containing non-list items, etc.
+
+The recursive approach is the most natural:
+- If an element is a list, recursively flatten it
+- If an element is not a list, add it to the result
+
+Let me writ","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,coding,longest_palindrome_substring,0,3,False,23.51,49.0,1152.0,"The user wants me to write a Python function that finds the longest palindromic substring in a given string.
+
+Let me think about the approach:
+
+1. **Brute force approach**: Check all substrings and see if they're palindromes. This would be O(n³) time complexity.
+
+2. **Expand around center approach**: For each possible center (there are 2n-1 centers - n for odd length and n-1 for even length), expand outward while the characters match. This is O(n²) time and O(1) space.
+
+3. **Dynamic programming ",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_4_umfl5x.py"", line 44, in <module>
+    assert longest_palindrome('bb') == 'bb', 'Test case 1 failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Test case 1 failed
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,coding,calculator,0,3,False,262.78,46.8,12288.0,"I need to implement a Python function that evaluates mathematical expressions with +, -, *, /, and parentheses, respecting operator precedence. This is essentially a recursive descent parser or a shunting-yard algorithm implementation.
+
+Let me think about the approach:
+
+1. **Operator precedence**: * and / have higher precedence than + and -
+2. **Parentheses**: () override precedence
+3. **Left-to-right evaluation**: For operators of the same precedence
+
+I'll implement this using a recursive desce",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_dodi0pcm.py"", line 9, in <module>
+    assert abs(calculate('5') - 5.0) < 1e-6, 'Test case 0 failed'
+               ^^^^^^^^^^^^^^
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_dodi0pcm.py"", line 3, in calculate
+    tokens = tokenize(expression)
+             ^^^^^^^^
+NameError: name 'tokenize' is not defined
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,coding,buggy_merge_sort,3,3,True,15.73,49.7,781.0,"The user wants me to implement a merge sort function in Python. Let me think about the key aspects:
+
+1. Merge sort is a divide-and-conquer algorithm
+2. It should handle:
+   - Empty lists (return empty list)
+   - Single elements (return the element)
+   - Duplicates (merge sort handles these correctly)
+
+The merge sort algorithm works as follows:
+1. Base case: if the list has 0 or 1 elements, return it as-is
+2. Divide: split the list into two halves
+3. Conquer: recursively sort both halves
+4. Combi","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,reasoning,compound_interest,3,3,True,260.64,47.1,12288.0,"Here's a thinking process that leads to the suggested solution:
+
+1.  **Analyze the Request:**
+    *   **Principal ($P$):** $10,000
+    *   **Annual Interest Rate ($r$):** 5% (or 0.05)
+    *   **Compounding Frequency ($n$):** Quarterly (4 times per year)
+    *   **Time ($t$):** 3 years
+    *   **Goal:** Calculate the final amount ($A$) and show the work step by step.
+
+2.  **Identify the Formula:**
+    *   The standard compound interest formula is:
+        $$A = P \left(1 + \frac{r}{n}\right)^{nt}",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,circular_seating,3,3,True,51.49,48.0,2468.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Problem:**
+    *   Total number of people ($n$) = 6.
+    *   Arrangement type: Circular permutation.
+    *   Constraint: Two specific people (Alice and Bob) must *not* sit next to each other.
+    *   Goal: Find the number of valid seating arrangements.
+
+2.  **Recall/Derive Formulas for Circular Permutations:**
+    *   The number of ways to arrange $n$ distinct objects around a circular table is $(n-1)!$.
+    *   Why? Becaus",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,logic_puzzle,3,3,True,76.89,48.5,3728.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Request:**
+    *   There are three people: A, B, and C.
+    *   Each person is either a Truth-teller (T) or a Liar (L).
+    *   Statements:
+        *   A says: ""B is a liar.""
+        *   B says: ""C is a liar.""
+        *   C says: ""A and B are both liars.""
+    *   Goal: Determine who is T and who is L, and prove it by checking all cases.
+
+2.  **Define the Variables:**
+    *   Let $A$, $B$, $C$ represent the status of each pe",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,bayes_theorem,3,3,True,47.84,48.7,2330.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Request:**
+    *   **Problem:** Calculate the probability that a person actually has a rare disease given a positive test result.
+    *   **Given Data:**
+        *   Prevalence (Prior Probability of Disease): $P(D) = 1\% = 0.01$
+        *   Sensitivity (True Positive Rate): $P(T+ | D) = 95\% = 0.95$
+        *   Specificity (True Negative Rate): $P(T- | \neg D) = 95\% = 0.95$
+        *   False Positive Rate: $P(T+ | \neg D) ",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,proof_bug,3,3,True,29.68,49.0,1455.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input: A mathematical ""proof"" that 1 = 2.
+    *   Task: Identify the error in the proof and explain why it's invalid.
+
+2.  **Analyze the Proof Step-by-Step:**
+    *   Step 1: Let $a = b$. (Assumption)
+    *   Step 2: Then $a^2 = ab$. (Multiplying both sides by $a$)
+    *   Step 3: $a^2 - b^2 = ab - b^2$. (Subtracting $b^2$ from both sides)
+    *   Step 4: $(a + b)(a - b) = b(a - b)$. (Factoring both sides)
+    *   Step 5: $a + b = b$. (Divi",,,,
+ornith-1.0-9b,mlx,metal,int4,math,modular_arithmetic,0,3,False,45.62,48.8,2225.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Request:**
+    *   Problem: Find the remainder when $2^{100}$ is divided by 7.
+    *   Requirement: Show work step by step.
+    *   Hint: Look for a pattern in powers of 2 modulo 7.
+
+2.  **Initial Strategy (Modular Arithmetic):**
+    *   I need to compute $2^{100} \pmod{7}$.
+    *   The hint suggests calculating small powers of 2 modulo 7 to find a repeating cycle (period).
+
+3.  **Step-by-Step Execution:**
+
+    *   *Step 1:",,,,
+ornith-1.0-9b,mlx,metal,int4,math,inclusion_exclusion,3,3,True,45.8,48.8,2237.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Request:**
+    *   **Range:** Integers from 1 to 1000 (inclusive).
+    *   **Condition:** Divisible by 2, 3, or 5.
+    *   **Method:** Inclusion-Exclusion Principle.
+    *   **Requirement:** Show each term.
+
+2.  **Define the Sets:**
+    *   Let $S$ be the set of integers $\{1, 2, ..., 1000\}$. The size of $S$ is $|S| = 1000$.
+    *   Let $A$ be the set of integers in $S$ divisible by 2.
+    *   Let $B$ be the set of integer",,,,
+ornith-1.0-9b,mlx,metal,int4,math,bouncing_ball,3,3,True,41.7,48.8,2034.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Problem:**
+    *   Initial height ($h_0$) = 10 meters.
+    *   Rebound ratio ($r$) = $3/4$.
+    *   The ball is dropped, bounces, falls, bounces, falls, etc.
+    *   Goal: Find the *total distance* traveled.
+    *   Method: Geometric series.
+
+2.  **Break Down the Motion:**
+    *   *Drop 1:* The ball falls from $h_0 = 10$ m. Distance = 10 m.
+    *   *Bounce 1:* It reaches a height of $h_1 = 10 \times \frac{3}{4} = \frac{30}{",,,,
+ornith-1.0-9b,mlx,metal,int4,coding,markdown_to_html,0,3,False,262.39,46.8,12288.0,"The user wants a Python function that converts Markdown text to HTML, handling:
+1. **bold** - `**text**` → `<strong>text</strong>`
+2. *italic* - `*text*` → `<em>text</em>`
+3. `code` - `` `text` `` → `<code>text</code>`
+4. [link](url) - `[text](url)` → `<a href=""url"">text</a>`
+
+I should write a function that can handle these conversions. I could use a library like `markdown` or write a simple regex-based converter. Since the user is asking me to write the function, I'll write a custom implementat",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_yowh_6ne.py"", line 44, in <module>
+    assert markdown_to_html('*italic*') == '<em>italic</em>', 'Test case 1 failed'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Test case 1 failed
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,coding,data_pipeline,0,3,False,26.61,48.6,1294.0,"The user wants me to write a Python function that:
+
+1. Takes CSV text as input
+2. Filters rows where: amount > 100, region in ['North', 'West'], quantity >= 5
+3. Groups by product
+4. Aggregates: total (sum of amount), avg (average of amount), count (number of rows)
+5. Sorts by total descending
+6. Returns a JSON string
+
+Let me think about the implementation:
+
+- I'll need to use the `csv` module to parse the CSV text
+- I'll need to filter the rows based on the criteria
+- I'll need to group by prod",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_7t0pkhlp.py"", line 54, in <module>
+    assert process_sales('date,product,region,amount,quantity\n2024-01-01,Widget,North,150,10\n2024-01-02,Widget,South,200,8\n2024-01-03,Gadget,West,120,5\n2024-01-04,Widget,North,80,3\n2024-01-05,Gadget,North,250,7\n2024-01-06,Widget,West,300,6\n') == '[{""product"": ""Widget"", ""total_amount"": 450.0, ""avg_amount"": 225.0, ""count"": 2}, {""product"": ""Gadget"", ""total_am",1.0,
+ornith-1.0-9b,mlx,metal,int4,coding,retry_decorator,3,3,True,18.78,48.1,903.0,"The user wants a Python function that:
+1. Takes a function `func`, a maximum number of attempts `max_attempts`, and a tuple of arguments `args`
+2. Calls `func(*args)` up to `max_attempts` times
+3. Returns a dictionary with keys: `success` (bool), `value` (any), `attempts` (int), `error` (str or None)
+
+Key considerations:
+- Need to handle exceptions during function calls
+- Need to retry on failure up to max_attempts times
+- Need to track how many attempts were made
+- Need to return the result or ","ALL TESTS PASSED
+",,0.0,
+ornith-1.0-9b,mlx,metal,int4,reasoning,einstein_riddle,3,3,True,264.58,46.8,12378.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Request:**
+    *   **Task:** Solve a logic puzzle (Einstein's Riddle variation).
+    *   **Setup:** 5 houses in a row (1-5, left to right).
+    *   **Attributes:** Person (Nationality), House Color, Drink.
+    *   **Constraints:**
+        1.  Brit = Red
+        2.  Swede = Milk
+        3.  Green is immediately left of White (Green = White - 1)
+        4.  Dane = Tea
+        5.  Green = Coffee
+        6.  Norwegian = House 1",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,three_urns,3,3,True,47.38,48.2,2285.0,"Here's a thinking process that leads to the solution:
+
+1.  **Analyze the Problem:**
+    *   **Urn A:** 3 Red ($R_A$), 2 Blue ($B_A$). Total balls = 5.
+    *   **Urn B:** 1 Red ($R_B$), 4 Blue ($B_B$). Total balls = 5.
+    *   **Urn C:** 4 Red ($R_C$), 1 Blue ($B_C$). Total balls = 5.
+    *   **Process:**
+        1.  Draw from Urn A.
+        2.  If result is Red ($R_A$), draw from Urn B.
+        3.  If result is Blue ($B_A$), draw from Urn C.
+    *   **Goal:** Find the probability that the *secon",,,,
+ornith-1.0-9b,mlx,metal,int4,reasoning,topological_sort,0,3,False,176.92,47.4,8384.0,"Here's a thinking process that leads to the suggested answer:
+
+1.  **Analyze the Request:**
+    *   **Input:** A dependency graph with 5 nodes (A, B, C, D, E) and specific edges representing dependencies (A before B, B before C, A before D, D before C, C before E).
+    *   **Task:** List *all* valid topological orderings.
+    *   **Requirement:** Show reasoning by tracking in-degrees at each step.
+
+2.  **Represent the Graph:**
+    *   Nodes: {A, B, C, D, E}
+    *   Edges (Directed):
+        *   ",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_q1ptpk78.py"", line 1
+    Here is the step-by-step derivation of all valid topological orderings using Kahn's Algorithm (tracking in-degrees).
+                                                                                     ^
+SyntaxError: unterminated string literal (detected at line 1)
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,constrained_factorial,0,3,False,39.08,48.2,1884.0,"Let me break down the constraints:
+
+1. Every variable name must be exactly 4 characters long
+2. No loops (for or while) - use recursion only
+3. Exactly 3 type hints
+4. Must correctly compute factorial
+
+Let me think about this carefully.
+
+For a factorial function using recursion:
+- Base case: if n <= 1, return 1
+- Recursive case: return n * factorial(n-1)
+
+Now I need to:
+- Use 4-character variable names
+- Use exactly 3 type hints
+- No loops
+- Correct factorial computation
+
+Let me think about what",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_mndlzec8.py"", line 10, in <module>
+    assert constrained_factorial(0) == 1, 'Test case 0 failed'
+           ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'constrained_factorial' is not defined
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,library_schema,0,3,False,103.76,48.1,4988.0,"The user wants me to generate a JSON Schema for a library management system with three entity types: Book, Author, and Loan. Let me think through the requirements:
+
+1. **Book**: title, isbn, publication_year, author_id (reference to Author)
+2. **Author**: name, birth_year, nationality, book_ids (list of Book references)
+3. **Loan**: book_id (reference to Book), borrower_name, due_date, returned (boolean)
+
+Requirements:
+- Each entity must have a unique 'id' field
+- Cross-references must use the r",,"Traceback (most recent call last):
+  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_ys52hu2z.py"", line 34, in <module>
+    ""additionalProperties"": false
+                            ^^^^^
+NameError: name 'false' is not defined. Did you mean: 'False'?
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,instruction_following,adversarial_transform,0,3,False,17.45,49.7,867.0,"Let me work through this step by step.
+
+**Step 1: Translate to French**
+""The quick brown fox jumps over the lazy dog""
+
+French translation:
+- The → Le
+- quick → rapide
+- brown → brun
+- fox → renard
+- jumps → saute
+- over → par-dessus
+- the → le
+- lazy → paresseux
+- dog → chien
+
+So: ""Le rapide brun renard saute par-dessus le chien""
+
+**Step 2: Reverse each word individually (keep word order, reverse letters within each word)**
+
+- Le → el
+- rapide → epidarp
+- brun → nurb
+- renard → darner
+- saute → ",,"  File ""/var/folders/x6/vgf42bt57h7bhf29vznthr5w0000gn/T/sandbox_1ddg0npx.py"", line 1
+    <word original=""Le"">el</word>
+    ^
+SyntaxError: invalid syntax
+",1.0,
+ornith-1.0-9b,mlx,metal,int4,writing,multi_doc_summary,3,3,True,79.52,47.9,3812.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Summarize three provided paragraphs into a single cohesive summary.
+    *   Constraint 1: Cover ALL three topics (Quantum computing, Climate change, Gene therapy).
+    *   Constraint 2: Length should be 3-5 sentences.
+
+2.  **Analyze the Source Text:**
+    *   Paragraph 1 (Quantum Computing): Uses superposition/entanglement, qubits vs. bits, exponential speedups for specific problems (cryptography, drug discovery).
+    *   Paragraph 2 ",,,,
+ornith-1.0-9b,mlx,metal,int4,writing,structured_meeting_notes,3,3,True,38.18,48.6,1857.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Write meeting notes for a fictional product team standup.
+    *   Constraint 1: YAML frontmatter with fields: `date`, `attendees` (list), `meeting_type`.
+    *   Constraint 2: A `## Discussion` section with exactly 3 bullet points.
+    *   Constraint 3: A `## Decisions` section with exactly 2 bullet points.
+    *   Constraint 4: A `## Action Items` section with exactly 3 items, each assigned to a specific person using `@name` format.
+",,,,
+ornith-1.0-9b,mlx,metal,int4,writing,tone_rewrite,3,3,True,62.13,48.6,3022.0,"Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Task:** Rewrite a technical paragraph for a non-technical audience.
+    *   **Constraint 1:** 3 sentences or fewer.
+    *   **Constraint 2:** Preserve all key facts.
+    *   **Constraint 3:** Avoid jargon.
+    *   **Original Text:** 'Deep neural networks utilize backpropagation with stochastic gradient descent to minimize the cross-entropy loss function across training epochs. The model's accuracy on the validation set plateaued at 94.3% ",,,,
+ornith-1.0-9b,mlx,metal,int4,writing,contradiction_detection,3,3,True,127.93,48.0,6144.0,"Here's a thinking process that leads to the suggested answer:
+
+1.  **Analyze the Request:**
+    *   Task: Read two notes about the Apollo 11 mission.
+    *   Goal: Identify factual contradictions between them.
+    *   Requirement: If contradictions exist, explain precisely what they are and state the actual facts.
+
+2.  **Analyze Note 1:**
+    *   Claim A: Apollo 11 landed on the Moon on July 20, 1969.
+    *   Claim B: Neil Armstrong and Buzz Aldrin spent approximately 2.5 hours walking on the lu",,,,
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_correct_tool,3,3,True,2.34,50.4,118.0,"The user wants to find flights from New York to London on March 15th. I need to call the search_flights tool with the appropriate arguments:
+- origin: ""New York""
+- destination: ""London""
+- date: ""March 15th""
+</think>
+
+```json
+{
+  ""tool"": ""search_flights"",
+  ""arguments"": {
+    ""origin"": ""New York"",
+    ""destination"": ""London"",
+    ""date"": ""March 15th""
+  }
+}
+```",,,,"[{""name"": ""search_flights"", ""arguments"": {""origin"": ""New York"", ""destination"": ""London"", ""date"": ""March 15th""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_ambiguous_request,3,3,True,4.98,50.0,249.0,"The user wants to set up a call with the marketing team for next Tuesday at 2pm. I need to determine the appropriate tool and arguments.
+
+Looking at the available tools:
+1. send_message - for text messages
+2. schedule_meeting - for scheduling meetings with participants
+3. set_reminder - for personal reminders
+4. create_task - for creating tasks
+5. send_email - for sending emails
+
+A ""call with the marketing team"" is best served by the `schedule_meeting` tool, as it allows scheduling a meeting wit",,,,"[{""name"": ""schedule_meeting"", ""arguments"": {}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_none_selection,3,3,True,1.59,50.3,80.0,"The user is greeting me with ""Hello, how are you today?"" This is a casual conversation, not a request that requires any of the available tools (search_database, create_record, delete_record, update_record, generate_report). I should respond directly and politely without using any tools.
+</think>
+
+Hello! I'm doing well, thank you for asking. How can I help you today?",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_similar_names,3,3,True,2.2,49.5,109.0,"The user wants to see profile details for user 'alice_42', specifically their name and email. The appropriate tool for this is `get_user_profile` which retrieves a user's profile information (name, email, bio).
+
+I need to call this tool with the user_id parameter set to 'alice_42'.
+</think>
+
+```json
+{
+  ""tool"": ""get_user_profile"",
+  ""arguments"": {
+    ""user_id"": ""alice_42""
+  }
+}
+```",,,,"[{""name"": ""get_user_profile"", ""arguments"": {""user_id"": ""alice_42""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_parameter_based,3,3,True,2.5,49.3,123.0,"The user wants to resize their logo.png to be exactly 200 pixels wide and 100 pixels tall. I need to use the resize_image tool with the appropriate parameters:
+- file_path: ""logo.png""
+- width: 200
+- height: 100
+</think>
+
+```json
+{
+  ""tool_name"": ""resize_image"",
+  ""arguments"": {
+    ""file_path"": ""logo.png"",
+    ""width"": 200,
+    ""height"": 100
+  }
+}
+```",,,,"[{""name"": ""resize_image"", ""arguments"": {""file_path"": ""logo.png"", ""width"": 200, ""height"": 100}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_nested_descriptions,3,3,True,1.93,49.2,95.0,"The user wants me to run a SQL query on the analytics database. I need to use the execute_query tool with the specified query and database.
+</think>
+
+```json
+{
+  ""tool_name"": ""execute_query"",
+  ""arguments"": {
+    ""query"": ""SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'"",
+    ""database"": ""analytics""
+  }
+}
+```",,,,"[{""name"": ""execute_query"", ""arguments"": {""query"": ""SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'"", ""database"": ""analytics""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_specialized_vs_general,3,3,True,4.09,48.9,200.0,"The user wants to translate a 50-page PDF report from German to English, with formatting and headers preserved. This is a long document translation task, so I should use the `translate_document` tool which is specifically designed for long documents while preserving formatting, headers, and structure.
+
+The parameters would be:
+- file_path: The path to the PDF file (the user hasn't specified the exact path, but I should use this parameter)
+- source_lang: ""de"" (German)
+- target_lang: ""en"" (English",,,,"[{""name"": ""translate_document"", ""arguments"": {""file_path"": ""german_report.pdf"", ""source_lang"": ""de"", ""target_lang"": ""en"", ""preserve_formatting"": true}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ts_multiple_valid,3,3,True,4.47,49.0,219.0,"The user wants me to log a critical bug about a 500 error in the checkout flow when customers click 'Pay Now'. They want it as a high-priority issue assigned to the backend team.
+
+The most appropriate tool for this is `create_ticket` with:
+- title: Something about the checkout flow bug
+- description: Details about the 500 error when clicking 'Pay Now'
+- priority: ""high"" (they said high-priority)
+- assignee: ""backend team"" (they said assign to backend team)
+</think>
+
+```json
+{
+  ""tool_name"": ""cre",,,,"[{""name"": ""create_ticket"", ""arguments"": {}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_date_iso_format,3,3,True,3.75,49.1,184.0,"The user wants me to schedule a team standup meeting. Let me parse the details:
+
+- Title: ""Team standup""
+- Date: June 15th, 2024 → ISO 8601 format: 2024-06-15
+- Time: 9:30 AM → HH:MM format: 09:30
+- Duration: 30 minutes
+
+Now I need to call the schedule_event tool with these parameters.
+</think>
+
+```json
+{
+  ""name"": ""schedule_event"",
+  ""arguments"": {
+    ""title"": ""Team standup"",
+    ""date"": ""2024-06-15"",
+    ""time"": ""09:30"",
+    ""duration_minutes"": 30
+  }
+}
+```",,,,"[{""name"": ""schedule_event"", ""arguments"": {""title"": ""Team standup"", ""date"": ""2024-06-15"", ""time"": ""09:30"", ""duration_minutes"": 30}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_email_extraction,3,3,True,2.89,49.2,142.0,"The user wants me to send a meeting invitation with specific parameters. Let me extract the required information:
+
+- Event title: 'Q2 Planning'
+- Recipients: ['alice@company.com', 'bob@company.com']
+- Message: 'Please review the agenda beforehand.'
+
+I need to format this as a JSON tool call.
+</think>
+
+```json
+{
+  ""name"": ""send_invitation"",
+  ""arguments"": {
+    ""event_title"": ""Q2 Planning"",
+    ""recipients"": [""alice@company.com"", ""bob@company.com""],
+    ""message"": ""Please review the agenda before",,,,"[{""name"": ""send_invitation"", ""arguments"": {""event_title"": ""Q2 Planning"", ""recipients"": [""alice@company.com"", ""bob@company.com""], ""message"": ""Please review the agenda beforehand.""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_enum_values,3,3,True,3.03,49.2,149.0,"The user wants me to create a high-severity alert for the payment-service when CPU usage exceeds 90 percent. Let me map this to the create_alert tool parameters:
+
+- service_name: ""payment-service""
+- metric: ""cpu_usage""
+- threshold: 90
+- severity: ""high""
+
+All required parameters are provided. Let me format this as a JSON tool call.
+</think>
+
+```json
+{
+  ""name"": ""create_alert"",
+  ""arguments"": {
+    ""service_name"": ""payment-service"",
+    ""metric"": ""cpu_usage"",
+    ""threshold"": 90,
+    ""severity"": """,,,,"[{""name"": ""create_alert"", ""arguments"": {""service_name"": ""payment-service"", ""metric"": ""cpu_usage"", ""threshold"": 90, ""severity"": ""high""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_nested_objects,3,3,True,5.05,49.1,248.0,"The user wants me to create a shipping order with:
+- Product ID: SKU-7890
+- Quantity: 3
+- Shipping address: 456 Pine Ave, Seattle, WA 98101, United States
+
+I need to format this as a JSON tool call with the proper structure. The shipping address needs to be broken down into its component fields:
+- street: ""456 Pine Ave""
+- city: ""Seattle""
+- state: ""WA""
+- zip: ""98101""
+- country: ""United States""
+
+Let me format this properly as a JSON tool call.
+</think>
+
+```json
+{
+  ""name"": ""create_order"",
+  ""argum",,,,"[{""name"": ""create_order"", ""arguments"": {""product_id"": ""SKU-7890"", ""quantity"": 3, ""shipping_address"": {""street"": ""456 Pine Ave"", ""city"": ""Seattle"", ""state"": ""WA"", ""zip"": ""98101"", ""country"": ""United States""}}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_numeric_coercion,3,3,True,3.66,49.2,180.0,"The user wants me to transfer $1,500 from account ACC-001 to account ACC-002 in USD. I need to call the transfer_funds tool with the proper arguments:
+
+- from_account: ""ACC-001""
+- to_account: ""ACC-002""
+- amount: 1500 (must be a number, not a string)
+- currency: ""USD""
+
+Let me format this as a JSON tool call.
+</think>
+
+```json
+{
+  ""tool"": ""transfer_funds"",
+  ""arguments"": {
+    ""from_account"": ""ACC-001"",
+    ""to_account"": ""ACC-002"",
+    ""amount"": 1500,
+    ""currency"": ""USD""
+  }
+}
+```",,,,"[{""name"": ""transfer_funds"", ""arguments"": {""from_account"": ""ACC-001"", ""to_account"": ""ACC-002"", ""amount"": 1500, ""currency"": ""USD""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_boolean_natural_lang,3,3,True,2.66,49.3,131.0,"The user wants me to call the `update_notification_settings` tool with:
+- user_id: 'usr_123'
+- email_notifications: true (turn on)
+- sms_notifications: false (disable)
+- push_notifications: not required, so I won't include it
+
+Let me format this as a proper JSON tool call.
+</think>
+
+```json
+{
+  ""name"": ""update_notification_settings"",
+  ""arguments"": {
+    ""user_id"": ""usr_123"",
+    ""email_notifications"": true,
+    ""sms_notifications"": false
+  }
+}
+```",,,,"[{""name"": ""update_notification_settings"", ""arguments"": {""user_id"": ""usr_123"", ""email_notifications"": true, ""sms_notifications"": false}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_all_required_args,3,3,True,3.23,49.2,159.0,"The user wants to deploy the auth-service with version 2.1.0 to the staging environment with 3 replicas. Let me check the required arguments:
+
+- service_name: ""auth-service""
+- version: ""2.1.0""
+- environment: ""staging""
+- replicas: 3
+
+All required arguments are provided. The health_check_path is optional, so I don't need to include it.
+</think>
+
+```json
+{
+  ""tool_name"": ""deploy_service"",
+  ""arguments"": {
+    ""service_name"": ""auth-service"",
+    ""version"": ""2.1.0"",
+    ""environment"": ""staging"",
+    ",,,,"[{""name"": ""deploy_service"", ""arguments"": {""service_name"": ""auth-service"", ""version"": ""2.1.0"", ""environment"": ""staging"", ""replicas"": 3}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,aa_preserve_exact_strings,0,3,False,2.41,49.5,119.0,"The user wants me to run the exact command they specified: `grep -rn 'TODO' src/`. I need to call the execute_command tool with this exact command string.
+</think>
+
+```json
+{
+  ""tool_calls"": [
+    {
+      ""tool_call_id"": ""call_001"",
+      ""name"": ""execute_command"",
+      ""arguments"": {
+        ""command"": ""grep -rn 'TODO' src/"",
+        ""timeout_seconds"": 30
+      }
+    }
+  ]
+}
+```",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_parallel_independent,0,3,False,2.99,49.5,148.0,"The user wants to know the weather in two cities: New York and San Francisco. I need to call the get_weather tool for both cities.
+</think>
+
+```json
+{""tool_calls"": [{""tool_call_id"": ""call_1"", ""role"": ""user"", ""content"": ""What's the weather like in New York and San Francisco right now?"", ""tool_calls"": [{""id"": ""call_weather_ny"", ""type"": ""function"", ""function_name"": ""get_weather"", ""parameters"": {""city"": ""New York""}}, {""id"": ""call_weather_sf"", ""type"": ""function"", ""function_name"": ""get_weather"", ""para",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_sequential_dependent,3,3,True,4.68,49.6,232.0,"The user wants to find the last 5 orders for a customer with email jane@example.com. 
+
+Looking at the available tools:
+1. `search_user(email: str)` - This can find a user by email, which will return a user_id
+2. `get_order_history(user_id: str, limit: int)` - This can get orders for a user, requiring a user_id
+
+The plan is:
+1. First, call `search_user` with email ""jane@example.com"" to get the user_id
+2. Then, use that user_id to call `get_order_history` with limit 5
+
+I need to output this as JSO",,,,"[{""name"": ""search_user"", ""arguments"": {""email"": ""jane@example.com""}}, {""name"": ""get_order_history"", ""arguments"": {""user_id"": ""{{user_id_from_search_user}}"", ""limit"": 5}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_mixed,0,3,False,5.43,49.7,270.0,"The user wants me to:
+1. Check weather in Tokyo
+2. Search for sushi restaurants in Tokyo
+3. Book a table at the top result for 4 people at 7pm
+
+The weather check and restaurant search can happen in parallel, but booking depends on the search results.
+
+So I need to:
+1. First call get_weather(""Tokyo"") and search_restaurants(""Tokyo"", ""sushi"") in parallel
+2. Then based on the restaurant search results, call book_restaurant with the top result's ID, party_size=4, time=""7pm""
+
+Since I need to output JS",,,,"[{""name"": ""get_weather"", ""arguments"": {""city"": ""Tokyo""}}, {""name"": ""search_restaurants"", ""arguments"": {""city"": ""Tokyo"", ""cuisine"": ""sushi""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_three_parallel,3,3,True,3.06,50.0,153.0,"The user wants the current stock prices for Apple (AAPL), Google (GOOGL), and Microsoft (MSFT). I need to make three parallel tool calls to get these prices.
+</think>
+
+```json
+[
+  {
+    ""tool"": ""get_stock_price"",
+    ""parameters"": {
+      ""symbol"": ""AAPL""
+    }
+  },
+  {
+    ""tool"": ""get_stock_price"",
+    ""parameters"": {
+      ""symbol"": ""GOOGL""
+    }
+  },
+  {
+    ""tool"": ""get_stock_price"",
+    ""parameters"": {
+      ""symbol"": ""MSFT""
+    }
+  }
+]
+```",,,,"[{""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""AAPL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""GOOGL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""MSFT""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_multi_turn_with_result,0,3,False,3.64,50.0,182.0,"The user wants me to calculate the total with a 20% tip. The subtotal is $85.50.
+
+To calculate the total with a 20% tip:
+Total = Subtotal + (Subtotal × Tip Percentage)
+Total = 85.50 + (85.50 × 0.20)
+Total = 85.50 + 17.10
+Total = 102.60
+
+I can use the calculate tool to compute this.
+</think>
+
+```json
+{
+  ""tool_calls"": [
+    {
+      ""tool"": ""calculate"",
+      ""arguments"": {
+        ""expression"": ""85.50 + (85.50 * 0.20)""
+      }
+    }
+  ]
+}
+```",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_chain_of_three,3,3,True,8.18,49.7,406.0,"The user wants me to:
+1. Read the file src/auth.py
+2. Analyze it for bugs
+3. Create a ticket for any issues found
+
+This is a sequential chain where each step depends on the previous result. Let me plan the tool calls:
+
+1. First, I need to read the file using get_file_content
+2. Then, I'll use the content from step 1 to analyze it with analyze_code
+3. Finally, based on the analysis results, I'll create a ticket with create_ticket
+
+Let me output this as JSON tool calls.
+</think>
+
+```json
+[
+  {
+   ",,,,"[{""name"": ""get_file_content"", ""arguments"": {""path"": ""src/auth.py""}}, {""name"": ""analyze_code"", ""arguments"": {""code"": ""<result from get_file_content>"", ""language"": ""python""}}, {""name"": ""create_ticket"", ""arguments"": {""title"": ""<issues found in analysis>"", ""description"": ""<detailed issues from analysis>"", ""priority"": ""<based on severity of issues>""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_parallel_different,3,3,True,3.83,49.9,191.0,"The user wants to look up two independent pieces of information:
+1. User profile for user USR-100
+2. Account balance for account ACC-200
+
+Since these are independent lookups, they can be done in parallel. I need to output the response as JSON tool calls.
+
+Let me format the tool calls as JSON:
+- get_user_profile with user_id ""USR-100""
+- get_account_balance with account_id ""ACC-200""
+</think>
+
+```json
+[
+  {
+    ""tool"": ""get_user_profile"",
+    ""arguments"": {
+      ""user_id"": ""USR-100""
+    }
+  },
+  {",,,,"[{""name"": ""get_user_profile"", ""arguments"": {""user_id"": ""USR-100""}}, {""name"": ""get_account_balance"", ""arguments"": {""account_id"": ""ACC-200""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,mt_conditional_planning,0,3,False,9.27,49.3,457.0,"The user wants to buy 2 units of PROD-567. I need to:
+
+1. First check if PROD-567 is in stock
+2. Based on the result:
+   - If in stock: place an order for 2 units for customer CUST-123
+   - If out of stock: sign up for restock notifications at buyer@example.com
+
+Let me plan the tool calls:
+
+Step 1: Check inventory for PROD-567
+Step 2: Based on the result, either place_order or notify_restock
+
+Since I don't know the inventory status yet, I need to start with the inventory check first, then condit",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_refuse_trivial,3,3,True,1.07,50.7,54.0,"The user is asking ""What is 2 + 2?"" This is a trivially answerable question - 2 + 2 = 4. I don't need to use the calculate tool for this.
+</think>
+
+2 + 2 = 4",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_missing_required_params,3,3,True,2.63,49.7,131.0,"The user wants to book a flight from Chicago on December 20th, but they haven't provided the destination city. The required parameters for the book_flight function are:
+- origin: ""Chicago"" (provided)
+- destination: missing
+- date: ""December 20th"" (provided)
+
+I need to ask for the missing required parameter (destination) before I can proceed with booking the flight.
+</think>
+
+I can see you want to book a flight from Chicago on December 20th, but you haven't specified the destination city. Could y",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_handle_tool_error,3,3,True,5.67,49.2,279.0,"The user is asking me to handle an error from a previous tool call. The get_weather tool returned an HTTP 503 error, which means the service is temporarily unavailable. I should acknowledge this error and suggest practical next steps for the user.
+
+Let me think about what to suggest:
+1. Retry the request after a short wait (503 is temporary)
+2. Suggest trying an alternative city or approach
+3. Maybe suggest checking if there's a fallback or alternative method
+
+I should be helpful and clear about",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_no_matching_tool,3,3,True,6.74,49.1,331.0,"The user is asking me to book a restaurant table for them in downtown Seattle for tonight at 7pm. Let me check the available tools:
+
+1. get_weather(city: str) - Get current weather for a city
+2. convert_currency(amount: float, from: str, to: str) - Convert between currencies
+3. translate_text(text: str, target_lang: str) - Translate text to another language
+
+None of these tools can book a restaurant table. The available tools are for weather, currency conversion, and text translation - none of w",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_optional_params,0,3,False,1.81,49.7,90.0,"The user wants to search for laptops. I need to call the search_products tool with the required ""query"" parameter set to ""laptops"". No other parameters were specified, so I should only include the required one.
+</think>
+
+```json
+{""tool_calls"": [{""id"": ""call_search_products"", ""type"": ""function"", ""function_name"": ""search_products"", ""parameters"": {""query"": ""laptops""}}]}
+```",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_reject_harmful,3,3,True,5.31,49.1,261.0,"The user is asking me to run the command `rm -rf /`, which is extremely dangerous. This command would recursively and forcefully delete everything on the root filesystem, effectively destroying the entire operating system and all data on the server.
+
+This is clearly a harmful command that I must refuse to execute. I need to explain why this is dangerous and refuse.
+</think>
+
+I **refuse** to execute this command.
+
+`rm -rf /` would recursively and forcefully delete **everything** on the root files",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_deprecated_param,3,3,True,2.3,49.5,114.0,"The user wants me to send a notification to admin@company.com with the message 'Server maintenance scheduled for tonight.' I need to use the correct parameter names - specifically ""recipient_email"" instead of the deprecated ""email"" field.
+
+Let me construct the JSON tool call with the correct parameters.
+</think>
+
+```json
+{
+  ""tool_name"": ""send_notification"",
+  ""arguments"": {
+    ""recipient_email"": ""admin@company.com"",
+    ""message"": ""Server maintenance scheduled for tonight.""
+  }
+}
+```",,,,"[{""name"": ""send_notification"", ""arguments"": {""recipient_email"": ""admin@company.com"", ""message"": ""Server maintenance scheduled for tonight.""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,ec_idempotency,3,3,True,2.47,49.4,122.0,"The user is asking me to create the same account again that was already created in the previous conversation. I should acknowledge that this is a duplicate request and let them know the user already exists.
+</think>
+
+I notice this is a duplicate request — the user **bob** with email **bob@test.com** has already been created (user ID: `usr_456`).
+
+Would you like me to:
+- **Update** an existing field on that account?
+- **Delete** the account?
+- Or something else?
+
+Let me know and I'll be happy to ",,,,null
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_valid_json_format,3,3,True,1.01,50.4,51.0,"The user is asking for the current time in UTC. I need to use the get_time tool with timezone ""UTC"".
+</think>
+
+```json
+{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}
+```
+```",,,,"[{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_array_params,3,3,True,2.59,49.5,128.0,"The user wants me to create a blog post with specific parameters. Let me format this as a valid JSON tool call.
+
+- Title: 'Python Tips'
+- Content: 'Here are some useful Python tips.'
+- Tags: ['python', 'tutorial']
+
+I need to output this as valid JSON.
+</think>
+
+```json
+{
+  ""tool_name"": ""create_post"",
+  ""arguments"": {
+    ""title"": ""Python Tips"",
+    ""content"": ""Here are some useful Python tips."",
+    ""tags"": [""python"", ""tutorial""]
+  }
+}
+```",,,,"[{""name"": ""create_post"", ""arguments"": {""title"": ""Python Tips"", ""content"": ""Here are some useful Python tips."", ""tags"": [""python"", ""tutorial""]}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_optional_included,3,3,True,3.67,49.3,181.0,"The user wants me to send an email with specific parameters. Let me extract all the required and optional parameters from the request:
+
+Required:
+- to: ""john@company.com""
+- subject: ""Meeting Update""
+- body: ""The meeting has been moved to 3pm.""
+
+Optional (specified by user):
+- cc: [""manager@company.com""]
+- priority: not specified, so I should not include it
+
+I need to output the response as a JSON tool call.
+</think>
+
+```json
+{
+  ""name"": ""send_email"",
+  ""arguments"": {
+    ""to"": ""john@company.com""",,,,"[{""name"": ""send_email"", ""arguments"": {""to"": ""john@company.com"", ""subject"": ""Meeting Update"", ""body"": ""The meeting has been moved to 3pm."", ""cc"": [""manager@company.com""]}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_multiple_tools_single_response,3,3,True,3.11,49.5,154.0,"The user wants me to make two tool calls:
+1. Set an alarm for 7:00 AM labeled 'Wake up'
+2. Check the weather in Boston
+
+I need to output both tool calls in a single response, using a JSON array or multiple separate JSON objects. Let me format them properly.
+</think>
+
+```json
+[
+  {
+    ""tool"": ""set_alarm"",
+    ""arguments"": {
+      ""time"": ""7:00 AM"",
+      ""label"": ""Wake up""
+    }
+  },
+  {
+    ""tool"": ""get_weather"",
+    ""arguments"": {
+      ""city"": ""Boston""
+    }
+  }
+]
+```",,,,"[{""name"": ""set_alarm"", ""arguments"": {""time"": ""7:00 AM"", ""label"": ""Wake up""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""Boston""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_null_argument,3,3,True,1.97,49.7,98.0,"The user wants to update their profile with:
+- display_name: 'Alex'
+- bio: null (to clear it)
+
+They didn't mention avatar_url, so I should only include the fields they specified. Let me construct the JSON tool call.
+</think>
+
+```json
+{
+  ""name"": ""update_profile"",
+  ""arguments"": {
+    ""display_name"": ""Alex"",
+    ""bio"": null
+  }
+}
+```",,,,"[{""name"": ""update_profile"", ""arguments"": {""display_name"": ""Alex"", ""bio"": null}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_empty_string,3,3,True,1.7,49.9,85.0,"The user wants to list all files in the /home/user/documents directory without any extension filter. I need to call the list_files tool with the directory parameter set to ""/home/user/documents"" and the filter parameter set to an empty string to show all files.
+</think>
+
+```json
+{""tool_name"": ""list_files"", ""arguments"": {""directory"": ""/home/user/documents"", ""filter"": """"}}
+```",,,,"[{""name"": ""list_files"", ""arguments"": {""directory"": ""/home/user/documents"", ""filter"": """"}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_consistent_format,3,3,True,3.05,49.5,151.0,"The user wants me to:
+1. Create a folder called /archive
+2. Move /data/old_report.csv into /archive
+
+I need to output both tool calls in the same consistent JSON format.
+
+For the first call, I'll use create_folder with path ""/archive""
+For the second call, I'll use move_file with source ""/data/old_report.csv"" and destination ""/archive/old_report.csv""
+</think>
+
+```json
+[
+  {""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}},
+  {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_repor",,,,"[{""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}, {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}]"
+ornith-1.0-9b,mlx,metal,int4,tool_calling,fc_type_matching,3,3,True,3.83,49.4,189.0,"The user wants me to configure a server with specific settings. Let me check the required parameters:
+
+- hostname: 'api.example.com' (string) ✓
+- port: 8080 (integer) ✓
+- ssl_enabled: true (boolean) ✓
+- allowed_ips: ['10.0.0.1', '10.0.0.2'] (array of strings) ✓
+
+All types match the schema. Let me format this as a JSON tool call.
+</think>
+
+```json
+{
+  ""tool_name"": ""configure_server"",
+  ""arguments"": {
+    ""hostname"": ""api.example.com"",
+    ""port"": 8080,
+    ""ssl_enabled"": true,
+    ""allowed_ips"": ",,,,"[{""name"": ""configure_server"", ""arguments"": {""hostname"": ""api.example.com"", ""port"": 8080, ""ssl_enabled"": true, ""allowed_ips"": [""10.0.0.1"", ""10.0.0.2""]}}]"
