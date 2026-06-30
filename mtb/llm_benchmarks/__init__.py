@@ -67,6 +67,12 @@ from mtb.llm_benchmarks.models.qwen36 import (
     Qwen3p6_27B,
     Qwen3p6_35B_A3B,
 )
+from mtb.llm_benchmarks.models.ornith import (
+    Ornith_1p0_9B,
+)
+from mtb.llm_benchmarks.models.gpt_oss import (
+    GptOss_20B,
+)
 
 MODEL_SPECS = [
     # deepseek
@@ -103,9 +109,12 @@ MODEL_SPECS = [
     Qwen3p6_35B_A3B,
     # agentic / coding — MoE models
     Qwen3_Coder_30B_A3B,
+    GptOss_20B,
     GLM4p7_Flash,
     LFM2_24B_A2B,
     LFM2p5_8B_A1B,
+    # agentic / coding — dense models
+    Ornith_1p0_9B,
     # phi
     Phi4_Mini,
     Phi4,

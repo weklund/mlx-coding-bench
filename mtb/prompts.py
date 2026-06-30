@@ -3,6 +3,16 @@ import random
 from mtb.llm_benchmarks.base_llm_benchmark import BaseLLMBenchmark
 
 
+class PromptLengthUnreachable(ValueError):
+    """Requested prompt length is smaller than the model's chat-template overhead.
+
+    Some models (e.g. gpt-oss with the harmony format) wrap every prompt in a
+    large fixed system preamble. When that overhead alone exceeds the requested
+    number of prompt tokens, no user text can hit the target and the length must
+    be skipped for that model.
+    """
+
+
 def find_prompt_for_llm_benchmark(
     num_tokens: int,
     benchmark: BaseLLMBenchmark,
@@ -32,6 +42,15 @@ def find_prompt_for_llm_benchmark(
         benchmark.teardown()
         benchmark.setup()
         return prompt
+
+    # If the chat-template overhead alone already meets or exceeds the target,
+    # no user text can bring the total down to num_tokens: skip this length.
+    min_num_tokens = len(prompt_tokens)
+    if num_tokens <= min_num_tokens:
+        raise PromptLengthUnreachable(
+            f"Chat-template overhead is {min_num_tokens} tokens, which is "
+            f">= the requested prompt length {num_tokens}."
+        )
 
     # initial guess: we need 1 character per token
     text_length = int(num_tokens)

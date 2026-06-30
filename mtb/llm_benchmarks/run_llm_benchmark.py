@@ -14,7 +14,7 @@ from mtb.llm_benchmarks.models.base import ModelSpec
 from mtb.llm_benchmarks.ollama_llm_benchmark import OllamaLlmBenchmark
 from mtb.llm_benchmarks.torch_llm_benchmark import TorchLlmBenchmark
 from mtb.measurement import LlmBenchmarkMeasurement, Measurements
-from mtb.prompts import find_prompt_for_llm_benchmark
+from mtb.prompts import PromptLengthUnreachable, find_prompt_for_llm_benchmark
 
 
 def run_benchmark(
@@ -102,7 +102,11 @@ def run_benchmark(
     except Exception as e:
         print(f"\n  Exception for '{benchmark.name}': {e}")
 
-    return pd.read_csv(output_path)
+    if Path(output_path).exists():
+        return pd.read_csv(output_path)
+    # Nothing has been written yet (e.g. the first model errored on every
+    # prompt length): return an empty frame so the overall run can continue.
+    return pd.DataFrame(columns=csv_columns)
 
 
 def create_benchmark(
@@ -182,6 +186,18 @@ def run_benchmark_for_framework(
                 + "benchmark {it} / "
                 + f"{num_iterations}"
             )
+
+            # Skip prompt lengths the model's chat template can't reach (e.g.
+            # gpt-oss harmony overhead exceeds the smallest target length).
+            try:
+                find_prompt_for_llm_benchmark(
+                    benchmark=benchmark,
+                    num_tokens=num_prompt_tokens,
+                )
+            except PromptLengthUnreachable as e:
+                print(f"\n  Skipping L={num_prompt_tokens} for '{benchmark.name}': {e}")
+                iterator.update(num_warmup_iterations + num_iterations)
+                continue
 
             # Run warmup
             iterator.set_description(desc.format(warmup_it=0, it=0))
