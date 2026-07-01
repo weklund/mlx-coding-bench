@@ -159,6 +159,10 @@ Qwen3_8B_it = ModelSpec(
             "int4": "qwen3:8b",
         },
     },
+    # Speculative decoding drafter (shares the Qwen3 vocab).
+    draft_model_ids={
+        "mlx": {"int4": "mlx-community/Qwen3-0.6B-4bit"},
+    },
 )
 
 
@@ -180,6 +184,10 @@ Qwen3_14B_it = ModelSpec(
             "int4": "qwen3:14b",
         },
     },
+    # Speculative decoding drafter (shares the Qwen3 vocab).
+    draft_model_ids={
+        "mlx": {"int4": "mlx-community/Qwen3-0.6B-4bit"},
+    },
 )
 
 
@@ -195,5 +203,9 @@ Qwen3_32B_it = ModelSpec(
             "int8": "mlx-community/Qwen3-32B-8bit",
             "bfloat16": "mlx-community/Qwen3-32B-bf16",
         },
+    },
+    # Speculative decoding drafter (shares the Qwen3 vocab).
+    draft_model_ids={
+        "mlx": {"int4": "mlx-community/Qwen3-0.6B-4bit"},
     },
 )

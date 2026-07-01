@@ -29,6 +29,8 @@ def run_benchmark(
     num_iterations: int = 5,
     max_num_tokens: int = 100,
     cooldown_time_fraction: float = 0.1,
+    use_speculative: bool = False,
+    prompt_profile: str = "generic",
 ):
     """Run a benchmark for a specific model (and, by definition, dtype).
 
@@ -70,6 +72,14 @@ def run_benchmark(
         "generation_time_sec_std",
         "peak_memory_gib",  # peak memory usage in GiB
         "peak_memory_gib_std",
+        # Optimization dimension: "" is the standard/unoptimized config (the
+        # level playing field). A non-empty value names an optimization layered
+        # on top of the base model (e.g. "speculative_decoding"); detail holds
+        # its config (e.g. the drafter id). Future optimizations reuse these.
+        "optimization",
+        "optimization_detail",
+        # Prompt profile the generation was measured on ("generic" vs "code").
+        "prompt_profile",
     ]
 
     benchmark: BaseLLMBenchmark = create_benchmark(
@@ -78,6 +88,8 @@ def run_benchmark(
         backend=backend,
         dtype=dtype,
         max_num_tokens=max_num_tokens,
+        use_speculative=use_speculative,
+        prompt_profile=prompt_profile,
     )
 
     try:
@@ -111,6 +123,8 @@ def create_benchmark(
     backend: str,
     dtype: str,
     max_num_tokens: int = 100,
+    use_speculative: bool = False,
+    prompt_profile: str = "generic",
 ) -> BaseLLMBenchmark:
     """Create a benchmark for a specific task."""
 
@@ -128,6 +142,7 @@ def create_benchmark(
         raise NotImplementedError(f"Framework not supported: {framework}. ")
 
     model_id = model_spec.model_ids[framework][dtype]
+    draft_model_id = model_spec.get_draft_model_id(framework, dtype)
 
     benchmark = benchmark_class(
         name=model_spec.name,
@@ -137,6 +152,9 @@ def create_benchmark(
         dtype=dtype,
         max_num_tokens=max_num_tokens,
         thinking=model_spec.thinking,
+        draft_model_id=draft_model_id,
+        use_speculative=use_speculative,
+        prompt_profile=prompt_profile,
     )
     return benchmark
 
@@ -222,6 +240,9 @@ def run_benchmark_for_framework(
                 dtype=benchmark.dtype,
                 batch_size=batch_size,
                 num_prompt_tokens=int(num_prompt_tokens),
+                optimization=benchmark.optimization,
+                optimization_detail=benchmark.optimization_detail,
+                prompt_profile=benchmark.prompt_profile,
             )
             for metric_name in container.keys:
                 if metric_name not in measurement:

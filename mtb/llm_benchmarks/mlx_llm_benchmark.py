@@ -31,6 +31,21 @@ class MlxLlmBenchmark(BaseLLMBenchmark):
         self.model: mlx.nn.Module = model
         self.tokenizer: mlx_lm.tokenizer_utils.TokenizerWrapper = tokenizer
 
+        # Speculative decoding: load the drafter alongside the base model.
+        self.draft_model = None
+        if self.use_speculative and self.draft_model_id:
+            if not Path(self.draft_model_id).exists():
+                verbose_download_model(self.draft_model_id)
+            draft_model, draft_tokenizer = mlx_lm.load(self.draft_model_id)
+            # Drafter and target must share a vocabulary for spec-dec validity.
+            if draft_tokenizer.vocab_size != tokenizer.vocab_size:
+                raise ValueError(
+                    f"Drafter vocab ({draft_tokenizer.vocab_size}) != target "
+                    f"vocab ({tokenizer.vocab_size}) for "
+                    f"'{self.draft_model_id}' -> '{self.model_id}'."
+                )
+            self.draft_model = draft_model
+
     def format_and_tokenize_prompt(self, prompt: str) -> mx.array:
         prompt = self.prompt_formatter(prompt)
 
@@ -56,13 +71,16 @@ class MlxLlmBenchmark(BaseLLMBenchmark):
         mx.reset_peak_memory()
         prompt_tokens = self.format_and_tokenize_prompt(prompt)
 
-        # use stream_generate instead of generate, its response is more useful
+        # use stream_generate instead of generate, its response is more useful.
+        # draft_model=None is a plain (standard) run; a drafter enables
+        # speculative decoding (same output distribution, higher throughput).
         generation = ""
         for response in mlx_lm.stream_generate(
             self.model,
             self.tokenizer,
             max_tokens=self.max_num_tokens,
             prompt=prompt_tokens,
+            draft_model=getattr(self, "draft_model", None),
         ):
             generation += response.text
 
@@ -84,6 +102,10 @@ class MlxLlmBenchmark(BaseLLMBenchmark):
         del self.tokenizer
         self.model = None
         self.tokenizer = None
+
+        if getattr(self, "draft_model", None) is not None:
+            del self.draft_model
+            self.draft_model = None
 
         mx.clear_cache()
         gc.collect()

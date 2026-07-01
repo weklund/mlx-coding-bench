@@ -33,4 +33,9 @@ Qwen3_Coder_30B_A3B = ModelSpec(
             "int8": "mlx-community/Qwen3-Coder-30B-A3B-Instruct-8bit",
         },
     },
+    # Speculative decoding drafter (Qwen3 vocab). MoE targets typically gain
+    # far less than dense ones — only ~3B params are active per step.
+    draft_model_ids={
+        "mlx": {"int4": "mlx-community/Qwen3-0.6B-4bit"},
+    },
 )
