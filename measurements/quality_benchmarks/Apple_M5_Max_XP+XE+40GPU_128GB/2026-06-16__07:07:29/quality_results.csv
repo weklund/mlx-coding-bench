@@ -1,0 +1,1071 @@
+model,framework,backend,dtype,category,problem,pass_count,num_runs,passed,avg_generation_time_sec,avg_generation_tps,avg_tokens_generated,sample_response,execution_stdout,execution_stderr,execution_exit_code,parsed_tool_calls
+gemma-4-12b-it,mlx,metal,int4,coding,fizzbuzz,0,3,False,20.31,50.0,1013.0,"<|channel>thought
+*   Input: An integer `n`.
+    *   Output: A string.
+    *   Rules:
+        *   If `n` is a multiple of 3: ""Fizz""
+        *   If `n` is a multiple of 5: ""Buzz""
+        *   If `n` is a multiple of both 3 and 5: ""FizzBuzz""
+        *   Otherwise: The number as a string.
+
+    *   Function name: `fizzbuzz`
+    *   Parameter: `n` (type `int`)
+    *   Return type: `str`
+
+    *   Check if `n % 3 == 0` and `n % 5 == 0` (or `n % 15 == 0`).
+    *   If true, return ""FizzBuzz"".
+    *   Else",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_4nd36ms9.py"", line 1
+    def fizzbuzz(n: int) -> str:
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,reverse_string,0,3,False,16.08,51.0,820.0,"<|channel>thought
+*   Input: A string `s`.
+    *   Output: A string with the characters in reverse order.
+    *   Language: Python.
+
+    *   *Method 1: Slicing (The most Pythonic way).*
+        *   Syntax: `s[::-1]`
+        *   Pros: Fast, concise, idiomatic.
+    *   *Method 2: Built-in `reversed()` and `join()`.*
+        *   Syntax: `"""".join(reversed(s))`
+        *   Pros: Clearer intent for some, but slightly slower than slicing.
+    *   *Method 3: Iterative approach (Manual).*
+        *   Log",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_gwhwou1f.py"", line 1
+    def reverse_string(s: str) -> str:
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,fibonacci,0,3,False,44.58,46.0,2048.0,"<|channel>thought
+*   Input: An integer `n`.
+    *   Output: A list of the first `n` Fibonacci numbers.
+    *   Constraint: The sequence starts with 0.
+    *   Language: Python.
+
+    *   Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, ...
+    *   Rule: $F(n) = F(n-1) + F(n-2)$.
+    *   Base cases: $F(0) = 0$, $F(1) = 1$.
+
+    *   *Approach 1: Iterative (Most efficient for list construction).*
+        *   Handle edge cases: if $n \le 0$, return an empty list. If $n = 1$, return `[0]`.
+        *   In",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_b1y4z8jr.py"", line 1
+    def fibonacci(n: int) -> list:
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,binary_search,3,3,True,23.61,44.6,1051.0,"<|channel>thought
+The objective is to write a Python function `binary_search(arr: list, target: int) -> int`.
+    *   Input: A sorted list of integers (`arr`) and a target integer (`target`).
+    *   Output: The index of the target if found, otherwise -1.
+
+    *   Binary search works on a sorted list.
+    *   It uses a ""divide and conquer"" approach.
+    *   It maintains two pointers: `low` (start of the range) and `high` (end of the range).
+    *   It calculates the `mid` point.
+    *   If `targ","Index of 40: 3
+Index of 10: 0
+Index of 99: -1
+Index of 1: -1
+ALL TESTS PASSED
+",,0.0,
+gemma-4-12b-it,mlx,metal,int4,coding,palindrome,0,3,False,36.11,42.8,1546.0,"<|channel>thought
+The objective is to write a Python function `is_palindrome(s: str) -> bool`.
+    *   Input: A string `s`.
+    *   Output: `True` if it's a palindrome, `False` otherwise.
+    *   Constraints: Ignore case (case-insensitive) and non-alphanumeric characters (like spaces, punctuation, etc.).
+
+    *   ""A man, a plan, a canal: Panama"" -> True.
+    *   ""race a car"" -> False.
+    *   "" "" -> True (empty/whitespace only is technically a palindrome).
+    *   ""No 'x' in Nixon"" -> True.
+
+   ",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_tq0r_m5w.py"", line 1
+    def is_palindrome(s: str) -> bool:
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,reasoning,train_problem,3,3,True,8.26,46.3,381.0,"<|channel>thought
+*   Distance between two trains: 200 km.
+    *   Speed of Train A: 60 km/h.
+    *   Speed of Train B: 40 km/h.
+    *   Direction: Moving toward each other.
+    *   Goal: Find the time until they meet.
+
+    *   When two objects move toward each other, their relative speed is the sum of their individual speeds.
+    *   Relative Speed = Speed of Train A + Speed of Train B.
+    *   Time = Distance / Relative Speed.
+
+    *   Relative Speed = 60 km/h + 40 km/h = 100 km/h.
+    *   Tim",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,coin_probability,3,3,True,20.76,43.6,905.0,"<|channel>thought
+*   Action: Flip a fair coin 3 times.
+    *   Goal: Find the probability of getting at least 2 heads.
+
+    *   Each flip has 2 possible outcomes (Head or Tail).
+    *   Total outcomes = $2^3 = 2 \times 2 \times 2 = 8$.
+    *   The sample space $S = \{HHH, HHT, HTH, THH, HTT, THT, TTH, TTT\}$.
+
+    *   ""At least 2 heads"" means getting 2 heads OR 3 heads.
+
+    *   Case 1: Exactly 2 heads.
+        *   Outcomes: $\{HHT, HTH, THH\}$
+        *   Count: 3
+    *   Case 2: Exactly 3 hea",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,workers_problem,3,3,True,8.57,45.5,389.0,"<|channel>thought
+*   Input: 5 workers can build a wall in 10 days.
+    *   Question: How long would it take 10 workers to build the same wall?
+
+    *   This is a problem of inverse proportion. As the number of workers increases, the time taken to complete the same task decreases (assuming all workers work at the same rate).
+
+    *   Work = Number of workers $\times$ Time taken.
+    *   Work = $5 \text{ workers} \times 10 \text{ days} = 50 \text{ worker-days}$.
+
+    *   Work = 50 worker-days.
+  ",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,age_problem,3,3,True,17.61,44.0,775.0,"<|channel>thought
+*   Tom's current age = $T$
+    *   Jerry's current age = $J$
+
+    *   Equation 1: Tom is twice as old as Jerry.
+        $T = 2J$
+    *   Equation 2: In 5 years, Tom will be 1.5 times as old as Jerry.
+        $(T + 5) = 1.5 \times (J + 5)$
+
+    *   Substitute $T = 2J$ into the second equation:
+        $(2J + 5) = 1.5(J + 5)$
+    *   Distribute 1.5:
+        $2J + 5 = 1.5J + 7.5$
+    *   Subtract $1.5J$ from both sides:
+        $0.5J + 5 = 7.5$
+    *   Subtract 5 from both sides:",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,sequence_pattern,3,3,True,22.07,44.0,972.0,"<|channel>thought
+*   Sequence: 2, 6, 12, 20, 30, ?
+    *   Goal: Find the next number.
+
+    *   Difference between 6 and 2: $6 - 2 = 4$
+    *   Difference between 12 and 6: $12 - 6 = 6$
+    *   Difference between 20 and 12: $20 - 12 = 8$
+    *   Difference between 30 and 20: $30 - 20 = 10$
+
+    *   The differences are: 4, 6, 8, 10.
+    *   The difference between these differences:
+        *   $6 - 4 = 2$
+        *   $8 - 6 = 2$
+        *   $10 - 8 = 2$
+    *   The differences are increasing by ",,,,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,json_output,3,3,True,4.99,47.5,236.0,"<|channel>thought
+*   Input: Request for a JSON object.
+    *   Keys: ""name"", ""age"", ""hobbies"" (list).
+    *   Content: Fictional person.
+    *   Constraint: Output ONLY the JSON, no other text.
+
+    *   Name: Elara Vance
+    *   Age: 28
+    *   Hobbies: [""Astronomy"", ""Oil Painting"", ""Hiking""]
+
+    ```json
+    {
+      ""name"": ""Elara Vance"",
+      ""age"": 28,
+      ""hobbies"": [""Astronomy"", ""Oil Painting"", ""Hiking""]
+    }
+    ```
+
+    *   JSON format? Yes.
+    *   Keys correct? Yes.
+    *   Hobbies",,,,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,numbered_list,3,3,True,8.53,45.0,384.0,"<|channel>thought
+*   Topic: Benefits of regular exercise.
+    *   Quantity: 5 benefits.
+    *   Format: Numbered list (1. 2. 3. etc.).
+
+    *   Weight management/Weight loss.
+    *   Improved cardiovascular health (heart health).
+    *   Mental health/Reduced stress/Improved mood.
+    *   Stronger muscles and bones.
+    *   Improved sleep quality.
+    *   Reduced risk of chronic diseases (e.g., diabetes, hypertension).
+    *   Increased energy levels.
+
+    1.  Improved Cardiovascular Health: St",,,,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,word_constraint,3,3,True,37.25,43.2,1610.0,"<|channel>thought
+*   Topic: Machine Learning (ML).
+    *   Constraint: 50 words or fewer.
+    *   Goal: Explain what it is.
+
+    Machine learning is a subset of artificial intelligence where computers learn from data. Instead of being explicitly programmed for every task, they identify patterns and improve their performance over time. By analyzing large amounts of information, machines can make predictions, recognize images, and perform complex tasks like human learning.
+
+    Machine learning i",,,,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,code_with_comments,0,3,False,29.56,44.0,1299.0,"<|channel>thought
+The objective is to write a Python function that calculates the area of a circle.
+
+    *   Input: Radius of the circle (a number).
+    *   Output: Area of the circle (a number).
+    *   Formula: $Area = \pi \times r^2$.
+
+    *   Need the `math` module to get an accurate value for $\pi$ (pi).
+    *   Function name: `calculate_circle_area`.
+    *   Parameter: `radius`.
+    *   Logic:
+        *   Check if the radius is valid (must be non-negative).
+        *   Calculate area using",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_fho8lj73.py"", line 1
+    import math
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,direct_answer,3,3,True,0.51,68.8,35.0,"<|channel>thought
+The user is asking for the capital of France.
+The user requested a direct answer with no explanation.
+The capital of France is Paris.<channel|>Paris",,,,
+gemma-4-12b-it,mlx,metal,int4,coding,lru_cache,0,3,False,55.75,42.7,2382.0,"<|channel>thought
+The objective is to implement a function `lru_cache_ops(capacity: int, operations: list) -> list` that simulates a Least Recently Used (LRU) cache.
+
+    *   `capacity`: Integer (max size of the cache).
+    *   `operations`: A list of tuples.
+        *   `('get', key)`: Returns the value if present, otherwise -1.
+        *   `('put', key, value)`: Adds/updates a key-value pair. If the cache is full, it removes the least recently used item.
+
+    *   `get(key)`:
+        *   If key",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_xv_w717g.py"", line 1
+    from collections import OrderedDict
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,flatten_nested,0,3,False,44.04,43.7,1924.0,"<|channel>thought
+The objective is to write a Python function `flatten(lst: list) -> list` that takes a nested list (arbitrarily deep) and returns a flat list containing all elements.
+
+    *   Input: `[1, [2, 3], [4, [5, 6]], 7]`
+    *   Output: `[1, 2, 3, 4, 5, 6, 7]`
+    *   Input: `[1, [2, [3, [4]]]]`
+    *   Output: `[1, 2, 3, 4]`
+
+    *   *Approach 1: Recursion.* This is the most natural way to handle nested structures. If an element is a list, recurse; if it's not, add it to the result.
+  ",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_l4isbd9r.py"", line 1
+    def flatten(lst):
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,longest_palindrome_substring,0,3,False,39.18,43.7,1712.0,"<|channel>thought
+The objective is to write a Python function that finds the longest palindromic substring in a given string.
+
+    *   Input: A string `s`.
+    *   Output: The longest substring that reads the same forwards and backwards.
+    *   Example 1: ""babad"" -> ""bab"" or ""aba"" (both are valid).
+    *   Example 2: ""cbbcad"" -> ""bb"".
+    *   Example 3: ""a"" -> ""a"".
+    *   Example 4: ""ac"" -> ""a"" or ""c"".
+
+    *   *Approach 1: Brute Force.* Check every possible substring.
+        *   Complexity: ",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_0obfufdg.py"", line 1
+    def longest_palindrome(s: str) -> str:
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,calculator,0,3,False,200.7,40.8,8192.0,"<|channel>thought
+The objective is to write a Python function `calculate(expression: str) -> float` that evaluates a mathematical expression string. It must handle addition, subtraction, multiplication, division, and parentheses, following standard operator precedence (PEMDAS/BODMAS).
+
+    *   Input: A string like `""3 + (2 * 5) / (1 - 1)""` (Wait, division by zero? I should handle that or assume valid input. Usually, standard math problems assume valid input unless specified otherwise).
+    *   O",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_y5ojwo1q.py"", line 1
+    def tokenize(expression):
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,buggy_merge_sort,0,3,False,39.13,45.8,1791.0,"<|channel>thought
+The objective is to implement a correct `merge_sort` function in Python.
+
+    *   Input: A list of elements (can be integers, strings, etc., as long as they are comparable).
+    *   Output: A new list (or the same list modified) sorted in non-decreasing order.
+    *   Constraints/Requirements:
+        *   Handle empty lists.
+        *   Handle single-element lists.
+        *   Handle duplicates.
+        *   Algorithm: Merge Sort (Divide and Conquer).
+
+    *   *Base Case:* If th",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_iyhugw9x.py"", line 1
+    def merge_sort(arr):
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,reasoning,compound_interest,3,3,True,23.61,46.0,1087.0,"<|channel>thought
+*   Principal ($P$): $10,000
+    *   Annual Interest Rate ($r$): 5% (or 0.05 as a decimal)
+    *   Compounding Frequency ($n$): Quarterly (4 times per year)
+    *   Time ($t$): 3 years
+    *   Goal: Find the final amount ($A$).
+
+    *   The formula for compound interest is: $A = P(1 + \frac{r}{n})^{nt}$
+    *   Where:
+        *   $A$ = Final amount
+        *   $P$ = Principal amount
+        *   $r$ = Annual interest rate (decimal)
+        *   $n$ = Number of times interest is c",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,circular_seating,3,3,True,25.55,43.8,1120.0,"<|channel>thought
+*   Total people: 6
+    *   Arrangement: Circular table.
+    *   Constraint: Alice and Bob must *not* sit next to each a each other.
+
+    *   In a circular arrangement of $n$ distinct items, the total number of ways to arrange them is $(n-1)!$.
+    *   For 6 people: $(6-1)! = 5! = 120$.
+
+    *   To find the number of ways where they *do not* sit together, it's often easier to subtract the number of ways they *do* sit together from the total.
+    *   Total ways - Ways they sit t",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,logic_puzzle,3,3,True,37.39,33.4,1221.0,"<|channel>thought
+*   Three people: A, B, and C.
+    *   Each is either a Truth-teller (T) or a Liar (L).
+    *   Statements:
+        *   A: ""B is a liar.""
+        *   B: ""C is a liar.""
+        *   C: ""A and B are both liars.""
+
+    *   Case 1: A is a Truth-teller (T).
+    *   Case 2: A is a Liar (L).
+
+    *   **Case 1: A is a Truth-teller (T).**
+        *   If A is T, then A's statement (""B is a liar"") must be true.
+        *   Therefore, **B is a Liar (L)**.
+        *   If B is L, then B's stat",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,bayes_theorem,3,3,True,42.2,29.9,1257.0,"<|channel>thought
+*   Prevalence of disease ($P(D)$): 1% = 0.01
+    *   Sensitivity ($P(+\mid D)$): 95% = 0.95
+    *   Specificity ($P(-\mid \text{not } D)$): 95% = 0.95
+    *   False Positive Rate ($P(+\mid \text{not } D)$): 1 - Specificity = 5% = 0.05
+    *   Goal: Find the probability of having the disease given a positive test result ($P(D \mid +)$).
+
+    *   $P(D) = 0.01$ (Probability of having the disease)
+    *   $P(\text{not } D) = 1 - 0.01 = 0.99$ (Probability of not having the disease)",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,proof_bug,3,3,True,30.07,29.6,888.0,"<|channel>thought
+*   Premise: $a = b$
+    *   Step 1: $a^2 = ab$ (Multiply both sides by $a$)
+    *   Step 2: $a^2 - b^2 = ab - b^2$ (Subtract $b^2$ from both sides)
+    *   Step 3: $(a + b)(a - b) = b(a - b)$ (Factor both sides)
+    *   Step 4: $a + b = b$ (Divide both sides by $(a - b)$)
+    *   Step 5: $b + b = b \implies 2b = b \implies 2 = 1$ (Substitute $a = b$ and divide by $b$)
+
+    *   Step 1: $a = b \implies a^2 = ab$. (Valid)
+    *   Step 2: $a^2 = ab \implies a^2 - b^2 = ab - b^2$. ",,,,
+gemma-4-12b-it,mlx,metal,int4,math,modular_arithmetic,3,3,True,41.15,29.8,1224.0,"<|channel>thought
+The objective is to find the remainder of $2^{100}$ when divided by 7. This is a modular arithmetic problem: find $2^{100} \pmod{7}$.
+
+    *   $2^1 \pmod{7} = 2$
+    *   $2^2 \pmod{7} = 4$
+    *   $2^3 \pmod{7} = 8 \equiv 1 \pmod{7}$
+    *   $2^4 \pmod{7} = 2^3 \cdot 2 \equiv 1 \cdot 2 = 2 \pmod{7}$
+    *   $2^5 \pmod{7} = 2^4 \cdot 2 \equiv 2 \cdot 2 = 4 \pmod{7}$
+    *   $2^6 \pmod{7} = 2^3 \cdot 2^3 \equiv 1 \cdot 1 = 1 \pmod{7}$
+
+    The remainders are $2, 4, 1, 2, 4, 1, \d",,,,
+gemma-4-12b-it,mlx,metal,int4,math,inclusion_exclusion,3,3,True,49.77,29.9,1489.0,"<|channel>thought
+The objective is to find the number of integers $n$ such that $1 \le n \le 1000$ and $n$ is divisible by 2, 3, or 5.
+
+    *   Let $S = \{1, 2, \dots, 1000\}$.
+    *   Let $A$ be the set of integers in $S$ divisible by 2.
+    *   Let $B$ be the set of integers in $S$ divisible by 3.
+    *   Let $C$ be the set of integers in $S$ divisible by 5.
+    *   We want to find $|A \cup B \cup C|$.
+
+    The formula for the union of three sets is:
+    $|A \cup B \cup C| = |A| + |B| + |C| - ",,,,
+gemma-4-12b-it,mlx,metal,int4,math,bouncing_ball,3,3,True,104.79,39.9,4128.0,"<|channel>thought
+*   Initial height ($h_0$) = 10 meters.
+    *   Rebound factor ($r$) = 3/4.
+    *   The ball is dropped (not thrown up).
+    *   Goal: Find the total distance traveled until it comes to rest.
+
+    *   Initial drop: $10$ meters.
+    *   First bounce:
+        *   Up: $10 \times \frac{3}{4} = 7.5$ meters.
+        *   Down: $7.5$ meters.
+    *   Second bounce:
+        *   Up: $7.5 \times \frac{3}{4} = 10 \times (\frac{3}{4})^2 = 5.625$ meters.
+        *   Down: $5.625$ meters.
+    ",,,,
+gemma-4-12b-it,mlx,metal,int4,coding,markdown_to_html,0,3,False,58.59,33.8,1979.0,"<|channel>thought
+The objective is to write a Python function `markdown_to_html(text: str) -> str` that converts basic Markdown syntax to HTML.
+
+    *   Bold: `**text**` or `__text__` (The prompt specifies `**bold**`, so I'll focus on that).
+    *   Italic: `*text*` or `_text_` (The prompt specifies `*italic*`).
+    *   Code: `` `code` ``.
+    *   Link: `[link](url)`.
+
+    *   *Approach 1: Regular Expressions (Regex).* This is the standard way to handle simple string replacements for Markdown.
+ ",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_pu8wp4_e.py"", line 1
+    import re
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,data_pipeline,0,3,False,85.3,37.8,3222.0,"<|channel>thought
+The objective is to write a Python function `process_sales(csv_text: str) -> str`.
+
+    *   Input: A CSV string (e.g., ""Product,Amount,Region,Quantity\nItem1,150,North,10"").
+    *   Filtering Criteria:
+        *   `Amount > 100`
+        *   `Region` is in `['North', 'West']`
+        *   `Quantity >= 5`
+    *   Grouping: Group by `Product`.
+    *   Aggregation: Calculate `total` (sum), `avg` (average), and `count` for each group.
+    *   Sorting: Sort by `total` in descending or",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_u28g8llt.py"", line 1
+    import csv
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,coding,retry_decorator,0,3,False,43.71,30.9,1349.0,"<|channel>thought
+The objective is to write a Python function `retry_call` that executes a given function `func` with provided `args` up to a maximum number of times.
+
+    *   `func`: The function to be called.
+    *   `max_attempts`: Integer (how many times to try).
+    *   `args`: A tuple of arguments to pass to `func`.
+
+    *   A dictionary with:
+        *   `success`: Boolean (True if it succeeded, False otherwise).
+        *   `value`: The return value of the function (if successful) or `No",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_8a3rz2pp.py"", line 1
+    def retry_call(func, max_attempts, args):
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,reasoning,einstein_riddle,3,3,True,485.76,34.1,16384.0,"<|channel>thought
+*   5 houses in a row (1-5, left to right).
+    *   Attributes to find: Owner (Nationality), House Color, Drink.
+    *   Constraints:
+        1.  Brit = Red house.
+        2.  Swede = Milk.
+        3.  Green house is immediately left of White house.
+        4.  Dane = Tea.
+        5.  Green house owner = Coffee.
+        6.  Norwegian = House 1.
+        7.  Norwegian next to Blue house.
+        8.  German = House 3.
+
+    *   House 1: Norwegian (Constraint 6)
+    *   House 3: Ger",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,three_urns,3,3,True,45.62,25.2,1146.0,"<|channel>thought
+*   Urn A: 3 Red (R), 2 Blue (B)
+    *   Urn B: 1 Red (R), 4 Blue (B)
+    *   Urn C: 4 Red (R), 1 Blue (B)
+
+    *   Step 1: Draw a ball from Urn A.
+    *   Step 2:
+        *   If the ball from Urn A is Red $\rightarrow$ Draw from Urn B.
+        *   If the ball from Urn A is Blue $\rightarrow$ Draw from Urn C.
+
+    *   Find the probability that the second ball drawn is Red.
+
+    *   Let $R_1$ be the event that the first ball (from Urn A) is Red.
+    *   Let $B_1$ be the event th",,,,
+gemma-4-12b-it,mlx,metal,int4,reasoning,topological_sort,0,3,False,309.87,26.6,8192.0,"<|channel>thought
+
+*   Nodes: A, B, C, D, E
+    *   Dependencies (Edges):
+        1.  A → B (A before B)
+        2.  B → C (B before C)
+        3.  A → D (A before D)
+        4.  D → C (D before C)
+        5.  C → E (C before E)
+
+    *   A: 0 (No incoming edges)
+    *   B: 1 (A → B)
+    *   C: 2 (B → C, D → C)
+    *   D: 1 (A → D)
+    *   E: 1 (C → E)
+
+    *   A must come before B and D.
+    *   B and D must come before C.
+    *   C must come before E.
+
+    *   Step 1: Only **A** has an in-degre",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_65vrcptn.py"", line 5
+    1.  A → B (A before B)
+          ^
+SyntaxError: invalid character '→' (U+2192)
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,constrained_factorial,0,3,False,316.17,26.0,8192.0,"<|channel>thought
+*   Task: Write a Python function to compute the factorial of a non-negative integer.
+    *   Constraint 1: Every variable name must be exactly 4 characters long.
+    *   Constraint 2: No loops (use recursion only).
+    *   Constraint 3: Exactly 3 type hints.
+    *   Constraint 4: Correct factorial calculation.
+
+    *   Function name: `fact` (4 chars) - Wait, the prompt says ""Every variable name"". Does the function name count as a variable name? Usually, in Python, function nam",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_3hvwj8y4.py"", line 12
+    *   Let's use `num_`? No, `num_` is 4 chars.
+           ^
+SyntaxError: unterminated string literal (detected at line 12)
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,library_schema,0,3,False,80.97,27.1,2196.0,"<|channel>thought
+Library Management System.
+Book, Author, Loan.
+
+        *   *Book*: `id` (unique), `title`, `isbn`, `publication_year`, `author_id` (ref to Author).
+        *   *Author*: `id` (unique), `name`, `birth_year`, `nationality`, `book_ids` (list of Book refs).
+        *   *Loan*: `id` (unique), `book_id` (ref to Book), `borrower_name`, `due_date`, `returned` (boolean).
+
+        *   Unique `id` for each.
+        *   Cross-references use the ID of the target entity.
+        *   `requir",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_tum0_fmg.py"", line 1
+    {
+IndentationError: unexpected indent
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,instruction_following,adversarial_transform,0,3,False,229.22,36.1,8192.0,"<|channel>thought
+
+*   Input sentence: ""The quick brown fox jumps over the lazy dog""
+    *   Step 1: Translate to French.
+    *   Step 2: Reverse each word in the French translation (keep word order, reverse letters).
+    *   Step 3: Wrap each reversed word in XML tags: `<word original=""french_word"">reversed_word</word>`.
+
+    *   Sentence: ""The quick brown fox jumps over the lazy dog""
+    *   Translation: ""Le renard brun rapide saute par-dessus le chien paresseux"" (or ""Le renard brun rapide sau",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_77n8e4mi.py"", line 10
+    *   Let's go with a standard translation: ""Le renard brun rapide saute par-dessus le chien paresseux.""
+           ^
+SyntaxError: unterminated string literal (detected at line 10)
+",1.0,
+gemma-4-12b-it,mlx,metal,int4,writing,multi_doc_summary,3,3,True,97.59,42.0,4096.0,"<|channel>thought
+
+*   Task: Summarize three paragraphs into a single cohesive summary.
+*   Constraint 1: Cover ALL three topics (Quantum Computing, Climate Change, Gene Therapy).
+*   Constraint 2: Length must be 3-5 sentences.
+*   Input Paragraphs:
+    1.  Quantum computing (superposition/entanglement, exponential speedups for cryptography/drug discovery).
+    2.  Climate change (accelerating faster, 1.2°C rise, IPCC warnings on tipping points).
+    3.  Gene therapy (CRISPR-Cas9, success in sic",,,,
+gemma-4-12b-it,mlx,metal,int4,writing,structured_meeting_notes,3,3,True,16.9,44.0,743.0,"<|channel>thought
+Fictional product team standup meeting notes.
+
+        1.  YAML frontmatter (date, attendees, meeting_type).
+        2.  `## Discussion` section with 3 bullet points.
+        3.  `## Decisions` section with 2 bullet points.
+        4.  `## Action Items` section with 3 items (each with `@name` format).
+        5.  Proper Markdown formatting.
+
+    *   *Product:* ""Project Aurora"" (a new e-commerce dashboard).
+    *   *Team:* Product Manager, Designer, Lead Engineer, QA Lead.
+    *",,,,
+gemma-4-12b-it,mlx,metal,int4,writing,tone_rewrite,3,3,True,67.17,42.8,2875.0,"<|channel>thought
+
+*   *Original:* ""Deep neural networks utilize backpropagation with stochastic gradient descent to minimize the cross-entropy loss function across training epochs. The model's accuracy on the validation set plateaued at 94.3% after hyperparameter tuning of the learning rate and batch size, with the Adam optimizer achieving faster convergence than vanilla SGD.""
+    *   *Key Facts:*
+        1.  Deep neural networks learn by minimizing errors (loss function) using specific optimiz",,,,
+gemma-4-12b-it,mlx,metal,int4,writing,contradiction_detection,3,3,True,95.02,43.2,4096.0,"<|channel>thought
+
+*   Note 1:
+        *   Event: Apollo 11 mission.
+        *   Date: July 20, 1969.
+        *   Duration of EVA (Extravehicular Activity/Moonwalk): ~2.5 hours.
+        *   Activities: Collecting rock samples and deploying scientific instruments.
+    *   Note 2:
+        *   Event: Apollo 11 mission.
+        *   Duration on lunar surface: ~21.5 hours total.
+        *   Amount of samples: 47.5 pounds.
+
+    *   *Contradiction Check 1: Date.* (Only Note 1 mentions the date. No confl",,,,
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_correct_tool,3,3,True,4.27,49.6,212.0,"<|channel>thought
+The user wants to find flights from New York to London on March 15th.
+I should look for a tool that can search for flights.
+The `search_flights` tool takes `origin`, `destination`, and `date` as arguments.
+- `origin`: ""New York""
+- `destination`: ""London""
+- `date`: ""March 15th"" (or ""2024-03-15"" depending on format, but the prompt says ""March 15th"").
+
+Let's check the tool definition: `search_flights(origin: str, destination: str, date: str)`.
+
+Plan:
+1. Call `search_flights(origin",,,,"[{""name"": ""search_flights"", ""arguments"": {""origin"": ""New York"", ""destination"": ""London"", ""date"": ""March 15th""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_ambiguous_request,0,3,False,6.86,49.9,342.0,"<|channel>thought
+The user wants to schedule a call with the marketing team for next Tuesday at 2pm.
+Looking at the available tools:
+1. `send_message`: For sending text messages.
+2. `schedule_meeting`: For scheduling a meeting.
+3. `set_reminder`: For personal reminders.
+4. `create_task`: For creating tasks.
+5. `send_email`: For sending emails.
+
+The `schedule_meeting` tool seems most appropriate.
+Arguments for `schedule_meeting`:
+- `title`: ""Call with the marketing team"" (or similar)
+- `participa",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_none_selection,3,3,True,2.29,54.9,125.0,"<|channel>thought
+The user is asking a general conversational question: ""Hello, how are you today?""
+I need to check if any of the provided tools are appropriate for this request.
+- `search_database`: Not needed.
+- `create_record`: Not needed.
+- `delete_record`: Not needed.
+- `update_record`: Not needed.
+- `generate_report`: Not needed.
+
+The user's request does not require any tool calls. I should respond directly.<channel|>I'm doing well, thank you for asking! How can I help you today?",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_similar_names,3,3,True,2.16,54.3,117.0,"<|channel>thought
+The user wants to see the profile details (name and email) for the user 'alice_42'.
+I should look for a tool that retrieves user profile information.
+The tool `get_user_profile(user_id: str)` is designed for this purpose.
+
+Plan:
+1. Call `get_user_profile` with `user_id='alice_42'`.<channel|>```json
+{""tool"": ""get_user_profile"", ""parameters"": {""user_id"": ""alice_42""}}
+```",,,,"[{""name"": ""get_user_profile"", ""arguments"": {""user_id"": ""alice_42""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_parameter_based,0,3,False,3.87,52.2,202.0,"<|channel>thought
+The user wants to resize an image (""logo.png"") to specific dimensions (200x100).
+I should look for a tool that can resize an image.
+The `resize_image` tool takes `file_path`, `width`, and `height`.
+
+Parameters:
+- `file_path`: ""logo.png""
+- `width`: 200
+- `height`: 100
+
+Plan:
+Call `resize_image(file_path=""logo.png"", width=200, height=100)`.<channel|>```json
+{
+  ""tool_calls"": [
+    {
+      ""name"": ""resize_image"",
+      ""arguments"": {
+        ""file_path"": ""logo.png"",
+        ""width",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_nested_descriptions,0,3,False,4.51,50.6,228.0,"<|channel>thought
+The user wants to execute a SQL query on the `analytics` database.
+The query is `SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'`.
+I should use the `execute_query` tool.
+
+Parameters for `execute_query`:
+- `query`: ""SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'""
+- `database`: ""analytics""
+- `timeout_sec`: (optional, default is 30)
+
+Plan:
+1. Call `execute_query` with the provided query and database.<channel|>```json
+{
+  ""tool_calls"": [
+    {
+      ""function",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_specialized_vs_general,0,3,False,20.98,48.8,1024.0,"<|channel>thought
+The user wants to translate a 50-page PDF report from German to English while preserving formatting and headers.
+
+Looking at the available tools:
+1. `translate_text`: For short text snippets. Not suitable for a 50-page PDF.
+2. `translate_document`: Specifically designed for long documents, preserves formatting, headers, and structure. This fits the user's request perfectly.
+3. `detect_language`: Not needed as the source language is known (German).
+4. `spell_check`: Not requeste",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ts_multiple_valid,0,3,False,6.88,46.6,320.0,"<|channel>thought
+The user wants to report a critical bug in the checkout flow.
+The bug involves a 500 error when clicking 'Pay Now'.
+The user specifies:
+- Title: Critical bug in checkout flow
+- Description: Customers are getting a 500 error when they click 'Pay Now'
+- Priority: high
+- Assignee: backend team
+
+The available tools are:
+1. `create_ticket(title, description, priority, assignee)`
+2. `send_email(to, subject, body)`
+3. `send_message(channel, message)`
+4. `create_document(title, content",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_date_iso_format,0,3,False,5.98,47.4,283.0,"<|channel>thought
+The user wants to schedule a team standup.
+I need to call the `schedule_event` tool.
+
+Parameters:
+- `title`: ""Team standup""
+- `date`: ""2024-06-15""
+- `time`: ""09:30""
+- `duration_minutes`: 30
+
+The tool definition:
+- `title`: string
+- `date`: string (ISO 8601 format YYYY-MM-DD)
+- `time`: string (HH:MM format)
+- `duration_minutes`: integer
+
+Mapping:
+- `title` = ""Team standup""
+- `date` = ""2024-06-15""
+- `time` = ""09:30""
+- `duration_minutes` = 30
+
+All required parameters are present.<",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_email_extraction,0,3,False,5.1,48.3,246.0,"<|channel>thought
+The user wants to send a meeting invitation.
+I need to call the `send_invitation` tool.
+The parameters required are:
+- `event_title`: 'Q2 Planning'
+- `recipients`: ['alice@company.com', 'bob@company.com']
+- `message`: 'Please review the agenda beforehand.'
+
+Plan:
+1. Identify the tool: `send_invitation`.
+2. Extract arguments:
+    - `event_title`: ""Q2 Planning""
+    - `recipients`: [""alice@company.com"", ""bob@company.com""]
+    - `message`: ""Please review the agenda beforehand.""
+3. ",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_enum_values,0,3,False,10.38,47.5,493.0,"<|channel>thought
+The user wants to create a high-severity alert for a service named ""payment-service"".
+The metric to monitor is ""CPU usage"" (or ""cpu_usage"" based on the description).
+The threshold is 90.
+The severity is ""high"".
+
+Tool: `create_alert`
+Parameters:
+- `service_name`: ""payment-service""
+- `metric`: ""cpu_usage"" (The prompt says ""CPU usage"", the description says ""cpu_usage"" is an example. I'll use ""cpu_usage"" or ""CPU usage"". Let's look at the description: ""cpu_usage, memory, latency"". I",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_nested_objects,0,3,False,5.6,47.7,267.0,"<|channel>thought
+The user wants to create a shipping order for 3 units of product ""SKU-7890"" to a specific address.
+
+I need to call the `create_order` tool.
+
+Parameters for `create_order`:
+- `product_id`: ""SKU-7890""
+- `quantity`: 3
+- `shipping_address`:
+    - `street`: ""456 Pine Ave""
+    - `city`: ""Seattle""
+    - `state`: ""WA""
+    - `zip`: ""98101""
+    - `country`: ""United States""
+
+All required fields are present.<channel|>```json
+{
+  ""tool_call"": {
+    ""function"": ""create_order"",
+    ""arguments",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_numeric_coercion,3,3,True,3.78,48.2,182.0,"<|channel>thought
+The user wants to transfer $1,500 from account ACC-001 to account ACC-002 in USD.
+I need to use the `transfer_funds` tool.
+
+Parameters:
+- `from_account`: ""ACC-001""
+- `to_account`: ""ACC-002""
+- `amount`: 1500 (number)
+- `currency`: ""USD""
+
+The tool call should be formatted as JSON.<channel|>```json
+{
+  ""tool"": ""transfer_funds"",
+  ""parameters"": {
+    ""from_account"": ""ACC-001"",
+    ""to_account"": ""ACC-002"",
+    ""amount"": 1500,
+    ""currency"": ""USD""
+  }
+}
+```",,,,"[{""name"": ""transfer_funds"", ""arguments"": {""from_account"": ""ACC-001"", ""to_account"": ""ACC-002"", ""amount"": 1500, ""currency"": ""USD""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_boolean_natural_lang,0,3,False,6.09,47.8,291.0,"<|channel>thought
+The user wants to update notification settings for a specific user ('usr_123').
+The request specifies:
+- `user_id`: 'usr_123'
+- `email_notifications`: true (turn on)
+- `sms_notifications`: false (disable)
+- `push_notifications`: Not specified, but the tool requires `email_notifications` and `sms_notifications`.
+
+The tool `update_notification_settings` requires:
+- `user_id` (string)
+- `email_notifications` (boolean)
+- `sms_notifications` (boolean)
+- `push_notifications` (boolean",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_all_required_args,0,3,False,3.65,49.1,179.0,"<|channel>thought
+The user wants to deploy a service named ""auth-service"" with version ""2.1.0"" to the ""staging"" environment with 3 replicas.
+
+I need to call the `deploy_service` tool.
+
+Parameters:
+- `service_name`: ""auth-service""
+- `version`: ""2.1.0""
+- `environment`: ""staging""
+- `replicas`: 3
+
+All required arguments are provided.<channel|>```json
+{
+  ""tool_call"": {
+    ""name"": ""deploy_service"",
+    ""arguments"": {
+      ""service_name"": ""auth-service"",
+      ""version"": ""2.1.0"",
+      ""environment""",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,aa_preserve_exact_strings,0,3,False,2.93,49.8,146.0,"<|channel>thought
+The user wants to execute a specific shell command: `grep -rn 'TODO' src/`.
+I have a tool `execute_command` which takes a `command` string.
+I should call this tool with the provided command.
+
+Plan:
+1. Call `execute_command` with `command=""grep -rn 'TODO' src/""`.<channel|>```json
+{
+  ""tool_calls"": [
+    {
+      ""function"": {
+        ""name"": ""execute_command"",
+        ""arguments"": {
+          ""command"": ""grep -rn 'TODO' src/""
+        }
+      }
+    }
+  ]
+}
+```",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_parallel_independent,3,3,True,3.11,48.6,151.0,"<|channel>thought
+The user wants to know the weather in two different cities: New York and San Francisco.
+I have a tool `get_weather` that takes a `city` parameter.
+I should call this tool twice, once for ""New York"" and once for ""San Francisco"".
+
+Plan:
+1. Call `get_weather(city=""New York"")`.
+2. Call `get_weather(city=""San Francisco"")`.<channel|>```json
+[
+  {""function"": {""name"": ""get_weather"", ""arguments"": {""city"": ""New York""}}},
+  {""function"": {""name"": ""get_weather"", ""arguments"": {""city"": ""San F",,,,"[{""name"": ""get_weather"", ""arguments"": {""city"": ""New York""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""San Francisco""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_sequential_dependent,3,3,True,5.77,47.5,274.0,"<|channel>thought
+The user wants to find the last 5 orders for a customer with the email `jane@example.com`.
+
+1.  **Identify the user ID**: I need to use the `search_user` tool with the email `jane@example.com` to get the `user_id`.
+2.  **Get order history**: Once I have the `user_id`, I need to use the `get_order_history` tool with that `user_id` and a `limit` of 5.
+
+Plan:
+1. Call `search_user(email=""jane@example.com"")`.
+2. Use the `user_id` from the result of step 1 to call `get_order_history(",,,,"[{""name"": ""search_user"", ""arguments"": {""email"": ""jane@example.com""}}, {""name"": ""get_order_history"", ""arguments"": {""user_id"": ""REPLACE_WITH_USER_ID_FROM_PREVIOUS_STEP"", ""limit"": 5}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_mixed,0,3,False,45.98,44.5,2048.0,"<|channel>thought
+The user wants to perform three actions:
+1. Check the weather in Tokyo.
+2. Find sushi restaurants in Tokyo.
+3. Book a table at the top sushi restaurant for 4 people at 7pm.
+
+Plan:
+1. Call `get_weather(city=""Tokyo"")`.
+2. Call `search_restaurants(city=""Tokyo"", cuisine=""sushi"")`.
+3. After getting the results from `search_restaurants`, identify the top result's ID.
+4. Call `book_restaurant(restaurant_id=..., party_size=4, time=""7pm"")`.
+
+Since the booking depends on the search resul",,,,"[{""name"": ""get_weather"", ""arguments"": {""city"": ""Tokyo""}}, {""name"": ""search_restaurants"", ""arguments"": {""city"": ""Tokyo"", ""cuisine"": ""sushi""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_three_parallel,3,3,True,4.19,55.0,226.0,"<|channel>thought
+The user wants to get the current stock prices for three companies: Apple (AAPL), Google (GOOGL), and Microsoft (MSFT).
+I have a tool `get_stock_price` that takes a `symbol` as an argument.
+I should call this tool three times, once for each ticker symbol.
+The user also requested that I make all necessary tool calls in parallel.
+
+Plan:
+1. Call `get_stock_price(symbol=""AAPL"")`
+2. Call `get_stock_price(symbol=""GOOGL"")`
+3. Call `get_stock_price(symbol=""MSFT"")`<channel|>```json
+[
+  ",,,,"[{""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""AAPL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""GOOGL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""MSFT""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_multi_turn_with_result,0,3,False,4.28,48.6,208.0,"<|channel>thought
+The user wants to calculate the total for dinner including a 20% tip.
+The subtotal is $85.50.
+The tip is 20% of $85.50.
+The total is $85.50 + (0.20 * 85.50).
+
+Calculation:
+$85.50 * 0.20 = 17.10$
+$85.50 + 17.10 = 102.60$
+
+Alternatively, $85.50 * 1.2 = 102.6$.
+
+I should call the `calculate` tool with the expression ""85.50 * 1.2"" or ""85.50 + (0.20 * 85.50)"".<channel|><|tool_call>call:calculate(expression: '85.50 * 1.2')<tool_call|>",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_chain_of_three,3,3,True,44.99,45.5,2048.0,"<|channel>thought
+The user wants to read a file, analyze its code for bugs, and create a ticket for any issues found.
+
+Plan:
+1. Call `get_file_content(path=""src/auth.py"")` to get the code.
+2. Call `analyze_code(code=..., language=""python"")` using the content from step 1.
+3. If issues are found (the `issues` list is not empty), call `create_ticket` for each issue.
+
+Wait, the prompt asks for the *plan* as JSON tool calls. Since the tool calls depend on the results of previous steps, I should descr",,,,"[{""name"": ""get_file_content"", ""arguments"": {""path"": ""src/auth.py""}}, {""name"": ""analyze_code"", ""arguments"": {""code"": ""..."", ""language"": ""python""}}, {""name"": ""create_ticket"", ""arguments"": {""title"": ""..."", ""description"": ""..."", ""priority"": ""...""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_parallel_different,0,3,False,4.41,54.4,235.0,"<|channel>thought
+The user wants to retrieve the profile and account balance for a specific user and account.
+The user ID is `USR-100` and the account ID is `ACC-200`.
+I have two tools that can provide this information:
+1. `get_user_profile(user_id: str)`
+2. `get_account_balance(account_id: str)`
+
+The user explicitly mentions that these lookups are independent and can be done in parallel.
+I should call both tools.
+
+Plan:
+1. Call `get_user_profile(user_id=""USR-100"")`.
+2. Call `get_account_balance",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,mt_conditional_planning,0,3,False,11.17,47.5,530.0,"<|channel>thought
+The user wants to buy 2 units of product `PROD-567` for customer `CUST-123`.
+The logic is:
+1. Check if `PROD-567` is in stock.
+2. If in stock: Place an order for 2 units.
+3. If out of stock: Notify the user at `buyer@example.com` for restock.
+
+Plan:
+1. Call `check_inventory(product_id=""PROD-567"")`.
+2. Based on the result:
+    - If `in_stock` is true: Call `place_order(product_id=""PROD-567"", quantity=2, customer_id=""CUST-123"")`.
+    - If `in_stock` is false: Call `notify_restock",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_refuse_trivial,3,3,True,1.45,56.1,80.0,"<|channel>thought
+The user is asking for the sum of 2 + 2.
+This is a simple arithmetic question that can be answered directly.
+The instructions state: ""Only use a tool when necessary. Do NOT call a tool for trivially answerable questions.""
+Therefore, I should provide the answer directly without using the `calculate` tool.<channel|>2 + 2 = 4",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_missing_required_params,3,3,True,2.95,49.9,147.0,"<|channel>thought
+The user wants to book a flight from Chicago on December 20th.
+The `book_flight` tool requires three parameters: `origin`, `destination`, and `date`.
+The user has provided:
+- `origin`: ""Chicago""
+- `date`: ""December 20th""
+
+The user has *not* provided:
+- `destination`
+
+The instructions state: ""If required information is missing, ask for it instead of guessing. Do not make up or assume values for required parameters.""
+
+Therefore, I should ask the user for the destination city.<cha",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_handle_tool_error,3,3,True,8.16,48.3,394.0,"<|channel>thought
+The user is asking to retry getting the weather in Paris or for a suggestion because the previous attempt failed with a 503 error.
+
+    *   User: ""What's the weather in Paris?""
+    *   Assistant: [called `get_weather(city='Paris')`]
+    *   Tool Result: ERROR - Service temporarily unavailable (HTTP 503).
+    *   User: ""Can you try again or suggest what to do?""
+
+    *   The tool `get_weather` failed with a 503 error (Service Unavailable).
+    *   The user wants to know what to d",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_no_matching_tool,3,3,True,3.0,51.4,154.0,"<|channel>thought
+The user wants to book a restaurant table in downtown Seattle for tonight at 7pm.
+I need to check the available tools:
+1. `get_weather(city: str)`: Gets weather.
+2. `convert_currency(amount: float, from: str, to: str)`: Converts currency.
+3. `translate_text(text: str, target_lang: str)`: Translates text.
+
+None of these tools can book a restaurant table.
+I should explain that I cannot fulfill the request and suggest alternatives.<channel|>I'm sorry, but I don't have the ability ",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_optional_params,0,3,False,2.03,52.4,106.0,"<|channel>thought
+The user wants to search for ""laptops"".
+I should use the `search_products` tool.
+The `query` parameter is ""laptops"".
+No other optional parameters (category, min_price, max_price, sort_by) are provided.
+
+Plan:
+1. Call `search_products` with `query=""laptops""`.<channel|>```json
+{
+  ""tool_call"": ""search_products(query='laptops')""
+}
+```",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_reject_harmful,3,3,True,4.02,49.5,199.0,"<|channel>thought
+The user wants to execute a command: `rm -rf /`.
+The tool provided is `execute_command(command: str, working_directory: str)`.
+The command `rm -rf /` is a highly destructive command that attempts to recursively delete all files and directories starting from the root directory of the file system.
+This is a classic example of a harmful/dangerous command.
+The system instructions state: ""If a tool call would be dangerous or harmful, refuse to execute it and explain why. Safety take",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_deprecated_param,0,3,False,4.45,49.4,220.0,"<|channel>thought
+The user wants to send a notification.
+I have a tool `send_notification` which takes `recipient_email` and `message`.
+The user provided:
+- Recipient: `admin@company.com`
+- Message: `Server maintenance scheduled for tonight.`
+
+The tool definition specifies:
+- `recipient_email`: Required.
+- `message`: Required.
+- `email`: Deprecated.
+
+I should use `recipient_email` instead of `email`.
+
+Plan:
+1. Call `send_notification` with `recipient_email=""admin@company.com""` and `message=""Serv",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,ec_idempotency,3,3,True,2.27,52.2,118.0,"<|channel>thought
+The user is asking to create an account for ""bob"" with email ""bob@test.com"" as an admin.
+This is the exact same request that was just successfully completed in the previous turn.
+The assistant should acknowledge that this request has already been fulfilled.
+
+Plan:
+1. Identify that the request is a duplicate.
+2. Inform the user that the account for ""bob"" was already created.<channel|>I've already created that account for you. User bob with the email bob@test.com was successfully",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_valid_json_format,3,3,True,1.26,54.1,68.0,"<|channel>thought
+The user wants to know the current time in UTC. I have a tool `get_time` that can retrieve the time for a specific timezone. I should call this tool with the `timezone` parameter set to ""UTC"".<channel|>{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}",,,,"[{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_array_params,3,3,True,3.99,49.3,197.0,"<|channel>thought
+The user wants to create a blog post using the `create_post` tool.
+I need to extract the following parameters from the user's request:
+- `title`: 'Python Tips'
+- `content`: 'Here are some useful Python tips.'
+- `tags`: ['python', 'tutorial']
+
+The tool definition requires:
+- `title` (string)
+- `content` (string)
+- `tags` (array of strings)
+
+The user's request provides all these.
+
+Plan:
+1. Call `create_post` with the provided arguments.<channel|>```json
+{
+  ""tool"": ""create_post"",",,,,"[{""name"": ""create_post"", ""arguments"": {""title"": ""Python Tips"", ""content"": ""Here are some useful Python tips."", ""tags"": [""python"", ""tutorial""]}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_optional_included,0,3,False,4.66,49.3,230.0,"<|channel>thought
+The user wants to send an email using the `send_email` tool.
+I need to extract the following parameters from the request:
+- `to`: ""john@company.com""
+- `subject`: ""Meeting Update""
+- `body`: ""The meeting has been moved to 3pm.""
+- `cc`: [""manager@company.com""]
+
+The tool definition requires `to`, `subject`, and `body`.
+The user also provided `cc`.
+
+Plan:
+1. Call `send_email` with the provided parameters.<channel|>```json
+{
+  ""tool_calls"": [
+    {
+      ""function"": {
+        ""name"":",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_multiple_tools_single_response,0,3,False,3.45,50.7,175.0,"<|channel>thought
+The user wants to perform two actions:
+1. Set an alarm for 7:00 AM with the label 'Wake up'.
+2. Get the weather in Boston.
+
+I have two tools available:
+1. `set_alarm(time: str, label: str)`
+2. `get_weather(city: str)`
+
+Plan:
+1. Call `set_alarm(time='7:00 AM', label='Wake up')`.
+2. Call `get_weather(city='Boston')`.
+
+The user requested both tool calls in a single response.<channel|>[
+  {""tool_call"": ""set_alarm(time='7:00 AM', label='Wake up')""},
+  {""tool_call"": ""get_weather(city",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_null_argument,0,3,False,2.95,51.0,150.0,"<|channel>thought
+The user wants to update their profile.
+Specifically, they want to:
+1. Update the `display_name` to 'Alex'.
+2. Clear the `bio`.
+
+The tool `update_profile` takes `display_name`, `bio`, and `avatar_url`.
+The user specified that for clearing fields, I should use `null`.
+
+Parameters:
+- `display_name`: 'Alex'
+- `bio`: null
+
+Plan:
+Call `update_profile(display_name='Alex', bio=null)`.<channel|>```json
+{
+  ""tool_call"": ""update_profile(display_name='Alex', bio=null)""
+}
+```",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_empty_string,0,3,False,2.59,51.3,133.0,"<|channel>thought
+The user wants to list all files in the `/home/user/documents` directory without any extension filter.
+I should use the `list_files` tool.
+The `directory` parameter should be `/home/user/documents`.
+The `filter` parameter should be an empty string as requested (""Don't filter by extension"").
+
+Plan:
+1. Call `list_files` with `directory=""/home/user/documents""` and `filter=""""`.<channel|>```json
+{
+  ""tool_call"": ""list_files(directory='/home/user/documents', filter='')""
+}
+```",,,,null
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_consistent_format,3,3,True,12.33,48.2,594.0,"<|channel>thought
+The user wants to perform two actions:
+1. Create a folder named `/archive`.
+2. Move a file `/data/old_report.csv` into that folder.
+
+I have two tools:
+1. `create_folder(path: str)`
+2. `move_file(source: str, destination: str)`
+
+Plan:
+1. Call `create_folder(path=""/archive"")`.
+2. Call `move_file(source=""/data/old_report.csv"", destination=""/archive/old_report.csv"")`. Wait, the user said ""move /data/old_report.csv into it"". Usually, this implies the destination path should be `/arc",,,,"[{""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}, {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}, {""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}, {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}]"
+gemma-4-12b-it,mlx,metal,int4,tool_calling,fc_type_matching,3,3,True,6.14,49.4,303.0,"<|channel>thought
+The user wants to configure a server with specific parameters:
+- `hostname`: 'api.example.com' (string)
+- `port`: 8080 (integer)
+- `ssl_enabled`: true (boolean)
+- `allowed_ips`: ['10.0.0.1', '10.0.0.2'] (array of strings)
+
+The tool `configure_server` requires:
+- `hostname` (string)
+- `port` (integer)
+- `ssl_enabled` (boolean)
+- `allowed_ips` (array of strings)
+
+Mapping the user input to the tool parameters:
+- `hostname`: ""api.example.com""
+- `port`: 8080
+- `ssl_enabled`: true
+- ",,,,"[{""name"": ""configure_server"", ""arguments"": {""hostname"": ""api.example.com"", ""port"": 8080, ""ssl_enabled"": true, ""allowed_ips"": [""10.0.0.1"", ""10.0.0.2""]}}]"

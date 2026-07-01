@@ -1,52 +1,17 @@
-from typing import Dict, List, Type, Union
+from typing import Dict, List, Union
 
-from mtb.layer_benchmarks.base_layer_benchmark import BaseLayerBenchmark
 from mtb.llm_benchmarks.models.base import ModelSpec
 from mtb.system.memory import estimate_model_size, get_available_ram_gib
 
 
-def benchmark_name_to_benchmark_class(
-    benchmark_name: str,
-) -> Type:
-    """Get a benchmark class from a vague string identifier.
-
-    Args:
-        benchmark_name: String identifier for a benchmark.
-
-    """
-    original_benchmark_name = benchmark_name
-    benchmark_name = benchmark_name.lower().replace("_", "")
-
-    from mtb.layer_benchmarks import LAYER_BENCHMARKS as layer_benchmarks
-    from mtb.llm_benchmarks import MODEL_SPECS as model_specs
-
-    name_to_benchmark_class = dict()
-    for layer_benchmark in layer_benchmarks:
-        name = layer_benchmark.__name__.replace("Benchmark", "")
-        name_to_benchmark_class[name.lower()] = layer_benchmark
-    for model_spec in model_specs:
-        name = model_spec.name
-        name_to_benchmark_class[name.lower()] = model_spec
-
-    try:
-        benchmark_class = name_to_benchmark_class[benchmark_name]
-    except KeyError:
-        raise ValueError(
-            f"Could not find benchmark class for name '{original_benchmark_name}', "
-            f"must be one of {list(name_to_benchmark_class.keys())}."
-        )
-
-    return benchmark_class
-
-
 def filter_benchmarks(
-    benchmarks: List[BaseLayerBenchmark],
+    benchmarks: List,
     run_only_benchmarks: Union[str, List[str]],
-) -> List[BaseLayerBenchmark]:
+) -> List:
     """Filter given benchmarks, return only the ones meeting the criterion.
 
     Args:
-        benchmarks: List of benchmarks to filter.
+        benchmarks: List of benchmarks (ModelSpecs) to filter.
         run_only_benchmarks: List of benchmark names to include.
 
     """
@@ -127,7 +92,6 @@ def filter_llm_benchmarks(
         print_or_not(f"  Model {model_spec.name}:")
 
         for dtype in dtypes:
-            # Skip memory check for API models (num_params=0 or unknown dtype)
             if model_spec.num_params > 0 and dtype in (
                 "float32", "bfloat16", "float16", "int8", "int6", "int4", "int3",
             ):
@@ -139,7 +103,6 @@ def filter_llm_benchmarks(
                 memory_needed_gib = 0
 
             if memory_needed_gib > available_memory:
-                # model too large to load (probably)
                 print_or_not(
                     f"    skipping {dtype:>10}: "
                     f"it needs {memory_needed_gib:.3f} GiB memory to load parameters, "
@@ -149,7 +112,6 @@ def filter_llm_benchmarks(
 
             for flag, framework_backend in flag_to_framework_backend:
                 if not flag:
-                    # user disabled
                     continue
 
                 framework = framework_backend["framework"]
@@ -162,11 +124,9 @@ def filter_llm_benchmarks(
                     dtype=dtype,
                 )
                 if not spec_has_model_id:
-                    # no model_id available
                     print_or_not(f"skipping, no known model id.")
                     continue
 
-                # if we made it here, we have a model_id, and the model will fit
                 benchmark_settings = dict(
                     model_spec=model_spec,
                     framework=framework,

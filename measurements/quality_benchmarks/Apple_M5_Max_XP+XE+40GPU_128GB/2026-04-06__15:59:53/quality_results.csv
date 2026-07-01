@@ -1,0 +1,279 @@
+model,framework,backend,dtype,category,problem,pass_count,num_runs,passed,avg_generation_time_sec,avg_generation_tps,avg_tokens_generated,sample_response,execution_stdout,execution_stderr,execution_exit_code,parsed_tool_calls
+claude-opus-4-6,anthropic,api,api,coding,fizzbuzz,1,1,True,6.02,56.3,339.0,"```python
+def fizzbuzz(n: int) -> str:
+    if n % 3 == 0 and n % 5 == 0:
+        return ""FizzBuzz""
+    elif n % 3 == 0:
+        return ""Fizz""
+    elif n % 5 == 0:
+        return ""Buzz""
+    else:
+        return str(n)
+```
+
+**How it works:**
+
+1. **Check divisibility by both 3 and 5 first** — this must come before the individual checks, otherwise `""Fizz""` or `""Buzz""` would be returned prematurely for multiples of 15.
+2. **Check divisibility by 3** — return `""Fizz""`.
+3. **Check divisibility by 5** —","1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,coding,reverse_string,1,1,True,7.67,48.5,372.0,"```python
+def reverse_string(s: str) -> str:
+    """"""Reverses the input string.
+
+    Args:
+        s: The string to reverse.
+
+    Returns:
+        The reversed string.
+
+    Examples:
+        >>> reverse_string(""hello"")
+        'olleh'
+        >>> reverse_string("""")
+        ''
+        >>> reverse_string(""a"")
+        'a'
+    """"""
+    return s[::-1]
+```
+
+**How it works:**
+
+- `s[::-1]` uses Python's **slice notation** `[start:stop:step]` with a step of `-1`, which traverses the string from end to begi","olleh
+nohtyP
+racecar
+
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,coding,fibonacci,1,1,True,7.5,68.3,512.0,"```python
+def fibonacci(n: int) -> list:
+    """"""Return the first n Fibonacci numbers as a list starting with 0.
+
+    Args:
+        n: The number of Fibonacci numbers to generate. Must be non-negative.
+
+    Returns:
+        A list containing the first n Fibonacci numbers.
+
+    Examples:
+        >>> fibonacci(0)
+        []
+        >>> fibonacci(1)
+        [0]
+        >>> fibonacci(2)
+        [0, 1]
+        >>> fibonacci(7)
+        [0, 1, 1, 2, 3, 5, 8]
+    """"""
+    if n <= 0:
+        return []
+    ","ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,coding,binary_search,1,1,True,9.1,56.2,511.0,"```python
+def binary_search(arr: list, target: int) -> int:
+    """"""
+    Searches for a target value in a sorted list using binary search.
+
+    Args:
+        arr: A sorted list of integers.
+        target: The integer value to search for.
+
+    Returns:
+        The index of the target if found, otherwise -1.
+    """"""
+    left, right = 0, len(arr) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2  # Avoids potential overflow
+
+        if arr[mid] == target:
+            return mid","3
+0
+6
+-1
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,coding,palindrome,1,1,True,7.43,68.9,512.0,"```python
+def is_palindrome(s: str) -> bool:
+    """"""
+    Check if a string is a palindrome, ignoring case and non-alphanumeric characters.
+
+    Args:
+        s: The input string to check.
+
+    Returns:
+        True if the string is a palindrome, False otherwise.
+
+    Examples:
+        >>> is_palindrome(""A man, a plan, a canal: Panama"")
+        True
+        >>> is_palindrome(""racecar"")
+        True
+        >>> is_palindrome(""hello"")
+        False
+        >>> is_palindrome("""")
+        True
+       ","✅ is_palindrome(""A man, a plan, a canal: Panama"") = True
+✅ is_palindrome(""racecar"") = True
+✅ is_palindrome(""hello"") = False
+✅ is_palindrome("""") = True
+✅ is_palindrome(""Was it a car or a cat I saw?"") = True
+✅ is_palindrome(""No 'x' in Nixon"") = True
+✅ is_palindrome(""not a palindrome"") = False
+✅ is_palindrome(""12321"") = True
+✅ is_palindrome(""Race a car"") = False
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,reasoning,train_problem,1,1,True,4.1,44.1,181.0,"## Solution
+
+Since the trains are moving **toward each other**, their speeds combine:
+
+$$v_{\text{combined}} = 60 + 40 = 100 \text{ km/h}$$
+
+Using the formula **time = distance ÷ speed**:
+
+$$t = \frac{200 \text{ km}}{100 \text{ km/h}} = \boxed{2 \text{ hours}}$$
+
+The two trains will meet after **2 hours**.",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,coin_probability,0,1,False,6.77,63.6,431.0,"# Probability of At Least 2 Heads in 3 Flips
+
+## Setting Up the Sample Space
+
+With 3 coin flips, there are $2^3 = 8$ equally likely outcomes:
+
+$$\{HHH,\; HHT,\; HTH,\; THH,\; HTT,\; THT,\; TTH,\; TTT\}$$
+
+## Counting Favorable Outcomes
+
+""At least 2 heads"" means **exactly 2 heads OR exactly 3 heads**:
+
+| Outcome | Heads |
+|---------|-------|
+| **HHT** | 2 ✓ |
+| **HTH** | 2 ✓ |
+| **THH** | 2 ✓ |
+| **HHH** | 3 ✓ |
+
+**Favorable outcomes:** $\binom{3}{2} + \binom{3}{3} = 3 + 1 = 4$
+
+## Result
+
+$$P(\t",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,workers_problem,1,1,True,4.85,37.1,180.0,"## Solution
+
+**It would take 10 workers **5 days** to build the wall.**
+
+Here's the reasoning:
+
+1. **Find the total work:** 5 workers × 10 days = **50 worker-days** of effort
+2. **Apply to the new team:** 50 worker-days ÷ 10 workers = **5 days**
+
+**Key principle:** This is an inverse proportion — when you **double** the number of workers, you **halve** the time needed.",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,age_problem,1,1,True,6.29,58.0,365.0,"# Solving the Age Problem
+
+## Setting Up the Equations
+
+Let **J** = Jerry's current age and **T** = Tom's current age.
+
+| Condition | Equation |
+|---|---|
+| Tom is twice as old as Jerry | T = 2J |
+| In 5 years, Tom is 1.5× Jerry's age | T + 5 = 1.5(J + 5) |
+
+## Solving
+
+Substitute **T = 2J** into the second equation:
+
+$$2J + 5 = 1.5(J + 5)$$
+$$2J + 5 = 1.5J + 7.5$$
+$$0.5J = 2.5$$
+$$J = 5$$
+
+Therefore: **T = 2(5) = 10**
+
+## Answer
+
+- **Jerry is 5 years old**
+- **Tom is 10 years old**
+
+✅ *Check: I",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,sequence_pattern,1,1,True,6.99,53.4,373.0,"## The next number is **42**.
+
+**Here's why:**
+
+This sequence follows the pattern **n × (n + 1)**:
+
+| n | n × (n+1) | Result |
+|---|-----------|--------|
+| 1 | 1 × 2 | 2 |
+| 2 | 2 × 3 | 6 |
+| 3 | 3 × 4 | 12 |
+| 4 | 4 × 5 | 20 |
+| 5 | 5 × 6 | 30 |
+| 6 | 6 × 7 | **42** |
+
+You can also see it in the differences between terms: **4, 6, 8, 10, 12…** — each difference increases by 2, so 30 + 12 = **42**.",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,json_output,1,1,True,2.74,28.1,77.0,"```json
+{
+  ""name"": ""Elena Martinez"",
+  ""age"": 34,
+  ""hobbies"": [""painting"", ""hiking"", ""playing guitar"", ""reading science fiction""]
+}
+```",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,numbered_list,1,1,True,4.63,45.3,210.0,"1. **Improves cardiovascular health** — Regular exercise strengthens the heart, lowers blood pressure, and reduces the risk of heart disease and stroke.
+2. **Boosts mental health** — Physical activity releases endorphins, helping to reduce stress, anxiety, and symptoms of depression while improving overall mood.
+3. **Supports weight management** — Exercise helps burn calories, build lean muscle, and maintain a healthy metabolism, making it easier to achieve and sustain a healthy weight.
+4. **Str",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,word_constraint,1,1,True,3.2,28.2,90.0,"Machine learning is a branch of artificial intelligence where computers learn patterns from data to make predictions or decisions without being explicitly programmed for each task. By training on examples, algorithms improve their performance over time, enabling applications like image recognition, language translation, and recommendation systems.",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,code_with_comments,0,1,False,16.41,59.1,970.0,"```python
+import math
+
+
+def calculate_circle_area(radius):
+    """"""
+    Calculate the area of a circle given its radius.
+
+    The formula for the area of a circle is:
+        A = π * r²
+    where:
+        A = area of the circle
+        π = mathematical constant pi (approximately 3.14159)
+        r = radius of the circle
+
+    Parameters:
+        radius (int or float): The radius of the circle. Must be a non-negative number.
+
+    Returns:
+        float: The area of the circle.
+
+    Raises:
+        ","Radius:     0 --> Area: 0.0000
+Radius:     1 --> Area: 3.1416
+Radius:     5 --> Area: 78.5398
+Radius:  10.5 --> Area: 346.3606
+
+ValueError caught: Radius cannot be negative, got -3
+TypeError caught: Radius must be a number, got str
+","Traceback (most recent call last):
+  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_99q9f4g3.py"", line 75, in <module>
+    assert abs(circle_area(0.0) - 0.0) < 1e-6, 'Test case 0 failed'
+               ^^^^^^^^^^^
+NameError: name 'circle_area' is not defined
+",1.0,
+claude-opus-4-6,anthropic,api,api,instruction_following,direct_answer,1,1,True,2.01,10.4,21.0,Paris,,,,

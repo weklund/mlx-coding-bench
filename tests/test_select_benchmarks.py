@@ -1,67 +1,35 @@
 import pytest
 
-from mtb.layer_benchmarks.layers.layer_norm import LayerNormBenchmark
-from mtb.layer_benchmarks.layers.linear import LinearBenchmark
-from mtb.layer_benchmarks.layers.mhsa import MhsaBenchmark
-from mtb.layer_benchmarks.layers.scaled_dot_product_attention import (
-    ScaledDotProductAttentionBenchmark,
-)
-from mtb.layer_benchmarks.layers.transformer_decoder_layer import (
-    TransformerDecoderLayerBenchmark,
-)
-from mtb.layer_benchmarks.layers.transformer_encoder_layer import (
-    TransformerEncoderLayerBenchmark,
-)
-from mtb.select_benchmarks import benchmark_name_to_benchmark_class, filter_benchmarks
+from mtb.llm_benchmarks.models.base import ModelSpec
+from mtb.select_benchmarks import filter_benchmarks
 
 
-@pytest.mark.parametrize(
-    "benchmark_name, expected_class",
-    [
-        ("layernorm", LayerNormBenchmark),
-        ("linear", LinearBenchmark),
-        ("mhsa", MhsaBenchmark),
-        ("scaled_dot_product_attention", ScaledDotProductAttentionBenchmark),
-        ("transformerencoderlayer", TransformerEncoderLayerBenchmark),
-        ("transformerdecoderlayer", TransformerDecoderLayerBenchmark),
-    ],
-)
-def test_benchmark_name_to_benchmark_class(benchmark_name, expected_class):
-    assert benchmark_name_to_benchmark_class(benchmark_name) == expected_class
-
-
-def test_benchmark_name_to_benchmark_class_valueerror():
-    with pytest.raises(
-        ValueError,
-        match="Could not find benchmark class for name 'invalid_benchmark'",
-    ):
-        benchmark_name_to_benchmark_class("invalid_benchmark")
+def _make_spec(name: str) -> ModelSpec:
+    return ModelSpec(name=name, num_params=1e9, prompt_formatter=lambda p: [])
 
 
 @pytest.fixture()
-def layer_benchmarks():
-    kwargs = dict(
-        feature_dim=16,
-    )
+def model_specs():
     return [
-        LayerNormBenchmark(**kwargs),
-        LinearBenchmark(**kwargs),
-        MhsaBenchmark(**kwargs),
-        TransformerDecoderLayerBenchmark(**kwargs),
-        TransformerEncoderLayerBenchmark(**kwargs),
+        _make_spec("qwen-3-8b-it"),
+        _make_spec("gemma-4-e2b-it"),
+        _make_spec("phi-4-mini"),
     ]
 
 
-def test_filter_benchmarks(layer_benchmarks):
-    run_only_benchmarks = ["layernorm", "linear"]
-    filtered_benchmarks = filter_benchmarks(layer_benchmarks, run_only_benchmarks)
-    assert len(filtered_benchmarks) == 2
-    assert isinstance(filtered_benchmarks[0], LayerNormBenchmark)
-    assert isinstance(filtered_benchmarks[1], LinearBenchmark)
+def test_filter_benchmarks_list(model_specs):
+    filtered = filter_benchmarks(model_specs, ["qwen", "phi"])
+    assert len(filtered) == 2
+    assert filtered[0].name == "qwen-3-8b-it"
+    assert filtered[1].name == "phi-4-mini"
 
 
-def test_filter_benchmarks_str(layer_benchmarks):
-    run_only_benchmarks = "layernorm"
-    filtered_benchmarks = filter_benchmarks(layer_benchmarks, run_only_benchmarks)
-    assert len(filtered_benchmarks) == 1
-    assert isinstance(filtered_benchmarks[0], LayerNormBenchmark)
+def test_filter_benchmarks_str(model_specs):
+    filtered = filter_benchmarks(model_specs, "gemma")
+    assert len(filtered) == 1
+    assert filtered[0].name == "gemma-4-e2b-it"
+
+
+def test_filter_benchmarks_no_match(model_specs):
+    with pytest.raises(ValueError, match="No benchmarks to run"):
+        filter_benchmarks(model_specs, ["nonexistent"])

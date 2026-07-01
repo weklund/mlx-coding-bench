@@ -1,0 +1,35 @@
+{
+  "datetime": "2026-06-16__10:05:19",
+  "contributor": "",
+  "git_commit": "08d304ff2895c0165b532e3b30d59c1c84fa4ce7",
+  "benchmark_settings": {
+    "difficulty": "all",
+    "num_runs": 3,
+    "dtypes": [
+      "int4"
+    ],
+    "run_only_benchmarks": [
+      "gemma-4-12b-it"
+    ],
+    "max_tokens_multiplier": 1.0
+  },
+  "hardware_info": {
+    "processor": "arm",
+    "model_name": "MacBook Pro",
+    "chip": "Apple M5 Max",
+    "memory": "128",
+    "total_cores": "18",
+    "performance_cores": "X",
+    "efficiency_cores": "X",
+    "gpu_cores": "40",
+    "hardware_string": "Apple_M5_Max_XP+XE+40GPU_128GB"
+  },
+  "software_info": {
+    "platform": "macOS-26.4.1-arm64-arm-64bit",
+    "python_version": "3.11.11",
+    "torch_version": "2.6.0",
+    "mlx_version": "0.31.2",
+    "mlx_lm_version": "0.31.3",
+    "ollama_version": "0.30.8\nWarning: client version is 0.18.2"
+  }
+}

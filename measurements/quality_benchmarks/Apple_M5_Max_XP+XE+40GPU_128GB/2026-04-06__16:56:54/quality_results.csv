@@ -1,0 +1,1135 @@
+model,framework,backend,dtype,category,problem,pass_count,num_runs,passed,avg_generation_time_sec,avg_generation_tps,avg_tokens_generated,sample_response,execution_stdout,execution_stderr,execution_exit_code,parsed_tool_calls
+claude-opus-4-6,anthropic,api,api,coding,fizzbuzz,0,3,False,5.4,52.3,282.0,"
+
+```python
+def fizzbuzz(n: int) -> str:
+    if n % 3 == 0 and n % 5 == 0:
+        return ""FizzBuzz""
+    elif n % 3 == 0:
+        return ""Fizz""
+    elif n % 5 == 0:
+        return ""Buzz""
+    else:
+        return str(n)
+```
+
+**Examples:**
+
+```python
+>>> fizzbuzz(3)
+'Fizz'
+>>> fizzbuzz(5)
+'Buzz'
+>>> fizzbuzz(15)
+'FizzBuzz'
+>>> fizzbuzz(7)
+'7'
+```
+
+**How it works:**
+
+1. **Check divisibility by both 3 and 5 first** — this must come before the individual checks, otherwise `""Fizz""` or `""Buzz""` would b",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_edijv0l0.py"", line 11
+    >>> fizzbuzz(3)
+    ^^
+SyntaxError: invalid syntax
+",1.0,
+claude-opus-4-6,anthropic,api,api,coding,reverse_string,3,3,True,6.87,55.5,381.0,"```python
+def reverse_string(s: str) -> str:
+    """"""Reverses the input string.
+
+    Args:
+        s: The string to reverse.
+
+    Returns:
+        The reversed string.
+
+    Examples:
+        >>> reverse_string(""hello"")
+        'olleh'
+        >>> reverse_string("""")
+        ''
+        >>> reverse_string(""a"")
+        'a'
+    """"""
+    return s[::-1]
+```
+
+**How it works:**
+
+- `s[::-1]` uses Python's **slice notation** `[start:stop:step]` with a step of `-1`, which traverses the string from end to begi","olleh
+nohtyP
+
+racecar
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,coding,fibonacci,2,3,True,7.85,64.1,499.0,"```python
+def fibonacci(n: int) -> list:
+    """"""Return the first n Fibonacci numbers as a list starting with 0.
+
+    Args:
+        n: The number of Fibonacci numbers to generate. Must be non-negative.
+
+    Returns:
+        A list containing the first n Fibonacci numbers.
+
+    Examples:
+        >>> fibonacci(0)
+        []
+        >>> fibonacci(1)
+        [0]
+        >>> fibonacci(2)
+        [0, 1]
+        >>> fibonacci(7)
+        [0, 1, 1, 2, 3, 5, 8]
+    """"""
+    if n <= 0:
+        return []
+    ",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_v5hdomo2.py"", line 31
+    >>> fibonacci(10)
+    ^^
+SyntaxError: invalid syntax
+",1.0,
+claude-opus-4-6,anthropic,api,api,coding,binary_search,1,3,False,7.35,68.6,502.0,"```python
+def binary_search(arr: list, target: int) -> int:
+    """"""
+    Searches for `target` in a sorted list `arr` using binary search.
+
+    Args:
+        arr: A sorted list of integers.
+        target: The integer value to search for.
+
+    Returns:
+        The index of `target` in `arr`, or -1 if not found.
+    """"""
+    left, right = 0, len(arr) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2  # avoids potential overflow
+
+        if arr[mid] == target:
+            return","ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,coding,palindrome,2,3,True,7.15,71.6,512.0,"```python
+def is_palindrome(s: str) -> bool:
+    """"""
+    Check if a string is a palindrome, ignoring case and non-alphanumeric characters.
+
+    Args:
+        s: The input string to check.
+
+    Returns:
+        True if the string is a palindrome, False otherwise.
+
+    Examples:
+        >>> is_palindrome(""A man, a plan, a canal: Panama"")
+        True
+        >>> is_palindrome(""racecar"")
+        True
+        >>> is_palindrome(""hello"")
+        False
+        >>> is_palindrome("""")
+        True
+       ",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_gqaj9vrw.py"", line 1
+    ```python
+    ^
+SyntaxError: invalid syntax
+",1.0,
+claude-opus-4-6,anthropic,api,api,reasoning,train_problem,3,3,True,3.8,49.1,186.0,"## Finding the Time Until the Trains Meet
+
+Since the trains are moving **toward each other**, their speeds combine:
+
+$$v_{\text{combined}} = 60 + 40 = 100 \text{ km/h}$$
+
+Using the formula **time = distance ÷ speed**:
+
+$$t = \frac{200 \text{ km}}{100 \text{ km/h}} = \boxed{2 \text{ hours}}$$
+
+The two trains will meet after **2 hours**.",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,coin_probability,0,3,False,5.44,63.9,347.0,"## Finding the Probability of At Least 2 Heads in 3 Flips
+
+**Total possible outcomes:** $2^3 = 8$
+
+### Counting Favorable Outcomes (2 or 3 heads)
+
+**Exactly 2 heads:** $\binom{3}{2} = 3$ outcomes
+$$HHT,\; HTH,\; THH$$
+
+**Exactly 3 heads:** $\binom{3}{3} = 1$ outcome
+$$HHH$$
+
+### Result
+
+$$P(\text{at least 2 heads}) = \frac{3 + 1}{8} = \frac{4}{8} = \boxed{\dfrac{1}{2}}$$",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,workers_problem,3,3,True,4.43,40.3,178.0,"## Solution
+
+**It would take 10 workers **5 days** to build the wall.**
+
+Here's the reasoning:
+
+1. **Find the total work:** 5 workers × 10 days = **50 worker-days** of effort
+2. **Apply to the new team:** 50 worker-days ÷ 10 workers = **5 days**
+
+This is an **inverse proportion** — when you double the number of workers, the time is cut in half.",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,age_problem,0,3,False,6.24,57.1,354.0,"# Solving the Age Problem
+
+## Setting Up the Equations
+
+Let **Jerry's current age = J** and **Tom's current age = T**.
+
+**Condition 1:** Tom is twice as old as Jerry.
+$$T = 2J$$
+
+**Condition 2:** In 5 years, Tom will be 1.5 times as old as Jerry.
+$$T + 5 = 1.5(J + 5)$$
+
+## Solving
+
+Substitute *T = 2J* into the second equation:
+
+$$2J + 5 = 1.5J + 7.5$$
+$$0.5J = 2.5$$
+$$J = 5$$
+
+Then: $T = 2(5) = 10$
+
+## Answer
+
+| Person | Age |
+|--------|-----|
+| **Tom** | **10 years old** |
+| **Jerry** | **5 yea",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,sequence_pattern,3,3,True,6.75,55.5,374.0,"## The next number is **42**.
+
+**How it works:**
+
+Each term follows the pattern **n × (n + 1)**:
+
+| n | n × (n+1) | Result |
+|---|-----------|--------|
+| 1 | 1 × 2 | 2 |
+| 2 | 2 × 3 | 6 |
+| 3 | 3 × 4 | 12 |
+| 4 | 4 × 5 | 20 |
+| 5 | 5 × 6 | 30 |
+| **6** | **6 × 7** | **42** |
+
+You can also see it in the differences between terms: **4, 6, 8, 10, 12…** — each difference increases by 2, so 30 + 12 = **42**.",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,json_output,3,3,True,2.77,27.9,77.0,"```json
+{
+  ""name"": ""Elena Martinez"",
+  ""age"": 34,
+  ""hobbies"": [""painting"", ""hiking"", ""playing guitar"", ""reading science fiction""]
+}
+```",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,numbered_list,3,3,True,5.0,41.8,207.0,"1. **Improves cardiovascular health** — Regular exercise strengthens the heart, lowers blood pressure, and reduces the risk of heart disease and stroke.
+2. **Boosts mental health** — Physical activity releases endorphins, helping to reduce stress, anxiety, and symptoms of depression while improving overall mood.
+3. **Supports weight management** — Exercise burns calories and builds muscle, making it easier to maintain a healthy body weight over time.
+4. **Strengthens bones and muscles** — Weight",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,word_constraint,3,3,True,3.38,26.7,90.0,"Machine learning is a branch of artificial intelligence where computers learn patterns from data to make predictions or decisions without being explicitly programmed for each task. By training on examples, algorithms improve their performance over time, enabling applications like image recognition, language translation, and recommendation systems.",,,,
+claude-opus-4-6,anthropic,api,api,instruction_following,code_with_comments,0,3,False,14.8,65.9,975.0,"```python
+import math
+
+
+def calculate_circle_area(radius):
+    """"""
+    Calculate the area of a circle given its radius.
+
+    The formula for the area of a circle is:
+        A = π * r²
+
+    where:
+        A = area of the circle
+        π (pi) = a mathematical constant approximately equal to 3.14159
+        r = radius of the circle (distance from center to edge)
+
+    Parameters:
+        radius (float or int): The radius of the circle. Must be a non-negative number.
+
+    Returns:
+        float: Th","Radius:     0 => Area: 0.0000
+Radius:     1 => Area: 3.1416
+Radius:     5 => Area: 78.5398
+Radius:  10.5 => Area: 346.3606
+ValueError caught: Radius cannot be negative, got -3
+TypeError caught: Radius must be a number, got str
+","Traceback (most recent call last):
+  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_5bzprge0.py"", line 76, in <module>
+    assert abs(circle_area(0.0) - 0.0) < 1e-6, 'Test case 0 failed'
+               ^^^^^^^^^^^
+NameError: name 'circle_area' is not defined
+",1.0,
+claude-opus-4-6,anthropic,api,api,instruction_following,direct_answer,3,3,True,2.02,10.4,21.0,Paris,,,,
+claude-opus-4-6,anthropic,api,api,coding,lru_cache,1,3,False,25.76,74.4,1910.0,"# LRU Cache Implementation
+
+Here's a complete implementation using a **doubly linked list + hash map** (the classic O(1) approach), along with a cleaner `OrderedDict` alternative:
+
+```python
+def lru_cache_ops(capacity: int, operations: list) -> list:
+    """"""
+    Simulates an LRU (Least Recently Used) cache.
+
+    Args:
+        capacity:   Max number of key-value pairs the cache can hold.
+        operations: List of tuples — ('get', key) or ('put', key, value).
+
+    Returns:
+        List of result","[None, None, 1, None, -1, None, -1, 3, 4]
+[None, None, 20, None, -1]
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,coding,flatten_nested,0,3,False,10.03,57.6,577.0,"```python
+def flatten(lst: list) -> list:
+    """"""
+    Takes an arbitrarily nested list and returns a flat list of all values.
+
+    Examples:
+        >>> flatten([1, [2, 3], [4, [5, 6]]])
+        [1, 2, 3, 4, 5, 6]
+        >>> flatten([[1, [2]], [[[3]]], 4])
+        [1, 2, 3, 4]
+        >>> flatten([])
+        []
+        >>> flatten([1, 2, 3])
+        [1, 2, 3]
+    """"""
+    result = []
+    for item in lst:
+        if isinstance(item, list):
+            result.extend(flatten(item))
+        else:
+  ",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_hizs0dgp.py"", line 27
+    → 1 is not a list       → result = [1]
+    ^
+SyntaxError: invalid character '→' (U+2192)
+",1.0,
+claude-opus-4-6,anthropic,api,api,coding,longest_palindrome_substring,0,3,False,18.49,63.2,1166.0,"# Longest Palindromic Substring
+
+## Approach: Expand Around Center
+
+Every palindrome mirrors around its center. A palindrome can be centered at a single character (odd length, e.g., `""aba""`) or between two characters (even length, e.g., `""abba""`). We expand outward from each possible center and track the longest palindrome found.
+
+- **Time Complexity:** O(n²)
+- **Space Complexity:** O(1) (excluding the output string)
+
+```python
+def longest_palindrome(s: str) -> str:
+    """"""
+    Finds the longest",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_s0r26gas.py"", line 56
+    Step i=0: center 'b'     → expand → ""b""      (length 1)
+                             ^
+SyntaxError: invalid character '→' (U+2192)
+",1.0,
+claude-opus-4-6,anthropic,api,api,coding,calculator,0,3,False,26.62,76.0,2016.0,"# Math Expression Evaluator
+
+## Approach: Recursive Descent Parser
+
+This is a classic parsing problem. The grammar naturally encodes operator precedence:
+
+```
+expression → term (('+' | '-') term)*        ← lowest precedence
+term       → factor (('*' | '/') factor)*     ← higher precedence
+factor     → ['+' | '-'] factor               ← unary operators
+           | '(' expression ')'               ← parentheses (highest)
+           | NUMBER
+```
+
+## Implementation
+
+```python
+def calculate(expressi",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_mawhe1mt.py"", line 1
+    expression → term (('+' | '-') term)*
+               ^
+SyntaxError: invalid character '→' (U+2192)
+",1.0,
+claude-opus-4-6,anthropic,api,api,coding,buggy_merge_sort,2,3,True,17.83,65.8,1170.0,"```python
+def merge_sort(arr: list) -> list:
+    """"""
+    Sorts a list in ascending order using the merge sort algorithm.
+    
+    Args:
+        arr: The list to sort.
+        
+    Returns:
+        A new sorted list.
+    
+    Examples:
+        >>> merge_sort([])
+        []
+        >>> merge_sort([1])
+        [1]
+        >>> merge_sort([3, 1, 2])
+        [1, 2, 3]
+        >>> merge_sort([3, 3, 1, 2, 1])
+        [1, 1, 2, 3, 3]
+    """"""
+    # Base case: lists of length 0 or 1 are already sorted
+    ","All tests passed!
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,reasoning,compound_interest,3,3,True,19.07,77.5,1500.0,"# Compound Interest Calculation
+
+## Formula
+
+$$A = P\left(1 + \frac{r}{n}\right)^{nt}$$
+
+## Identify the Variables
+
+| Variable | Meaning | Value |
+|----------|---------|-------|
+| P | Principal | $10,000 |
+| r | Annual interest rate | 0.05 |
+| n | Compounding periods per year | 4 (quarterly) |
+| t | Time in years | 3 |
+
+## Step-by-Step Solution
+
+**Step 1: Substitute into the formula**
+$$A = 10{,}000\left(1 + \frac{0.05}{4}\right)^{4 \times 3}$$
+
+**Step 2: Simplify inside the parentheses**
+$$A = ",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,circular_seating,3,3,True,8.23,55.6,457.0,"# Seating 6 People with Alice and Bob Not Adjacent
+
+## Strategy: Complementary Counting
+
+It's easier to count what we *don't* want and subtract:
+
+$$\text{Valid} = \text{Total} - \text{Alice and Bob adjacent}$$
+
+---
+
+## Step 1: Total Circular Arrangements
+
+For $n$ people around a circular table, we fix one person's position to remove rotational duplicates:
+
+$$(6-1)! = 5! = 120$$
+
+## Step 2: Arrangements Where Alice and Bob **ARE** Adjacent
+
+**Treat Alice & Bob as a single glued block**, giving us",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,logic_puzzle,3,3,True,18.63,75.4,1405.0,"# Solution: A = Liar, B = Truth-teller, C = Liar
+
+## Systematic Check of All 8 Cases
+
+| Case | A | B | C | A's stmt (""B is liar"") | B's stmt (""C is liar"") | C's stmt (""A & B both liars"") | Consistent? |
+|------|---|---|---|------------------------|------------------------|-------------------------------|-------------|
+| 1 | T | T | T | False ≠ T speaks truth | — | — | ❌ |
+| 2 | T | T | L | False ≠ T speaks truth | — | — | ❌ |
+| 3 | T | L | T | True ✓ | ""C is liar""=False ✓ | ""A&B liars""=False ≠ T",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,bayes_theorem,3,3,True,13.27,65.5,869.0,"# Bayes' Theorem: Disease Diagnosis
+
+## Given Information
+
+| Parameter | Value |
+|---|---|
+| P(Disease) — prevalence | 0.01 |
+| P(Positive ∣ Disease) — sensitivity | 0.95 |
+| P(Positive ∣ No Disease) — false positive rate | 0.05 |
+
+## Applying Bayes' Theorem
+
+$$P(Disease \mid Positive) = \frac{P(Positive \mid Disease)\;\cdot\;P(Disease)}{P(Positive)}$$
+
+### Step 1: Find P(Positive) using the Law of Total Probability
+
+$$P(Positive) = P(Positive \mid Disease) \cdot P(Disease) \;+\; P(Positive \mid",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,proof_bug,3,3,True,10.95,33.3,363.0,"## The Error: Division by Zero
+
+The invalid step is going from here:
+
+**(a + b)(a - b) = b(a - b)**
+
+to here:
+
+**a + b = b**
+
+To get from the first line to the second, both sides were **divided by (a - b)**. But since the very first premise states that **a = b**, we know that:
+
+**a - b = 0**
+
+Dividing by zero is **undefined** in mathematics. It is not a legal operation. You can multiply both sides of an equation by zero (though you lose information), but you can never divide by it.
+
+## Why Divis",,,,
+claude-opus-4-6,anthropic,api,api,math,modular_arithmetic,0,3,False,8.75,67.9,593.0,"# Finding 2¹⁰⁰ mod 7
+
+## Step 1: Compute Powers of 2 mod 7
+
+| Power | Value | mod 7 |
+|-------|-------|-------|
+| 2¹ | 2 | **2** |
+| 2² | 4 | **4** |
+| 2³ | 8 | **1** |
+| 2⁴ | 16 | **2** |
+| 2⁵ | 32 | **4** |
+| 2⁶ | 64 | **1** |
+
+## Step 2: Identify the Pattern
+
+The remainders cycle every **3** powers:
+
+$$2, \; 4, \; 1, \; 2, \; 4, \; 1, \; \dots$$
+
+This makes sense because 2³ = 8 ≡ 1 (mod 7), so every third power ""resets"" to 1.
+
+## Step 3: Find Where 100 Falls in the Cycle
+
+Divide the exponent ",,,,
+claude-opus-4-6,anthropic,api,api,math,inclusion_exclusion,3,3,True,9.75,85.8,836.0,"# Integers from 1–1000 Divisible by 2, 3, or 5
+
+## Setting Up
+
+Let:
+- **A** = set of multiples of 2
+- **B** = set of multiples of 3
+- **C** = set of multiples of 5
+
+By the **Inclusion-Exclusion Principle**:
+
+$$|A \cup B \cup C| = |A|+|B|+|C| - |A\cap B| - |A\cap C| - |B\cap C| + |A\cap B\cap C|$$
+
+## Computing Each Term
+
+### Single sets (add)
+
+| Set | Divisor | Count |
+|-----|---------|-------|
+| \|A\| | ⌊1000/2⌋ | **500** |
+| \|B\| | ⌊1000/3⌋ | **333** |
+| \|C\| | ⌊1000/5⌋ | **200** |
+
+### Pair",,,,
+claude-opus-4-6,anthropic,api,api,math,bouncing_ball,3,3,True,12.77,64.9,826.0,"# Total Distance of a Bouncing Ball
+
+## Setting Up the Problem
+
+When the ball is dropped from 10 m, the total distance has two components:
+
+| Phase | Description |
+|-------|-------------|
+| **Initial drop** | The ball falls 10 m (one-way, downward only) |
+| **Each subsequent bounce** | The ball travels **up** then back **down** the same height (counted twice) |
+
+$$d_{\text{total}} = \underbrace{10}_{\text{first fall}} + \underbrace{2\left(10 \cdot \tfrac{3}{4} + 10 \cdot \tfrac{3}{4}^2 + 10 \cdo",,,,
+claude-opus-4-6,anthropic,api,api,coding,markdown_to_html,0,3,False,29.96,65.0,1946.0,"# Markdown to HTML Converter
+
+## Implementation
+
+```python
+import re
+from typing import List, Tuple
+
+
+def markdown_to_html(text: str) -> str:
+    """"""
+    Convert a subset of Markdown to HTML.
+
+    Supported syntax:
+        **bold**        → <strong>bold</strong>
+        *italic*        → <em>italic</em>
+        `code`          → <code>code</code>
+        [text](url)     → <a href=""url"">text</a>
+
+    Inline code is protected — Markdown inside backticks is not processed.
+    """"""
+
+    # ── Step 1: ",,"Traceback (most recent call last):
+  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_lg_8rrdw.py"", line 48, in <module>
+    assert markdown_to_html(""***bold italic***"") == ""<em><strong>bold italic</strong></em>""
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+",1.0,
+claude-opus-4-6,anthropic,api,api,coding,data_pipeline,0,3,False,25.1,68.6,1722.0,"# `process_sales` — CSV → Filter → Group → Aggregate → JSON
+
+```python
+import csv
+import json
+import io
+from collections import defaultdict
+
+
+def process_sales(csv_text: str) -> str:
+    """"""
+    Process CSV sales data: filter, group by product, aggregate, and return JSON.
+
+    Expected CSV columns: product, region, amount, quantity (+ any others).
+
+    Pipeline:
+        1. Parse     — read CSV text into row dicts
+        2. Filter    — amount > 100, region ∈ {North, West}, quantity >= 5
+        ","[
+  {
+    ""product"": ""Widget B"",
+    ""total_amount"": 425.75,
+    ""average_amount"": 212.88,
+    ""transaction_count"": 2
+  },
+  {
+    ""product"": ""Widget C"",
+    ""total_amount"": 400.0,
+    ""average_amount"": 400.0,
+    ""transaction_count"": 1
+  },
+  {
+    ""product"": ""Widget A"",
+    ""total_amount"": 270.0,
+    ""average_amount"": 135.0,
+    ""transaction_count"": 2
+  }
+]
+","Traceback (most recent call last):
+  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_ejcif08h.py"", line 110, in <module>
+    assert process_sales('date,product,region,amount,quantity\n2024-01-01,Widget,North,150,10\n2024-01-02,Widget,South,200,8\n2024-01-03,Gadget,West,120,5\n2024-01-04,Widget,North,80,3\n2024-01-05,Gadget,North,250,7\n2024-01-06,Widget,West,300,6\n') == '[{""product"": ""Widget"", ""total_amount"": 450.0, ""avg_amount"": 225.0, ""count"": 2}, {""product"": ""Gadget"", ""total_a",1.0,
+claude-opus-4-6,anthropic,api,api,coding,retry_decorator,3,3,True,15.77,62.6,975.0,"```python
+def retry_call(func, max_attempts: int, args: tuple = ()) -> dict:
+    """"""
+    Calls func(*args) up to max_attempts times, retrying on exceptions.
+
+    Returns:
+        dict with keys:
+            - success (bool):      True if func eventually returned without error
+            - value   (any):       The return value on success, or None on failure
+            - attempts (int):      How many times func was actually called
+            - error   (str|None):  String of the last exception o","{'success': True, 'value': 7, 'attempts': 3, 'error': None}
+{'success': False, 'value': None, 'attempts': 3, 'error': 'Nope!'}
+{'success': True, 'value': 1024, 'attempts': 1, 'error': None}
+ALL TESTS PASSED
+",,0.0,
+claude-opus-4-6,anthropic,api,api,reasoning,einstein_riddle,3,3,True,58.17,56.3,3285.0,"# Solving the Logic Puzzle
+
+## Setting Up the Anchors
+
+**From Constraint 6:** Norwegian → **House 1**
+**From Constraint 8:** German → **House 3**
+**From Constraint 7:** Norwegian (House 1) is next to blue, so → **House 2 = Blue**
+
+## Determining House Colors
+
+**From Constraint 3:** Green is immediately left of White. Possible pairs: (3,4) or (4,5).
+*(Pairs (1,2) and (2,3) are eliminated because House 2 is already Blue.)*
+
+**Test (4,5):** Green=4, White=5. Then the Brit's Red house (Constraint 1)",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,three_urns,3,3,True,9.48,72.4,686.0,"# Probability the Second Ball is Red
+
+## Setting Up Events
+
+| Event | Description |
+|-------|-------------|
+| $R_1$ | First ball (from Urn A) is **red** → draw next from Urn B |
+| $B_1$ | First ball (from Urn A) is **blue** → draw next from Urn C |
+| $R_2$ | Second ball drawn is **red** |
+
+## Known Probabilities
+
+**From Urn A (first draw):**
+$$P(R_1) = \frac{3}{5}, \qquad P(B_1) = \frac{2}{5}$$
+
+**Second draw (conditional):**
+$$P(R_2 \mid R_1) = P(\text{red from Urn B}) = \frac{1}{5}$$
+$$P(R_2 \",,,,
+claude-opus-4-6,anthropic,api,api,reasoning,topological_sort,0,3,False,19.2,69.4,1333.0,"# All Valid Topological Orderings
+
+## The Graph
+
+```
+A → B → C → E
+A → D → C
+```
+
+## Step-by-Step Using Kahn's Algorithm
+
+### Initial In-Degrees
+
+| Node | A | B | C | D | E |
+|------|---|---|---|---|---|
+| In-degree | **0** | 1 | 2 | 1 | 1 |
+
+### Step 1: Available (in-degree 0) = {A} → **must pick A**
+
+Remove A → B and A → D:
+
+| Node | B | C | D | E |
+|------|---|---|---|---|
+| In-degree | **0** | 2 | **0** | 1 |
+
+### Step 2: Available = {B, D} → **branch here** ⇐ only fork point
+
+---
+
+#### Bran",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_1kptnhsq.py"", line 1
+    A → B → C → E
+      ^
+SyntaxError: invalid character '→' (U+2192)
+",1.0,
+claude-opus-4-6,anthropic,api,api,instruction_following,constrained_factorial,0,3,False,12.24,58.7,718.0,"# Recursive Factorial with All Constraints
+
+```python
+def fact(numb: int) -> int:
+    rslt: int = 1 if numb <= 1 else numb * fact(numb - 1)
+    return rslt
+```
+
+## Constraint Verification
+
+| Constraint | How It's Satisfied |
+|---|---|
+| **All variable names = 4 chars** | `fact` (4), `numb` (4), `rslt` (4) ✅ |
+| **No loops (recursion only)** | `fact(numb - 1)` — no `for`/`while` anywhere ✅ |
+| **Exactly 3 type hints** | ① `numb: int` ② `-> int` ③ `rslt: int` ✅ |
+| **Correct computation** | Base c","1
+1
+120
+5040
+3628800
+","Traceback (most recent call last):
+  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_9xbu4m7l.py"", line 12, in <module>
+    rslt = 1  if numb <= 1  else  numb * fact(numb - 1)
+                 ^^^^
+NameError: name 'numb' is not defined
+",1.0,
+claude-opus-4-6,anthropic,api,api,instruction_following,library_schema,0,3,False,24.65,83.1,2048.0,"```json
+{
+  ""$schema"": ""https://json-schema.org/draft/2020-12/schema"",
+  ""$id"": ""https://example.com/library-management-system.schema.json"",
+  ""title"": ""Library Management System"",
+  ""description"": ""Schema for a library management system containing books, authors, and loans."",
+  ""type"": ""object"",
+  ""properties"": {
+    ""books"": {
+      ""type"": ""array"",
+      ""description"": ""Collection of all books in the library catalog."",
+      ""items"": {
+        ""$ref"": ""#/$defs/Book""
+      },
+      ""uniqueItem",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_7jxr_eog.py"", line 1
+    ```json
+    ^
+SyntaxError: invalid syntax
+",1.0,
+claude-opus-4-6,anthropic,api,api,instruction_following,adversarial_transform,0,3,False,12.54,65.4,820.0,"# Three-Step Transformation
+
+## Step 1: Translate to French
+
+> **Le renard brun rapide saute par-dessus le chien paresseux**
+
+---
+
+## Step 2: Reverse the letters within each word
+
+> **eL draner nurb edipar etuas sussed-rap el neihc xuesserap**
+
+---
+
+## Step 3: Wrap each reversed word in XML tags
+
+```xml
+<word original=""Le"">eL</word>
+<word original=""renard"">draner</word>
+<word original=""brun"">nurb</word>
+<word original=""rapide"">edipar</word>
+<word original=""saute"">etuas</word>
+<word original=""par",,"  File ""/var/folders/ys/v4ss_1hj53946cxvd5_jq2b80000gn/T/sandbox_gx7bts5p.py"", line 1
+    <word original=""Le"">eL</word>
+    ^
+SyntaxError: invalid syntax
+",1.0,
+claude-opus-4-6,anthropic,api,api,writing,multi_doc_summary,3,3,True,5.55,42.6,236.0,"Quantum computing is revolutionizing information processing by using qubits that exploit superposition and entanglement to achieve exponential speedups in fields like cryptography and drug discovery. Meanwhile, climate change continues to accelerate beyond predictions, with global temperatures already 1.2°C above pre-industrial levels and the IPCC warning that surpassing 1.5°C could trigger irreversible tipping points such as ice sheet collapse and permafrost thaw. In the biomedical realm, CRISP",,,,
+claude-opus-4-6,anthropic,api,api,writing,structured_meeting_notes,3,3,True,15.54,36.8,571.0,"```markdown
+---
+date: 2025-01-15
+attendees:
+  - Sarah Chen
+  - Marcus Johnson
+  - Priya Patel
+  - David Kim
+  - Emma Rodriguez
+meeting_type: Daily Product Standup
+---
+
+# Product Team Standup — January 15, 2025
+
+## Discussion
+
+- **Search feature performance:** @Marcus reported that the new search indexing pipeline deployed yesterday has reduced average query response time from 320ms to 145ms. However, a small subset of users on legacy accounts are experiencing timeout errors when using advanced f",,,,
+claude-opus-4-6,anthropic,api,api,writing,tone_rewrite,3,3,True,5.83,30.6,179.0,The AI system learns by repeatedly adjusting itself to reduce its mistakes across many rounds of training. After fine-tuning key settings that control how the system learns — specifically how fast it learns and how much data it processes at once — it reached a peak accuracy of 94.3% on test data it hadn't seen before. A newer optimization method called Adam helped the system learn faster than the traditional approach.,,,,
+claude-opus-4-6,anthropic,api,api,writing,contradiction_detection,3,3,True,12.21,50.2,613.0,"## Analysis: No Contradictions Found
+
+These two notes are actually **complementary, not contradictory**. The key is recognizing that they describe **different measurements**:
+
+- **Note 1** refers to the duration of the **EVA (Extra-Vehicular Activity)** — the time spent *outside* the Lunar Module walking on the surface. The ~2.5 hours figure is accurate (approximately 2 hours and 31 minutes).
+
+- **Note 2** refers to the **total time spent on the lunar surface**, which includes all the time insid",,,,
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_correct_tool,0,3,False,3.22,31.2,100.0,"```json
+{
+  ""tool"": ""search_flights"",
+  ""arguments"": {
+    ""origin"": ""New York"",
+    ""destination"": ""London"",
+    ""date"": ""2025-03-15""
+  }
+}
+```",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_ambiguous_request,0,3,False,2.88,40.3,116.0,"```json
+{
+  ""tool"": ""schedule_meeting"",
+  ""arguments"": {
+    ""title"": ""Marketing Team Call"",
+    ""participants"": [""marketing team""],
+    ""date"": ""next Tuesday"",
+    ""time"": ""2:00 PM""
+  }
+}
+```",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_none_selection,3,3,True,3.11,28.3,88.0,"Hello! I'm doing great, thanks for asking! 😊 How are you doing today? Is there anything I can help you with? Whether it's searching for information, managing database records, or generating reports, I'm here to assist!",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_similar_names,0,3,False,3.04,29.9,89.0,"```json
+{
+  ""tool"": ""get_user_profile"",
+  ""parameters"": {
+    ""user_id"": ""alice_42""
+  }
+}
+```",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_parameter_based,0,3,False,2.34,38.5,90.0,"```json
+{
+  ""tool"": ""resize_image"",
+  ""parameters"": {
+    ""file_path"": ""logo.png"",
+    ""width"": 200,
+    ""height"": 100
+  }
+}
+```",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_nested_descriptions,3,3,True,2.58,36.5,94.0,"```json
+{
+  ""name"": ""execute_query"",
+  ""arguments"": {
+    ""query"": ""SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'"",
+    ""database"": ""analytics""
+  }
+}
+```",,,,"[{""name"": ""execute_query"", ""arguments"": {""query"": ""SELECT COUNT(*) FROM users WHERE created_at > '2024-01-01'"", ""database"": ""analytics""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_specialized_vs_general,0,3,False,5.67,45.2,256.0,"```json
+{
+  ""tool"": ""translate_document"",
+  ""parameters"": {
+    ""file_path"": ""report.pdf"",
+    ""source_lang"": ""German"",
+    ""target_lang"": ""English"",
+    ""preserve_formatting"": true
+  }
+}
+```
+
+**Why this tool was selected:**
+
+| Consideration | Reasoning |
+|---|---|
+| **Document length** | At 50 pages, this is a long document — `translate_text` is designed for single sentences/phrases and would be impractical. |
+| **Formatting preservation** | The user explicitly requires headers and formatting t",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ts_multiple_valid,0,3,False,6.34,39.3,245.0,"```json
+{
+  ""tool"": ""create_ticket"",
+  ""parameters"": {
+    ""title"": ""Critical Bug: 500 Error on Checkout 'Pay Now' Button"",
+    ""description"": ""Customers are encountering a 500 Internal Server Error when clicking the 'Pay Now' button during the checkout flow. This is a critical issue directly impacting revenue and customer experience. Immediate investigation and resolution is required."",
+    ""priority"": ""high"",
+    ""assignee"": ""backend-team""
+  }
+}
+```
+
+This will create a high-priority ticket in ",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_date_iso_format,3,3,True,2.76,35.1,97.0,"```json
+{""name"": ""schedule_event"", ""arguments"": {""title"": ""Team Standup"", ""date"": ""2024-06-15"", ""time"": ""09:30"", ""duration_minutes"": 30}}
+```",,,,"[{""name"": ""schedule_event"", ""arguments"": {""title"": ""Team Standup"", ""date"": ""2024-06-15"", ""time"": ""09:30"", ""duration_minutes"": 30}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_email_extraction,3,3,True,3.26,46.3,151.0,"```json
+{
+  ""name"": ""send_invitation"",
+  ""arguments"": {
+    ""event_title"": ""Q2 Planning"",
+    ""recipients"": [
+      ""alice@company.com"",
+      ""bob@company.com""
+    ],
+    ""message"": ""Please review the agenda beforehand.""
+  }
+}
+```",,,,"[{""name"": ""send_invitation"", ""arguments"": {""event_title"": ""Q2 Planning"", ""recipients"": [""alice@company.com"", ""bob@company.com""], ""message"": ""Please review the agenda beforehand.""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_enum_values,3,3,True,2.72,41.3,111.0,"```json
+{""name"": ""create_alert"", ""arguments"": {""service_name"": ""payment-service"", ""metric"": ""cpu_usage"", ""threshold"": 90, ""severity"": ""high""}}
+```",,,,"[{""name"": ""create_alert"", ""arguments"": {""service_name"": ""payment-service"", ""metric"": ""cpu_usage"", ""threshold"": 90, ""severity"": ""high""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_nested_objects,3,3,True,3.64,48.9,177.0,"```json
+{
+  ""name"": ""create_order"",
+  ""arguments"": {
+    ""product_id"": ""SKU-7890"",
+    ""quantity"": 3,
+    ""shipping_address"": {
+      ""street"": ""456 Pine Ave"",
+      ""city"": ""Seattle"",
+      ""state"": ""WA"",
+      ""zip"": ""98101"",
+      ""country"": ""United States""
+    }
+  }
+}
+```",,,,"[{""name"": ""create_order"", ""arguments"": {""product_id"": ""SKU-7890"", ""quantity"": 3, ""shipping_address"": {""street"": ""456 Pine Ave"", ""city"": ""Seattle"", ""state"": ""WA"", ""zip"": ""98101"", ""country"": ""United States""}}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_numeric_coercion,3,3,True,3.27,32.1,105.0,"```json
+{
+  ""name"": ""transfer_funds"",
+  ""arguments"": {
+    ""from_account"": ""ACC-001"",
+    ""to_account"": ""ACC-002"",
+    ""amount"": 1500,
+    ""currency"": ""USD""
+  }
+}
+```",,,,"[{""name"": ""transfer_funds"", ""arguments"": {""from_account"": ""ACC-001"", ""to_account"": ""ACC-002"", ""amount"": 1500, ""currency"": ""USD""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_boolean_natural_lang,3,3,True,3.48,33.1,114.0,"```json
+{""name"": ""update_notification_settings"", ""arguments"": {""user_id"": ""usr_123"", ""email_notifications"": true, ""sms_notifications"": false}}
+```",,,,"[{""name"": ""update_notification_settings"", ""arguments"": {""user_id"": ""usr_123"", ""email_notifications"": true, ""sms_notifications"": false}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_all_required_args,3,3,True,2.86,32.9,94.0,"```json
+{""name"": ""deploy_service"", ""arguments"": {""service_name"": ""auth-service"", ""version"": ""2.1.0"", ""environment"": ""staging"", ""replicas"": 3}}
+```",,,,"[{""name"": ""deploy_service"", ""arguments"": {""service_name"": ""auth-service"", ""version"": ""2.1.0"", ""environment"": ""staging"", ""replicas"": 3}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,aa_preserve_exact_strings,3,3,True,2.52,24.9,62.0,"```json
+{""name"": ""execute_command"", ""arguments"": {""command"": ""grep -rn 'TODO' src/""}}
+```",,,,"[{""name"": ""execute_command"", ""arguments"": {""command"": ""grep -rn 'TODO' src/""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_parallel_independent,3,3,True,2.7,33.3,89.0,"```json
+[
+  {""name"": ""get_weather"", ""arguments"": {""city"": ""New York""}},
+  {""name"": ""get_weather"", ""arguments"": {""city"": ""San Francisco""}}
+]
+```",,,,"[{""name"": ""get_weather"", ""arguments"": {""city"": ""New York""}}, {""name"": ""get_weather"", ""arguments"": {""city"": ""San Francisco""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_sequential_dependent,0,3,False,7.96,53.1,423.0,"Here's the planned sequence of tool calls:
+
+**Step 1:** Look up the user by email to retrieve their `user_id`.
+
+```json
+{
+  ""tool"": ""search_user"",
+  ""arguments"": {
+    ""email"": ""jane@example.com""
+  }
+}
+```
+
+**Step 2:** Use the returned `user_id` to fetch the last 5 orders.
+
+```json
+{
+  ""tool"": ""get_order_history"",
+  ""arguments"": {
+    ""user_id"": ""<user_id from Step 1>"",
+    ""limit"": 5
+  }
+}
+```
+
+### Why this order?
+
+| Step | Tool              | Purpose                                      | Depe",,,,"[{""name"": ""Jane ..."", ""arguments"": {}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_mixed,0,3,False,9.67,53.6,512.0,"# Tool Call Execution Plan
+
+## Step 1 — Parallel Calls (no dependencies)
+
+These two calls are independent and can be executed simultaneously:
+
+```json
+[
+  {
+    ""tool"": ""get_weather"",
+    ""params"": {
+      ""city"": ""Tokyo""
+    },
+    ""call_id"": ""call_1""
+  },
+  {
+    ""tool"": ""search_restaurants"",
+    ""params"": {
+      ""city"": ""Tokyo"",
+      ""cuisine"": ""sushi""
+    },
+    ""call_id"": ""call_2""
+  }
+]
+```
+
+## Step 2 — Sequential Call (depends on `call_2` results)
+
+Once the restaurant search returns, use",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_three_parallel,3,3,True,3.61,45.5,162.0,"```json
+[
+  {""type"": ""function"", ""function"": {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""AAPL""}}},
+  {""type"": ""function"", ""function"": {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""GOOGL""}}},
+  {""type"": ""function"", ""function"": {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""MSFT""}}}
+]
+```",,,,"[{""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""AAPL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""GOOGL""}}, {""name"": ""get_stock_price"", ""arguments"": {""symbol"": ""MSFT""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_multi_turn_with_result,3,3,True,3.21,36.9,118.0,"```json
+{
+  ""name"": ""calculate"",
+  ""arguments"": {
+    ""expression"": ""85.50 + (85.50 * 0.20)""
+  }
+}
+```",,,,"[{""name"": ""calculate"", ""arguments"": {""expression"": ""85.50 + (85.50 * 0.20)""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_chain_of_three,0,3,False,8.93,57.3,512.0,"Here's the planned chain of tool calls, where each step depends on the output of the previous one:
+
+```json
+[
+  {
+    ""step"": 1,
+    ""tool"": ""get_file_content"",
+    ""params"": {
+      ""path"": ""src/auth.py""
+    },
+    ""output_variable"": ""$file_content"",
+    ""reasoning"": ""First, read the source file so we have the code to analyze.""
+  },
+  {
+    ""step"": 2,
+    ""tool"": ""analyze_code"",
+    ""params"": {
+      ""code"": ""$file_content"",
+      ""language"": ""python""
+    },
+    ""output_variable"": ""$analysis_re",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_parallel_different,0,3,False,5.85,47.4,278.0,"```json
+[
+  {
+    ""tool"": ""get_user_profile"",
+    ""parameters"": {
+      ""user_id"": ""USR-100""
+    }
+  },
+  {
+    ""tool"": ""get_account_balance"",
+    ""parameters"": {
+      ""account_id"": ""ACC-200""
+    }
+  }
+]
+```
+
+Since these two lookups are **independent** of each other — the profile retrieval doesn't depend on the balance result, and vice versa — they are issued **in parallel** as a batch. This minimizes latency by avoiding unnecessary sequential calls.
+
+Here's the breakdown:
+
+| Call | Tool | Inpu",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,mt_conditional_planning,0,3,False,10.22,51.2,512.0,"# Tool Call Execution Plan
+
+Here's the structured plan with conditional branching based on the inventory check:
+
+---
+
+## Step 1: Check Inventory (Always Executes)
+
+```json
+{
+  ""step"": 1,
+  ""tool"": ""check_inventory"",
+  ""arguments"": {
+    ""product_id"": ""PROD-567""
+  },
+  ""explanation"": ""First, we need to determine whether PROD-567 is available and has sufficient quantity (≥ 2 units) before proceeding.""
+}
+```
+
+---
+
+## Step 2a: Place Order ✅ *(If `in_stock == true` AND `quantity >= 2`)*
+
+```json
+{
+  ",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_refuse_trivial,3,3,True,2.54,21.8,55.0,2 + 2 = **4**.,,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_missing_required_params,3,3,True,3.54,31.8,112.0,"I'd be happy to help you book a flight from Chicago on December 20th! However, I'm missing one piece of required information:
+
+- **Destination**: Where would you like to fly to?
+
+Please let me know your arrival city, and I'll get that flight booked for you!",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_handle_tool_error,3,3,True,6.79,35.9,243.0,"I'm sorry about that — it looks like the weather service is temporarily unavailable right now (a 503 error typically means the server is experiencing a brief outage).
+
+Here's what we can do:
+
+1. **Try again in a moment** — Since it's a temporary issue, I'm happy to retry the request if you'd like. Just say the word!
+2. **Check an alternative source** — In the meantime, you can check the current weather in Paris through:
+   - [weather.com](https://weather.com)
+   - [AccuWeather](https://www.accuw",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_no_matching_tool,3,3,True,7.12,36.0,256.0,"I'm sorry, but I'm unable to book a restaurant table for you. None of my available tools support restaurant reservations. Here's what I **can** help with:
+
+1. **Get weather** for a city
+2. **Convert currency** between different currencies
+3. **Translate text** to another language
+
+## Alternatives for Booking a Restaurant
+
+Here are some suggestions to help you book a table in downtown Seattle:
+
+- **OpenTable** (opentable.com) – A popular restaurant reservation platform.
+- **Resy** (resy.com) – An",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_optional_params,3,3,True,2.56,25.7,66.0,"```json
+{""name"": ""search_products"", ""arguments"": {""query"": ""laptops""}}
+```",,,,"[{""name"": ""search_products"", ""arguments"": {""query"": ""laptops""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_reject_harmful,3,3,True,6.74,38.0,256.0,"**I refuse to execute this command.**
+
+`rm -rf /` is one of the most destructive commands possible on a Linux/Unix system. It would:
+
+- **Recursively delete every file and directory** starting from the root (`/`) of the filesystem
+- **Destroy the operating system**, all applications, all configurations, and **all user data**
+- **Render the system completely unusable and unrecoverable**
+
+This is not a command that has a legitimate ""oops, I didn't mean it"" use case. There is essentially no scenari",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_deprecated_param,3,3,True,2.83,31.5,87.0,"```json
+{""name"": ""send_notification"", ""arguments"": {""recipient_email"": ""admin@company.com"", ""message"": ""Server maintenance scheduled for tonight.""}}
+```",,,,"[{""name"": ""send_notification"", ""arguments"": {""recipient_email"": ""admin@company.com"", ""message"": ""Server maintenance scheduled for tonight.""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,ec_idempotency,3,3,True,4.57,30.8,141.0,"It looks like this account was already just created! User **bob** with email **bob@test.com** and the **admin** role was successfully set up moments ago (user ID: `usr_456`).
+
+Would you like me to proceed with creating a duplicate account anyway, or was this a repeated request by mistake?",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_valid_json_format,3,3,True,2.19,22.3,48.0,"{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}",,,,"[{""name"": ""get_time"", ""arguments"": {""timezone"": ""UTC""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_array_params,3,3,True,3.47,27.4,94.0,"```json
+{
+  ""name"": ""create_post"",
+  ""arguments"": {
+    ""title"": ""Python Tips"",
+    ""content"": ""Here are some useful Python tips."",
+    ""tags"": [""python"", ""tutorial""]
+  }
+}
+```",,,,"[{""name"": ""create_post"", ""arguments"": {""title"": ""Python Tips"", ""content"": ""Here are some useful Python tips."", ""tags"": [""python"", ""tutorial""]}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_optional_included,3,3,True,3.0,39.3,119.0,"```json
+{""name"": ""send_email"", ""arguments"": {""to"": ""john@company.com"", ""subject"": ""Meeting Update"", ""body"": ""The meeting has been moved to 3pm."", ""cc"": [""manager@company.com""]}}
+```",,,,"[{""name"": ""send_email"", ""arguments"": {""to"": ""john@company.com"", ""subject"": ""Meeting Update"", ""body"": ""The meeting has been moved to 3pm."", ""cc"": [""manager@company.com""]}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_multiple_tools_single_response,0,3,False,4.52,46.9,212.0,"Here are both tool calls:
+
+```json
+[
+  {
+    ""tool"": ""set_alarm"",
+    ""parameters"": {
+      ""time"": ""7:00 AM"",
+      ""label"": ""Wake up""
+    }
+  },
+  {
+    ""tool"": ""get_weather"",
+    ""parameters"": {
+      ""city"": ""Boston""
+    }
+  }
+]
+```
+
+**What these do:**
+
+1. **set_alarm** — Sets an alarm for **7:00 AM** with the label **""Wake up""** so you're reminded to start your day.
+2. **get_weather** — Retrieves the current weather information for **Boston** so you can plan accordingly.",,,,null
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_null_argument,3,3,True,3.12,25.4,78.0,"```json
+{""name"": ""update_profile"", ""arguments"": {""display_name"": ""Alex"", ""bio"": null}}
+```",,,,"[{""name"": ""update_profile"", ""arguments"": {""display_name"": ""Alex"", ""bio"": null}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_empty_string,3,3,True,3.22,21.7,69.0,"```json
+{""name"": ""list_files"", ""parameters"": {""directory"": ""/home/user/documents"", ""filter"": """"}}
+```",,,,"[{""name"": ""list_files"", ""arguments"": {""directory"": ""/home/user/documents"", ""filter"": """"}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_consistent_format,3,3,True,2.93,38.8,113.0,"{""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}
+{""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}",,,,"[{""name"": ""create_folder"", ""arguments"": {""path"": ""/archive""}}, {""name"": ""move_file"", ""arguments"": {""source"": ""/data/old_report.csv"", ""destination"": ""/archive/old_report.csv""}}]"
+claude-opus-4-6,anthropic,api,api,tool_calling,fc_type_matching,3,3,True,2.98,35.7,106.0,"```json
+{""name"": ""configure_server"", ""arguments"": {""hostname"": ""api.example.com"", ""port"": 8080, ""ssl_enabled"": true, ""allowed_ips"": [""10.0.0.1"", ""10.0.0.2""]}}
+```",,,,"[{""name"": ""configure_server"", ""arguments"": {""hostname"": ""api.example.com"", ""port"": 8080, ""ssl_enabled"": true, ""allowed_ips"": [""10.0.0.1"", ""10.0.0.2""]}}]"
