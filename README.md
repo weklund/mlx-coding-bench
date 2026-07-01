@@ -85,6 +85,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 | Qwen 3.5-2B (2B dense) | 4.0 GiB | 93 | 1668 |
 | Gemma 4 E2B-it (2.3B dense) | 5.8 GiB | 78 | 4265 |
 | LFM2-24B-A2B (2B MoE) | 25.9 GiB | 75 | 1186 |
+| gpt-oss-20b | 12.7 GiB | 72 | 837 |
 | Qwen 2.5-Coder-3B (3B dense) | 4.0 GiB | 72 | 1093 |
 | Qwen 2.5-3B-it (3B dense) | 4.0 GiB | 68 | 1135 |
 | Nemotron-3-Nano-4B (4B dense) | 6.5 GiB | 58 | 824 |
@@ -97,6 +98,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 | Gemma 4 E4B-it (4.5B dense) | 8.7 GiB | 42 | 1229 |
 | Qwen 3-8B-it (8B dense) | 9.5 GiB | 30 | 454 |
 | DeepSeek-R1-0528-Qwen3-8B (8B dense) | 9.5 GiB | 29 | 450 |
+| ornith-1.0-9b | 10.6 GiB | 28 | 431 |
 | Qwen 3.5-9B (9B dense) | 11.7 GiB | 24 | 383 |
 | Qwen 3.5-35B-A3B (3B MoE) | 39.2 GiB | 22 | 716 |
 | Gemma 3-12B-it QAT (12B dense) | 14.6 GiB | 18 | 280 |
