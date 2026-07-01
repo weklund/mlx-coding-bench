@@ -304,3 +304,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full setup instructions and how to su
 - **[mlx-stack](https://github.com/weklund/mlx-stack)** -- runs multiple MLX models behind a single OpenAI-compatible endpoint. This benchmark suite feeds its model catalog.
 - **[QUALITY_METHODOLOGY.md](QUALITY_METHODOLOGY.md)** -- detailed breakdown of the quality benchmark suite, scoring formula, and problem categories.
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** -- how to add models, run benchmarks, and submit measurements.
+
+## Acknowledgments
+
+This project began as a fork of [aukejw/mlx_transformers_benchmark](https://github.com/aukejw/mlx_transformers_benchmark), which benchmarks MLX layer operations and LLM inference speed across Apple Silicon chips. This repo diverged significantly to focus on **quality evaluation for agentic coding** — adding an 81-problem benchmark suite with code execution, tool calling, and weighted scoring — and was moved to a standalone repository for independent development.
