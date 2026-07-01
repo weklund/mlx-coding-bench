@@ -25,6 +25,8 @@ def main(
     enable_hf_progressbar: bool = False,
     cooldown_time_fraction: float = 0.05,
     hf_cache_dir: Optional[str] = mtb.DEFAULT_HF_HOME,
+    speculative: bool = False,
+    prompt_profile: str = "generic",
     *,
     run_only_benchmarks: Optional[Iterable[str]] = None,
     run_mlx_metal: bool = True,
@@ -74,6 +76,26 @@ def main(
         **boolean_flags,
     )
 
+    # In speculative mode, only benchmark models that actually have a drafter
+    # configured for their framework/dtype (others have nothing to speculate).
+    if speculative:
+        eligible = [
+            cfg
+            for cfg in benchmarks_to_run
+            if cfg["model_spec"].get_draft_model_id(cfg["framework"], cfg["dtype"])
+        ]
+        skipped = {
+            cfg["model_spec"].name
+            for cfg in benchmarks_to_run
+            if cfg not in eligible
+        }
+        if skipped:
+            print(
+                f"Speculative mode: skipping {len(skipped)} model(s) without a "
+                f"drafter: {sorted(skipped)}"
+            )
+        benchmarks_to_run = eligible
+
     # Create output directory for measurements
     output_dir = create_benchmark_output_dir(
         output_root=output_root,
@@ -83,6 +105,8 @@ def main(
             max_num_tokens=max_num_tokens,
             dtypes=dtypes,
             run_only_benchmarks=run_only_benchmarks,
+            speculative=speculative,
+            prompt_profile=prompt_profile,
         ),
     )
     output_path = output_dir / "benchmark_results.csv"
@@ -107,6 +131,8 @@ def main(
                 num_iterations=num_iterations,
                 max_num_tokens=max_num_tokens,
                 cooldown_time_fraction=cooldown_time_fraction,
+                use_speculative=speculative,
+                prompt_profile=prompt_profile,
             )
 
     print(f"Saved {len(measurements)} measurements to '{output_path}'")

@@ -37,6 +37,37 @@ HARDWARE_DISPLAY = {
     "Apple_M5_Max_XP+XE+40GPU_128GB": "M5 Max 128GB",
 }
 
+
+def _short_model_id(model_id: str) -> str:
+    """'mlx-community/Qwen3-0.6B-4bit' -> 'Qwen3-0.6B' for compact display."""
+    if not model_id:
+        return "--"
+    name = model_id.split("/")[-1]
+    for suffix in ("-4bit", "-8bit", "-bf16", "-MLX", "-mlx", "-Instruct"):
+        name = name.replace(suffix, "")
+    return name
+
+
+# Registry of optimizations layered on top of the standard config. Each entry
+# controls how that optimization renders in the Optimizations section. Add a new
+# key here (and set benchmark.optimization to match) to introduce a new method —
+# the section, speedup math, and table are all generic.
+OPTIMIZATION_DISPLAY = {
+    "speculative_decoding": {
+        "title": "Speculative decoding",
+        "blurb": (
+            "A small **drafter** model proposes tokens that the base model "
+            "verifies in parallel. Output is identical to the standard config — "
+            "only throughput changes. Requires a drafter sharing the base "
+            "model's tokenizer, and a base architecture with a trimmable KV "
+            "cache (Qwen/Llama/Gemma work; some newer architectures don't yet)."
+        ),
+        "config_header": "Drafter",
+        "config_fn": _short_model_id,
+        # spec-dec preserves output, so quantify only speed (no memory/quality).
+    },
+}
+
 # Model display names and metadata
 MODEL_META = {
     "gemma-4-e2b-it": {"display": "Gemma 4 E2B-it", "arch": "2.3B dense"},
@@ -140,6 +171,16 @@ def load_speed_data(
 
     all_df = pd.concat(dfs, ignore_index=True)
 
+    # Optimization + prompt-profile dimensions (backward-compat: older CSVs
+    # predate them, so their rows are the standard config on generic prompts).
+    for col in ("optimization", "optimization_detail"):
+        if col not in all_df.columns:
+            all_df[col] = ""
+        all_df[col] = all_df[col].fillna("")
+    if "prompt_profile" not in all_df.columns:
+        all_df["prompt_profile"] = "generic"
+    all_df["prompt_profile"] = all_df["prompt_profile"].fillna("generic")
+
     # Filter to 1024 prompt tokens, MLX metal
     mask = (all_df["num_prompt_tokens"] == 1024) & (all_df["framework"] == "mlx")
     all_df = all_df[mask].copy()
@@ -147,16 +188,27 @@ def load_speed_data(
     if models:
         all_df = all_df[all_df["name"].isin(models)]
 
-    # Keep latest per model/dtype/hardware
+    # Keep latest per model/dtype/hardware/optimization/prompt_profile
+    # (standard and each optimization×profile are distinct rows for a model).
     all_df = (
         all_df.sort_values("_source_dir")
-        .groupby(["hardware", "name", "dtype"])
+        .groupby(["hardware", "name", "dtype", "optimization", "prompt_profile"])
         .last()
         .reset_index()
     )
 
     return all_df[
-        ["hardware", "name", "dtype", "generation_tps", "prompt_tps", "peak_memory_gib"]
+        [
+            "hardware",
+            "name",
+            "dtype",
+            "optimization",
+            "optimization_detail",
+            "prompt_profile",
+            "generation_tps",
+            "prompt_tps",
+            "peak_memory_gib",
+        ]
     ]
 
 
@@ -620,6 +672,92 @@ def generate_cross_hardware_summary(
     return "\n".join(lines)
 
 
+def generate_optimizations_section(speed_df: pd.DataFrame) -> str:
+    """Render the generic 'Optimizations' section.
+
+    Any speed row with a non-empty `optimization` is compared against the
+    matching standard row (same hardware/name/dtype, optimization == "") to
+    report a speedup. One sub-table per optimization method, driven by
+    OPTIMIZATION_DISPLAY, so new methods need no bespoke rendering code.
+    """
+    if speed_df.empty or "optimization" not in speed_df.columns:
+        return ""
+
+    optimized = speed_df[speed_df["optimization"].astype(str) != ""].copy()
+    if optimized.empty:
+        return ""
+
+    # Each optimized row is compared against the standard row measured on the
+    # SAME prompt profile (spec-dec speedup depends heavily on the workload).
+    standard = (
+        speed_df[speed_df["optimization"].astype(str) == ""][
+            ["hardware", "name", "dtype", "prompt_profile", "generation_tps"]
+        ].rename(columns={"generation_tps": "standard_tps"})
+    )
+
+    lines = ["## Optimizations", ""]
+    lines.append(
+        "Techniques layered on top of the standard config above. They trade "
+        "extra setup for speed/memory gains and are opt-in — not every model or "
+        "architecture supports each one — so they're reported separately rather "
+        "than mixed into the main ranking. Speedup is vs. that model's standard "
+        "row on the same hardware **and prompt profile**: `prose` uses the "
+        "generic benchmark prompt (near worst-case acceptance), `code` uses a "
+        "code-continuation prompt (closer to agentic-coding use)."
+    )
+    lines.append("")
+
+    for opt_name, opt_df in optimized.groupby("optimization"):
+        meta = OPTIMIZATION_DISPLAY.get(
+            opt_name,
+            {
+                "title": opt_name.replace("_", " ").title(),
+                "blurb": "",
+                "config_header": "Config",
+                "config_fn": lambda d: d or "--",
+            },
+        )
+        merged = opt_df.merge(
+            standard, on=["hardware", "name", "dtype", "prompt_profile"], how="left"
+        )
+        merged["speedup"] = merged["generation_tps"] / merged["standard_tps"]
+        # Group each model's profiles together, best speedup first.
+        merged = merged.sort_values(
+            ["name", "prompt_profile"], ascending=[True, True]
+        )
+
+        lines.append(f"### ⚡ {meta['title']}")
+        lines.append("")
+        if meta.get("blurb"):
+            lines.append(meta["blurb"])
+            lines.append("")
+        lines.append(
+            f"| Model | {meta['config_header']} | Prompt | Hardware | Standard "
+            "| + Optimized | Speedup |"
+        )
+        lines.append("|---|---|---|---|---:|---:|---:|")
+
+        config_fn = meta.get("config_fn", lambda d: d or "--")
+        for _, r in merged.iterrows():
+            name = format_model_name(r["name"], include_arch=True)
+            cfg = config_fn(r.get("optimization_detail", ""))
+            profile = "code" if r.get("prompt_profile") == "code" else "prose"
+            hw = HARDWARE_DISPLAY.get(r["hardware"], r["hardware"])
+            std = (
+                f"{r['standard_tps']:.0f} tok/s"
+                if pd.notna(r["standard_tps"])
+                else "--"
+            )
+            opt = f"{r['generation_tps']:.0f} tok/s"
+            spd = f"{r['speedup']:.2f}×" if pd.notna(r["speedup"]) else "--"
+            lines.append(
+                f"| {name} | {cfg} | {profile} | {hw} | {std} | {opt} | {spd} |"
+            )
+        lines.append("")
+
+    return "\n".join(lines)
+
+
 def generate_tables(
     models: Optional[List[str]] = None,
 ) -> str:
@@ -630,13 +768,21 @@ def generate_tables(
     if speed_df.empty:
         return "No benchmark data found.\n"
 
+    # The main tables use only the standard (unoptimized) config on the generic
+    # prompt, so every model is compared on the same footing. Optimizations and
+    # alternate prompt profiles get their own section.
+    standard_speed = speed_df[
+        (speed_df["optimization"].astype(str) == "")
+        & (speed_df["prompt_profile"].astype(str) == "generic")
+    ].copy()
+
     # Determine hardware profiles with data, sorted by preference
     hardware_order = [
         "Apple_M4_Pro_10P+4E+20GPU_64GB",
         "Apple_M5_Max_XP+XE+40GPU_128GB",
         "Apple_M4_Pro_10P+4E+20GPU_24GB",
     ]
-    available_hw = speed_df["hardware"].unique()
+    available_hw = standard_speed["hardware"].unique()
     hardware_profiles = [h for h in hardware_order if h in available_hw]
     for h in sorted(available_hw):
         if h not in hardware_profiles:
@@ -690,7 +836,9 @@ def generate_tables(
     # Only include primary hardware profiles (skip older/legacy)
     primary_hw = [h for h in hardware_profiles if "24GB" not in h]
     if len(primary_hw) >= 1:
-        lines.append(generate_cross_hardware_summary(speed_df, quality_df, primary_hw))
+        lines.append(
+            generate_cross_hardware_summary(standard_speed, quality_df, primary_hw)
+        )
         lines.append("")
 
     # Hardware profiles that still use the older (smaller) quality suite
@@ -716,7 +864,7 @@ def generate_tables(
                 )
                 lines.append("")
 
-        table = generate_hardware_table(speed_df, quality_df, hw)
+        table = generate_hardware_table(standard_speed, quality_df, hw)
         if table:
             lines.append(table)
         else:
@@ -726,6 +874,12 @@ def generate_tables(
             lines.append("")
             lines.append("</details>")
 
+        lines.append("")
+
+    # Optimizations section (only rendered if any optimized rows exist).
+    optimizations = generate_optimizations_section(speed_df)
+    if optimizations:
+        lines.append(optimizations)
         lines.append("")
 
     return "\n".join(lines)

@@ -31,12 +31,21 @@ def find_prompt_for_llm_benchmark(
         A prompt with the correct number of tokens for the tokenizer and message template.
 
     """
+    # The prompt profile controls what kind of text the model generates.
+    # "generic" prose is close to worst-case acceptance for speculative
+    # decoding; "code" is more representative of agentic-coding workloads.
+    prompt_builder = (
+        get_code_prompt
+        if getattr(benchmark, "prompt_profile", "generic") == "code"
+        else get_random_prompt
+    )
+
     try:
         prompt_tokens = benchmark.format_and_tokenize_prompt("")
     except NotImplementedError:
         # benchmark does not implement tokenizer: use a very long prompt,
         # and rely on the context length parameter to limit the context.
-        prompt = get_random_prompt(text_length=5 * num_tokens)
+        prompt = prompt_builder(text_length=5 * num_tokens)
         # sadly, this involves re-initializing the model: context length is a load-time parameter
         benchmark.max_context_length = num_tokens
         benchmark.teardown()
@@ -58,7 +67,7 @@ def find_prompt_for_llm_benchmark(
 
     # iteratively search for prompts until we hit one with length num_tokens
     while num_prompt_tokens != num_tokens:
-        prompt = get_random_prompt(text_length=text_length)
+        prompt = prompt_builder(text_length=text_length)
         prompt_tokens = benchmark.format_and_tokenize_prompt(prompt)
         num_prompt_tokens = len(prompt_tokens)
 
@@ -102,3 +111,70 @@ def get_random_prompt(text_length: int) -> str:
     prompt += task_string
 
     return prompt
+
+
+# A realistic partial module used by the "code" prompt profile. Ending the
+# prompt inside real code makes the model generate more code — predictable
+# syntax and repeated identifiers give a small drafter a much higher acceptance
+# rate than free-form prose, closer to agentic-coding use.
+_CODE_HEADER = '''\
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional
+
+
+@dataclass
+class LRUCache:
+    """A fixed-capacity least-recently-used cache."""
+
+    capacity: int
+    _store: Dict[int, int] = field(default_factory=dict)
+    _order: List[int] = field(default_factory=list)
+
+    def get(self, key: int) -> Optional[int]:
+        if key not in self._store:
+            return None
+        self._order.remove(key)
+        self._order.append(key)
+        return self._store[key]
+
+    def put(self, key: int, value: int) -> None:
+        if key in self._store:
+            self._order.remove(key)
+        elif len(self._store) >= self.capacity:
+            oldest = self._order.pop(0)
+            del self._store[oldest]
+        self._store[key] = value
+        self._order.append(key)
+'''
+
+
+def get_code_prompt(text_length: int) -> str:
+    """Get a realistic code-continuation prompt of the specified length.
+
+    Same length contract as get_random_prompt (text_length in characters), but
+    the content is a Python module the model is asked to extend, so generation
+    is code. Speculative-decoding acceptance is highly content-dependent, so
+    this profile measures spec-dec closer to real coding workloads.
+    """
+    instruction = (
+        "# Extend the module below: add `peek()`, `__len__`, `clear()`, and a "
+        "`stats()` method returning a dict of hits and misses. Keep the same "
+        "style, add docstrings, then write a few unit tests. Continue the code:\n\n"
+    )
+    base = instruction + _CODE_HEADER
+    if text_length <= len(base):
+        return base[-text_length:]
+
+    # Pad with varying comment lines (random numbers defeat prompt caching)
+    # placed before the module, so the instruction + code stay at the end.
+    pad_target = text_length - len(base)
+    lines = []
+    total = 0
+    i = 0
+    while total < pad_target:
+        line = f"# fixture {random.randint(0, 10**9)}: seed row {i}\n"
+        lines.append(line)
+        total += len(line)
+        i += 1
+    pad = "".join(lines)[:pad_target]
+    return pad + base

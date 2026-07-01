@@ -149,6 +149,11 @@ Gemma3_12B_it_QAT = ModelSpec(
             "int4": "gemma3:12b-it-qat",
         },
     },
+    # Speculative decoding drafter (shares the Gemma vocab). Cross-family test:
+    # Gemma-3's sliding-window attention may or may not expose a trimmable cache.
+    draft_model_ids={
+        "mlx": {"int4": "mlx-community/gemma-3-1b-it-qat-4bit"},
+    },
 )
 
 
