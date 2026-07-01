@@ -82,3 +82,4 @@ venv.bak/
 # Local model files (too large for git)
 /models/
 site/
+social-preview.png
