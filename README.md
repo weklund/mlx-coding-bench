@@ -6,7 +6,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 
 <!-- BEGIN BENCHMARK TABLE -->
 
-> MLX Metal | int4 quantization | June 2026
+> MLX Metal | int4 quantization | July 2026
 > Speed: 1024 prompt tokens, 100 generated tokens
 > Quality: 81 problems across coding, reasoning, tool calling, math, writing (3 runs each, majority vote)
 > **API baseline:** Claude Opus 4.6 scores 86.7% on the same quality benchmark (via Anthropic API, not local)
@@ -61,9 +61,9 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 | Gemma 3-1B-it QAT (1B dense) | 1.6 GiB | 250 | 3774 |
 | Nemotron-3-Nano-4B (4B dense) | 4.5 GiB | 102 | 833 |
 | DeepSeek-R1-Distill-7B (7B dense) | 5.1 GiB | 56 | 531 |
-| Qwen 3-8B-it (8B dense) | 5.4 GiB | 51 | 452 |
-| Gemma 3-12B-it QAT (12B dense) | 8.2 GiB | 32 | 280 |
-| Qwen 3-14B-it (14B dense) | 9.1 GiB | 29 | 242 |
+| Qwen 3-8B-it (8B dense) | 5.4 GiB | 52 | 457 |
+| Gemma 3-12B-it QAT (12B dense) | 8.3 GiB | 32 | 271 |
+| Qwen 3-14B-it (14B dense) | 9.1 GiB | 29 | 239 |
 | phi-4-reasoning-plus | 10.1 GiB | 26 | 239 |
 | Qwen 3.5-27B Opus Distilled (27B dense) | 16.9 GiB | 16 | 128 |
 
@@ -229,6 +229,26 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 </details>
 
 </details>
+
+## Optimizations
+
+Techniques layered on top of the standard config above. They trade extra setup for speed/memory gains and are opt-in — not every model or architecture supports each one — so they're reported separately rather than mixed into the main ranking. Speedup is vs. that model's standard row on the same hardware **and prompt profile**: `prose` uses the generic benchmark prompt (near worst-case acceptance), `code` uses a code-continuation prompt (closer to agentic-coding use).
+
+### ⚡ Speculative decoding
+
+A small **drafter** model proposes tokens that the base model verifies in parallel. Output is identical to the standard config — only throughput changes. Requires a drafter sharing the base model's tokenizer, and a base architecture with a trimmable KV cache (Qwen/Llama/Gemma work; some newer architectures don't yet).
+
+| Model | Drafter | Prompt | Hardware | Standard | + Optimized | Speedup |
+|---|---|---|---|---:|---:|---:|
+| Gemma 3-12B-it QAT (12B dense) | gemma-3-1b-it-qat | code | M4 Pro 64GB | 32 tok/s | 45 tok/s | 1.43× |
+| Gemma 3-12B-it QAT (12B dense) | gemma-3-1b-it-qat | prose | M4 Pro 64GB | 32 tok/s | 28 tok/s | 0.87× |
+| Qwen 3-14B-it (14B dense) | Qwen3-0.6B | code | M4 Pro 64GB | 29 tok/s | 39 tok/s | 1.36× |
+| Qwen 3-14B-it (14B dense) | Qwen3-0.6B | prose | M4 Pro 64GB | 29 tok/s | 46 tok/s | 1.60× |
+| Qwen 3-8B-it (8B dense) | Qwen3-0.6B | code | M4 Pro 64GB | 51 tok/s | 55 tok/s | 1.08× |
+| Qwen 3-8B-it (8B dense) | Qwen3-0.6B | prose | M4 Pro 64GB | 52 tok/s | 52 tok/s | 1.00× |
+| Qwen3-Coder-30B-A3B (3B MoE) | Qwen3-0.6B | code | M4 Pro 64GB | 80 tok/s | 80 tok/s | 1.00× |
+| Qwen3-Coder-30B-A3B (3B MoE) | Qwen3-0.6B | prose | M4 Pro 64GB | 80 tok/s | 53 tok/s | 0.66× |
+
 
 
 <!-- END BENCHMARK TABLE -->
