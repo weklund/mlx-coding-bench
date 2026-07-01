@@ -307,4 +307,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full setup instructions and how to su
 
 ## Acknowledgments
 
-This project began as a fork of [aukejw/mlx_transformers_benchmark](https://github.com/aukejw/mlx_transformers_benchmark), which benchmarks MLX layer operations and LLM inference speed across Apple Silicon chips. This repo diverged significantly to focus on **quality evaluation for agentic coding** — adding an 81-problem benchmark suite with code execution, tool calling, and weighted scoring — and was moved to a standalone repository for independent development.
+This project began as a fork of [aukejw/mlx_transformers_benchmark](https://github.com/aukejw/mlx_transformers_benchmark) (thank you @aukejw !), which benchmarks MLX layer operations and LLM inference speed across Apple Silicon chips. This repo diverged significantly to focus on **quality evaluation for agentic coding** — adding an 81-problem benchmark suite with code execution, tool calling, and weighted scoring — and was moved to a standalone repository for independent development.
