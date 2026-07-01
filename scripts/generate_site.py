@@ -129,7 +129,7 @@ def _render_html(data: dict) -> str:
     generated = data["generated"]
 
     return f"""<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -143,6 +143,14 @@ def _render_html(data: dict) -> str:
     <meta name="twitter:description" content="Speed + quality benchmarks for 35+ local LLMs on Apple Silicon. The only benchmark that measures both.">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <script>
+        // Apply theme before render to avoid flash
+        (function() {{
+            const saved = localStorage.getItem('theme');
+            const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', saved || system);
+        }})();
+    </script>
     <script src="https://cdn.plot.ly/plotly-2.35.0.min.js"></script>
 
     <style>
@@ -184,7 +192,21 @@ def _render_html(data: dict) -> str:
             gap: 1rem;
             flex-wrap: wrap;
             align-items: end;
-            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
+            margin: 0 -1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--pico-background-color);
+            border-bottom: 1px solid var(--pico-muted-border-color);
+            border-radius: var(--pico-border-radius);
+            transition: box-shadow 0.2s;
+        }}
+        .filters.stuck {{
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 0;
+            margin: 0 -1.5rem 1.5rem;
+            padding: 0.75rem 1.5rem;
         }}
         .filters label {{
             margin-bottom: 0;
@@ -237,6 +259,28 @@ def _render_html(data: dict) -> str:
         .badge-moe {{ background: color-mix(in srgb, var(--pico-primary) 20%, transparent); color: var(--pico-primary); }}
         .badge-dense {{ background: color-mix(in srgb, #f78166 20%, transparent); color: #f78166; }}
 
+        .theme-toggle {{
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: 1px solid var(--pico-muted-border-color);
+            border-radius: 50%;
+            width: 2.2rem;
+            height: 2.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: border-color 0.2s;
+            padding: 0;
+            margin: 0;
+        }}
+        .theme-toggle:hover {{
+            border-color: var(--pico-primary);
+        }}
+
         section {{ margin-bottom: 3rem; }}
         section > p:first-of-type {{ opacity: 0.65; margin-bottom: 1.5rem; }}
 
@@ -249,7 +293,8 @@ def _render_html(data: dict) -> str:
     </style>
 </head>
 <body>
-<main class="container">
+<main class="container" style="position:relative;">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="theme-btn"></button>
     <header>
         <h1>mlx-coding-bench</h1>
         <p>Which local LLM runs best for coding on your Mac? The only benchmark measuring both <strong>speed</strong> and <strong>quality</strong> for agentic coding on Apple Silicon.</p>
@@ -257,35 +302,34 @@ def _render_html(data: dict) -> str:
 
     <div class="stats-grid" id="hero-stats"></div>
 
+    <div class="filters">
+        <label>
+            Hardware
+            <select id="hw-filter" onchange="updateCharts()"></select>
+        </label>
+        <label>
+            Quantization
+            <select id="dtype-filter" onchange="updateCharts()">
+                <option value="int4" selected>int4</option>
+                <option value="int8">int8</option>
+            </select>
+        </label>
+        <label>
+            RAM limit
+            <select id="ram-filter" onchange="updateCharts()">
+                <option value="999">All</option>
+                <option value="8">&le; 8 GB</option>
+                <option value="16">&le; 16 GB</option>
+                <option value="24">&le; 24 GB</option>
+                <option value="32">&le; 32 GB</option>
+                <option value="48">&le; 48 GB</option>
+            </select>
+        </label>
+    </div>
+
     <section>
         <h2>Speed vs Quality</h2>
         <p>The tradeoff that matters. Top-right is the sweet spot — fast enough for interactive use AND smart enough for real coding tasks.</p>
-
-        <div class="filters">
-            <label>
-                Hardware
-                <select id="hw-filter" onchange="updateCharts()"></select>
-            </label>
-            <label>
-                Quantization
-                <select id="dtype-filter" onchange="updateCharts()">
-                    <option value="int4" selected>int4</option>
-                    <option value="int8">int8</option>
-                </select>
-            </label>
-            <label>
-                RAM limit
-                <select id="ram-filter" onchange="updateCharts()">
-                    <option value="999">All</option>
-                    <option value="8">&le; 8 GB</option>
-                    <option value="16">&le; 16 GB</option>
-                    <option value="24">&le; 24 GB</option>
-                    <option value="32">&le; 32 GB</option>
-                    <option value="48">&le; 48 GB</option>
-                </select>
-            </label>
-        </div>
-
         <div class="chart-wrap" id="scatter-chart" style="height:520px;"></div>
     </section>
 
@@ -325,6 +369,35 @@ def _render_html(data: dict) -> str:
 
 <script>
 const DATA = {data_json};
+
+function isDark() {{
+    return document.documentElement.getAttribute('data-theme') === 'dark';
+}}
+
+function themeColors() {{
+    const dark = isDark();
+    return {{
+        text: dark ? '#c9d1d9' : '#24292f',
+        grid: dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.08)',
+        line: dark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.12)',
+        muted: dark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.4)',
+        zone: dark ? 'rgba(63,185,80,0.03)' : 'rgba(63,185,80,0.06)',
+    }};
+}}
+
+function toggleTheme() {{
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeIcon();
+    updateCharts();
+}}
+
+function updateThemeIcon() {{
+    const btn = document.getElementById('theme-btn');
+    btn.textContent = isDark() ? '☀️' : '🌙';
+}}
 
 function getFilters() {{
     const hw = document.getElementById('hw-filter').value;
@@ -397,7 +470,7 @@ function updateScatter() {{
 
     const isMoE = m => m.arch.includes('MoE');
     const traces = [];
-    const bg = getComputedStyle(document.body).getPropertyValue('--pico-card-background-color').trim() || '#1e2228';
+    const tc = themeColors();
 
     const moQ = withQuality.filter(isMoE);
     if (moQ.length) {{
@@ -434,30 +507,30 @@ function updateScatter() {{
     const layout = {{
         paper_bgcolor: 'rgba(0,0,0,0)',
         plot_bgcolor: 'rgba(0,0,0,0)',
-        font: {{ color: '#c9d1d9', size: 12 }},
+        font: {{ color: tc.text, size: 12 }},
         xaxis: {{
             title: {{ text: 'Generation Speed (tok/s)', standoff: 10 }},
-            gridcolor: 'rgba(255,255,255,0.06)',
+            gridcolor: tc.grid,
             zeroline: false,
-            linecolor: 'rgba(255,255,255,0.1)',
+            linecolor: tc.line,
         }},
         yaxis: {{
             title: {{ text: 'Quality (%)', standoff: 10 }},
-            gridcolor: 'rgba(255,255,255,0.06)',
+            gridcolor: tc.grid,
             zeroline: false,
             range: [10, 100],
-            linecolor: 'rgba(255,255,255,0.1)',
+            linecolor: tc.line,
         }},
         legend: {{ x: 0.01, y: 0.99, bgcolor: 'rgba(0,0,0,0)', font: {{ size: 11 }} }},
         margin: {{ t: 20, r: 20, b: 50, l: 55 }},
         shapes: [
-            {{ type: 'line', x0: 50, x1: 50, y0: 10, y1: 100, line: {{ color: 'rgba(255,255,255,0.12)', dash: 'dot', width: 1 }} }},
-            {{ type: 'line', x0: 0, x1: 500, y0: 60, y1: 60, line: {{ color: 'rgba(255,255,255,0.12)', dash: 'dot', width: 1 }} }},
-            {{ type: 'rect', x0: 50, x1: 500, y0: 60, y1: 100, fillcolor: 'rgba(63,185,80,0.03)', line: {{ width: 0 }} }},
+            {{ type: 'line', x0: 50, x1: 50, y0: 10, y1: 100, line: {{ color: tc.line, dash: 'dot', width: 1 }} }},
+            {{ type: 'line', x0: 0, x1: 500, y0: 60, y1: 60, line: {{ color: tc.line, dash: 'dot', width: 1 }} }},
+            {{ type: 'rect', x0: 50, x1: 500, y0: 60, y1: 100, fillcolor: tc.zone, line: {{ width: 0 }} }},
         ],
         annotations: [
-            {{ x: 52, y: 13, text: '50 tok/s', showarrow: false, font: {{ size: 9, color: 'rgba(255,255,255,0.35)' }}, xanchor: 'left' }},
-            {{ x: 3, y: 62, text: '60% quality', showarrow: false, font: {{ size: 9, color: 'rgba(255,255,255,0.35)' }}, xanchor: 'left' }},
+            {{ x: 52, y: 13, text: '50 tok/s', showarrow: false, font: {{ size: 9, color: tc.muted }}, xanchor: 'left' }},
+            {{ x: 3, y: 62, text: '60% quality', showarrow: false, font: {{ size: 9, color: tc.muted }}, xanchor: 'left' }},
         ],
     }};
 
@@ -503,6 +576,7 @@ function updateSpeedTiers() {{
         return '#f78166';
     }});
 
+    const tc = themeColors();
     const trace = {{
         type: 'bar',
         orientation: 'h',
@@ -511,7 +585,7 @@ function updateSpeedTiers() {{
         marker: {{ color: colors }},
         text: models.map(m => `${{m.gen_tps}} tok/s`),
         textposition: 'outside',
-        textfont: {{ size: 11, color: '#c9d1d9' }},
+        textfont: {{ size: 11, color: tc.text }},
         hovertemplate: models.map(m =>
             `<b>${{m.display_name}}</b><br>${{m.gen_tps}} tok/s<br>${{m.quality_pct}}% quality<br>${{m.memory_gib}} GiB<extra></extra>`
         ),
@@ -521,10 +595,10 @@ function updateSpeedTiers() {{
     const layout = {{
         paper_bgcolor: 'rgba(0,0,0,0)',
         plot_bgcolor: 'rgba(0,0,0,0)',
-        font: {{ color: '#c9d1d9', size: 11 }},
+        font: {{ color: tc.text, size: 11 }},
         xaxis: {{
             title: 'Generation Speed (tok/s)',
-            gridcolor: 'rgba(255,255,255,0.06)',
+            gridcolor: tc.grid,
             zeroline: false,
         }},
         yaxis: {{ autorange: 'reversed' }},
@@ -544,7 +618,25 @@ function updateCharts() {{
 }}
 
 initFilters();
+updateThemeIcon();
 updateCharts();
+
+// Sticky filter shadow
+const filters = document.querySelector('.filters');
+const observer = new IntersectionObserver(
+    ([e]) => filters.classList.toggle('stuck', e.intersectionRatio < 1),
+    {{ threshold: [1], rootMargin: '-1px 0px 0px 0px' }}
+);
+observer.observe(filters);
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {{
+    if (!localStorage.getItem('theme')) {{
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        updateThemeIcon();
+        updateCharts();
+    }}
+}});
 </script>
 </body>
 </html>"""
