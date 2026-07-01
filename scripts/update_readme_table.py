@@ -701,9 +701,10 @@ def generate_optimizations_section(speed_df: pd.DataFrame) -> str:
         "extra setup for speed/memory gains and are opt-in — not every model or "
         "architecture supports each one — so they're reported separately rather "
         "than mixed into the main ranking. Speedup is vs. that model's standard "
-        "row on the same hardware **and prompt profile**: `prose` uses the "
-        "generic benchmark prompt (near worst-case acceptance), `code` uses a "
-        "code-continuation prompt (closer to agentic-coding use)."
+        "row on the same hardware **and prompt profile**: `generic` uses the "
+        "standard benchmark prompt — general text, near worst-case acceptance "
+        "for speculative decoding — while `code` uses a code-continuation "
+        "prompt, closer to agentic-coding use."
     )
     lines.append("")
 
@@ -741,7 +742,7 @@ def generate_optimizations_section(speed_df: pd.DataFrame) -> str:
         for _, r in merged.iterrows():
             name = format_model_name(r["name"], include_arch=True)
             cfg = config_fn(r.get("optimization_detail", ""))
-            profile = "code" if r.get("prompt_profile") == "code" else "prose"
+            profile = "code" if r.get("prompt_profile") == "code" else "generic"
             hw = HARDWARE_DISPLAY.get(r["hardware"], r["hardware"])
             std = (
                 f"{r['standard_tps']:.0f} tok/s"

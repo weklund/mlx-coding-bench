@@ -232,7 +232,7 @@ Which local LLM runs best for coding on your Mac? Speed and quality benchmarks f
 
 ## Optimizations
 
-Techniques layered on top of the standard config above. They trade extra setup for speed/memory gains and are opt-in — not every model or architecture supports each one — so they're reported separately rather than mixed into the main ranking. Speedup is vs. that model's standard row on the same hardware **and prompt profile**: `prose` uses the generic benchmark prompt (near worst-case acceptance), `code` uses a code-continuation prompt (closer to agentic-coding use).
+Techniques layered on top of the standard config above. They trade extra setup for speed/memory gains and are opt-in — not every model or architecture supports each one — so they're reported separately rather than mixed into the main ranking. Speedup is vs. that model's standard row on the same hardware **and prompt profile**: `generic` uses the standard benchmark prompt — general text, near worst-case acceptance for speculative decoding — while `code` uses a code-continuation prompt, closer to agentic-coding use.
 
 ### ⚡ Speculative decoding
 
@@ -241,13 +241,13 @@ A small **drafter** model proposes tokens that the base model verifies in parall
 | Model | Drafter | Prompt | Hardware | Standard | + Optimized | Speedup |
 |---|---|---|---|---:|---:|---:|
 | Gemma 3-12B-it QAT (12B dense) | gemma-3-1b-it-qat | code | M4 Pro 64GB | 32 tok/s | 45 tok/s | 1.43× |
-| Gemma 3-12B-it QAT (12B dense) | gemma-3-1b-it-qat | prose | M4 Pro 64GB | 32 tok/s | 28 tok/s | 0.87× |
+| Gemma 3-12B-it QAT (12B dense) | gemma-3-1b-it-qat | generic | M4 Pro 64GB | 32 tok/s | 28 tok/s | 0.87× |
 | Qwen 3-14B-it (14B dense) | Qwen3-0.6B | code | M4 Pro 64GB | 29 tok/s | 39 tok/s | 1.36× |
-| Qwen 3-14B-it (14B dense) | Qwen3-0.6B | prose | M4 Pro 64GB | 29 tok/s | 46 tok/s | 1.60× |
+| Qwen 3-14B-it (14B dense) | Qwen3-0.6B | generic | M4 Pro 64GB | 29 tok/s | 46 tok/s | 1.60× |
 | Qwen 3-8B-it (8B dense) | Qwen3-0.6B | code | M4 Pro 64GB | 51 tok/s | 55 tok/s | 1.08× |
-| Qwen 3-8B-it (8B dense) | Qwen3-0.6B | prose | M4 Pro 64GB | 52 tok/s | 52 tok/s | 1.00× |
+| Qwen 3-8B-it (8B dense) | Qwen3-0.6B | generic | M4 Pro 64GB | 52 tok/s | 52 tok/s | 1.00× |
 | Qwen3-Coder-30B-A3B (3B MoE) | Qwen3-0.6B | code | M4 Pro 64GB | 80 tok/s | 80 tok/s | 1.00× |
-| Qwen3-Coder-30B-A3B (3B MoE) | Qwen3-0.6B | prose | M4 Pro 64GB | 80 tok/s | 53 tok/s | 0.66× |
+| Qwen3-Coder-30B-A3B (3B MoE) | Qwen3-0.6B | generic | M4 Pro 64GB | 80 tok/s | 53 tok/s | 0.66× |
 
 
 
