@@ -1,8 +1,10 @@
-# MLX LLM Benchmarks for Agentic Coding on Apple Silicon
+# mlx-coding-bench
 
-[![tests-Mac](https://github.com/weklund-agent/mlx_transformers_benchmark/actions/workflows/tests-mac.yaml/badge.svg)](https://github.com/weklund-agent/mlx_transformers_benchmark/actions/workflows/tests-mac.yaml)
+[![tests-Mac](https://github.com/weklund/mlx-coding-bench/actions/workflows/tests-mac.yaml/badge.svg)](https://github.com/weklund/mlx-coding-bench/actions/workflows/tests-mac.yaml)
 
-Which local LLM runs best for coding on your Mac? Speed and quality benchmarks for MLX models, tested on real Apple hardware.
+Which local LLM runs best for coding on your Mac? Speed **and** quality benchmarks for MLX models on Apple Silicon — the only benchmark that measures both.
+
+**[Live Dashboard](https://weklund.github.io/mlx-coding-bench)** · 35+ models · 81 problems · Real hardware
 
 <!-- BEGIN BENCHMARK TABLE -->
 
@@ -271,8 +273,8 @@ For full scoring methodology, see [QUALITY_METHODOLOGY.md](QUALITY_METHODOLOGY.m
 ## Quick Start
 
 ```bash
-git clone git@github.com:weklund-agent/mlx_transformers_benchmark.git
-cd mlx_transformers_benchmark
+git clone git@github.com:weklund/mlx-coding-bench.git
+cd mlx-coding-bench
 make setup
 
 # Run speed benchmarks
@@ -288,6 +290,9 @@ uv run python scripts/run_quality_benchmarks.py \
 
 # Update the README table
 uv run python scripts/update_readme_table.py
+
+# Generate the interactive site
+uv run python scripts/generate_site.py
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for full setup instructions and how to submit results.
@@ -295,6 +300,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for full setup instructions and how to su
 
 ## Related
 
+- **[Live Dashboard](https://weklund.github.io/mlx-coding-bench)** -- interactive speed vs quality charts, filterable by hardware and RAM.
 - **[mlx-stack](https://github.com/weklund/mlx-stack)** -- runs multiple MLX models behind a single OpenAI-compatible endpoint. This benchmark suite feeds its model catalog.
 - **[QUALITY_METHODOLOGY.md](QUALITY_METHODOLOGY.md)** -- detailed breakdown of the quality benchmark suite, scoring formula, and problem categories.
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** -- how to add models, run benchmarks, and submit measurements.

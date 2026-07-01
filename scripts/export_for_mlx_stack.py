@@ -225,7 +225,7 @@ def build_export(
     Output format:
     {
         "generated_at": "...",
-        "source": "mlx_transformers_benchmark@<commit>",
+        "source": "mlx-coding-bench@<commit>",
         "models": {
             "mlx-community/Qwen3.5-9B-4bit": {
                 "benchmark_name": "qwen-3.5-9b",
@@ -298,7 +298,7 @@ def build_export(
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "source": f"mlx_transformers_benchmark@{commit}",
+        "source": f"mlx-coding-bench@{commit}",
         "models": models,
     }
 

@@ -1,91 +1,77 @@
-# Contributing to `mtb`
+# Contributing to mlx-coding-bench
 
-There are two easy ways to contribute: adding a new measurement, or adding a new benchmark task.
+There are two main ways to contribute: submitting benchmark results for new hardware, or adding a new model.
 
 You will need:
  - [`uv`](https://github.com/astral-sh/uv) to manage dependencies, available as [homebrew](https://formulae.brew.sh/formula/uv)
 
-First, [fork the repo](https://github.com/weklund-agent/mlx_transformers_benchmark/fork) and set up a local environment using `uv`:
+First, [fork the repo](https://github.com/weklund/mlx-coding-bench/fork) and set up a local environment:
 ```
-git clone git@github.com:<your-username>/mlx_transformers_benchmark.git
-cd mlx_transformers_benchmark
+git clone git@github.com:<your-username>/mlx-coding-bench.git
+cd mlx-coding-bench
 make setup
 ```
 
-You can check if installation was successful by running the tests:
+Check installation:
 ```
 make test
 ```
 
 ### Adding a measurement
 
-1. To run a specific llm benchmark:
+1. Run a speed benchmark for a specific model:
    ```
-   python scripts/run_llm_benchmarks.py \
-       --run_only_benchmarks qwen-2.5-0.5b-it \
-       --dtypes \["int4","int8"\] \
-       --num_iterations 3 \
+   uv run python scripts/run_llm_benchmarks.py \
+       --run_only_benchmarks '["qwen-3.6-27b"]' \
+       --dtypes '["int4","int8"]' \
+       --num_iterations 3
    ```
-   This will create a new measurement file in the `measurements` folder.
-   By default, each measurement stores device information and software versions.
+   This creates a timestamped CSV in `measurements/llm_benchmarks/<hardware>/`.
 
-2. Check that the new measurements look sensible by visualizing results:
+2. Run quality benchmarks (takes ~40 min for MoE models, longer for large dense):
    ```
-   make show-llm
-   ```
-   This will open a browser window and show individual measurements. Do check for outliers!
-
-3. Optionally, add your github username to the `settings.json` file for tracking purposes:
-   ```
-   - "contributor": "",
-   + "contributor": "aukejw",
+   uv run python scripts/run_quality_benchmarks.py \
+       --difficulty all \
+       --run_only_benchmarks '["qwen-3.6-27b"]' \
+       --dtypes '["int4"]' \
+       --num_runs 3
    ```
 
-4. Add the new files, and commit the changes:
+3. Update the README table to include your results:
    ```
-   git add measurements/
-   git commit -am "Adding a new measurement"
+   uv run python scripts/update_readme_table.py
+   ```
+
+4. Commit and submit a PR:
+   ```
+   git add measurements/ README.md
+   git commit -m "Add benchmarks for <model> on <hardware>"
    git push
    ```
 
-5. Submit a PR from your fork.
+### Adding a model
 
+Models live in `mtb/llm_benchmarks/models/`. Each model family has its own file.
 
-Alternatively, you can run *all* llm benchmarks using:
-```
-make run-llm-benchmarks
-```
-This will take more than 40 minutes excluding download times, and the larger 
-`bfloat16` models will certainly take up memory. We will automatically skip models 
-that do not fit, but make sure you aren't busy with other tasks!
+1. Create or update a model file with a `ModelSpec`:
+   ```python
+   from mtb.llm_benchmarks.models.base import ModelSpec
 
+   MyModel = ModelSpec(
+       name="my-model-7b",
+       num_params=7e9,
+       prompt_formatter=format_my_model_prompt,
+       model_ids={
+           "mlx": {
+               "int4": "mlx-community/my-model-7b-4bit",
+               "int8": "mlx-community/my-model-7b-8bit",
+           },
+       },
+   )
+   ```
 
-### Adding a benchmark task
+2. Register it in `mtb/llm_benchmarks/__init__.py` (import + add to `MODEL_SPECS`).
 
-All benchmarks are located in `mtb/llm_benchmarks` and `mtb/layer_benchmarks`. 
+3. Verify: `uv run python -c "from mtb.llm_benchmarks import MODEL_SPECS; print(len(MODEL_SPECS))"`
 
-#### LLM benchmarks 
-
-To create a new LLM benchmarks, you must define at least the huggingface `model_id` for each dtype
-(e.g. `mlx-community/gemma-3-1b-it-4bit`), the number of parameters, and the benchmark name.
-For a Gemma 3 model with 1 billion parameters, this could look something like the below:
-
-```
-class Gemma3_1B_it_Benchmark(GemmaBenchmark):
-    dtype_to_model_id = {
-        torch.bfloat16: "google/gemma-3-1b-it",
-        mx.bfloat16: "mlx-community/gemma-3-1b-it-bf16",
-        mx.int8: "mlx-community/gemma-3-1b-it-8bit",
-    }
-    name = "gemma-3-1b-it"
-    num_params = 1e9
-```
-
-For more examples, see 
-[the gemma benchmark](https://github.com/weklund-agent/mlx_transformers_benchmark/blob/main/mtb/llm_benchmarks/gemma.py).
-
-#### Layer benchmarks
-
-Layer benchmarks will run operators in torch and mlx, and therefore require you to define 
-`setup_torch`, `setup_mlx` and `run_torch`, `run_mlx` functions. For an example, see 
-[the mhsa benchmark](https://github.com/weklund-agent/mlx_transformers_benchmark/blob/main/mtb/layer_benchmarks/mhsa.py).
+See [CLAUDE.md](CLAUDE.md) for detailed `ModelSpec` field documentation and common issues.
