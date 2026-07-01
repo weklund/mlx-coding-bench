@@ -2,7 +2,7 @@
 name = "mtb"
 version = "0.1.0"
 readme = "README.md"
-description = "Benchmarking neural network layers on MLX+Metal vs torch+MPS"
+description = "Speed + quality benchmarks for local LLMs on Apple Silicon"
 authors = [
     {name="Wes Eklund", email="s.wes35@gmail.com"},
     {name="Auke Wiggers", email="wiggers.auke@gmail.com"},
@@ -13,16 +13,19 @@ dependencies = [
     "anthropic >= 0.52.0",
     "fire >= 0.7.0",
     "Jinja2 >= 3.1.6",
-    "lmstudio == 1.3.0",
-    "ollama == 0.4.8",
     "matplotlib >= 3.10.1",
     "mlx >= 0.31.2",
     "mlx-lm @ git+https://github.com/ml-explore/mlx-lm.git",
+    "ollama == 0.4.8",
     "pandas >= 2.2.3",
     "plotly >= 6.0.1",
+    "psutil >= 5.9.0",
     "transformers >= 4.50.1",
-    "torch == 2.6.0",
 ]
+
+[project.optional-dependencies]
+torch = ["torch >= 2.6.0"]
+lmstudio = ["lmstudio == 1.3.0"]
 
 [dependency-groups]
 dev = [

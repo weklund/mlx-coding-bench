@@ -3,7 +3,6 @@ from typing import Optional
 
 import mlx.core as mx
 import psutil
-import torch
 
 
 def bytes_to_gib(bytes: int) -> float:
@@ -34,10 +33,10 @@ def get_used_ram_gib() -> float:
 def get_torch_memory_gib(backend: Optional[str] = None) -> float:
     """Return the memory allocated by torch tensors in GiB.
 
-    Tensors on GPU typically live in a separate memory space, despite the
-    unified memory model. This function returns the allocated GPU memory.
-
+    Requires torch to be installed. Raises ImportError otherwise.
     """
+    import torch
+
     if backend is None:
         if torch.mps.is_available():
             backend = "mps"
@@ -51,27 +50,13 @@ def get_torch_memory_gib(backend: Optional[str] = None) -> float:
     elif backend == "cuda":
         mem = torch.cuda.memory_allocated()
     else:
-        # all data lives in RAM -- crude approximation
         mem = get_process_memory_gib()
 
     return bytes_to_gib(mem)
 
 
 def get_mlx_memory_gib() -> float:
-    """Return the memory allocated by mlx tensors in bytes.
-
-    Note that mlx is lazy, which means that tensors are only allocated
-    once evaluated! For example, creating a tensor with `mx.ones` only
-    allocates `tensor.size * 4` bytes when evaluated:
-
-        >>> import mlx
-        >>> import mlx.core as mx
-        >>> tensor = mx.ones((1_000, 1_000), dtype=mx.float32)
-        >>> assert mx.get_active_memory() == 12
-        >>> mx.eval(tensor)
-        >>> assert mx.get_active_memory() > tensor.size * 4
-
-    """
+    """Return the memory allocated by mlx tensors in GiB."""
     mem = mx.get_active_memory()
     return bytes_to_gib(mem)
 
@@ -86,23 +71,15 @@ def estimate_model_size(
         "bfloat16": 16,
         "float16": 16,
         "int8": 8,
-        "int6": 6,  # not always true in practice
+        "int6": 6,
         "int4": 4,
-        "int3": 3,  # not always true in practice
+        "int3": 3,
     }
     return bytes_to_gib(num_params * dtype_to_bits[dtype] / 8)
 
 
 def get_lmstudio_memory():
-    """Return the memory allocated to LmStudio processes in GiB.
-
-    This includes all helper processes as well.
-
-    Returns:
-        A dictionary mapping process names to their memory usage in GiB.
-        A key 'total' is included as well, summing all other processes.
-
-    """
+    """Return the memory allocated to LmStudio processes in GiB."""
     memory = dict()
     for proc in psutil.process_iter():
         try:
